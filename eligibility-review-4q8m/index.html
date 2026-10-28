@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Eligibility Review | RDSP Canada</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="stylesheet" href="../assets/style.css?v=11">
+  <style>
+    .er { padding: 2rem 0 3rem; }
+    .er-progress { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; margin-bottom: .5rem; }
+    .er-progress span { display: block; height: 100%; width: 0; background: var(--link); transition: width .25s ease; }
+    .er-count { font-size: .9rem; color: var(--muted); margin: 0 0 1.25rem; }
+    .er-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.75rem 1.75rem 1.5rem; }
+    .er-card h2 { margin: 0 0 .5rem; }
+    .er-card .lead { font-size: 1.1rem; color: var(--text); max-width: none; }
+    .er-step[hidden] { display: none; }
+
+    .er-field { padding: 1.1rem 0; border-top: 1px solid var(--line); }
+    .er-field:first-of-type { border-top: 0; padding-top: .5rem; }
+    .er-field > label, .er-field > .er-label { display: block; font-weight: 600; color: var(--ink); margin-bottom: .6rem; }
+    .er-field small { display: block; font-weight: 400; color: var(--muted); font-size: .95rem; margin-top: .1rem; }
+    .er-field select, .er-field input[type="text"], .er-field input[type="number"] { font: inherit; font-size: 1.05rem; padding: .6rem .75rem; border: 1px solid #b8c3ce; border-radius: 8px; background: #fff; color: var(--ink); width: 100%; max-width: 320px; }
+    .er-field select:focus, .er-field input:focus { outline: 3px solid var(--note-line); outline-offset: 1px; border-color: var(--link); }
+    .er-money { position: relative; max-width: 320px; }
+    .er-money span { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); color: var(--muted); }
+    .er-money input { padding-left: 1.6rem !important; }
+
+    .er-choices { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .er-choices button { font: inherit; font-weight: 400; min-height: 44px; padding: .45rem 1rem; border-radius: 10px; border: 2px solid var(--link); background: #fff; color: var(--link); cursor: pointer; }
+    .er-choices.stack { flex-direction: column; align-items: stretch; max-width: 360px; }
+    .er-choices.stack button { text-align: left; }
+    .er-choices button:hover { background: var(--note-bg); }
+    .er-choices button[aria-pressed="true"] { background: var(--link); color: #fff; }
+    .er-other { margin-top: .6rem; }
+
+    .er-list { list-style: none; padding: 0; margin: 1rem 0 0; columns: 2; column-gap: 2rem; }
+    .er-list li { margin: 0 0 .5rem; break-inside: avoid; }
+
+    .er-cols { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.25rem; }
+    .er-box { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.15rem; }
+    .er-box.person { background: var(--surface); }
+    .er-box h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 .5rem; }
+    .er-box dl { margin: 0; }
+    .er-box dt { font-weight: 600; color: var(--ink); margin-top: .7rem; }
+    .er-box dt:first-child { margin-top: 0; }
+    .er-box dd { margin: .1rem 0 0; }
+    .mark { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .03em; border-radius: 999px; padding: .05rem .5rem; margin-left: .35rem; white-space: nowrap; vertical-align: 1px; }
+    .mark.ok { color: #1f5e3a; background: #e3f2e8; border: 1px solid #b7dcc4; }
+    .mark.part { color: #6b4d00; background: #fff4d6; border: 1px solid #f0d48a; }
+    .mark.no { color: #8a1c12; background: #fdf3f2; border: 1px solid #f0c7c2; }
+    .mark.check { color: var(--link); background: var(--note-bg); border: 1px solid var(--note-line); }
+    .er-note { margin: 1rem 0 0; font-size: .95rem; color: var(--muted); max-width: none; }
+    .er-apply { margin-top: 1.25rem; }
+    .er-ask { margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
+    .er-ask p { font-weight: 600; color: var(--ink); margin: 0 0 .6rem; }
+
+    .er-nav { display: flex; justify-content: space-between; gap: .75rem; margin-top: 1.5rem; }
+    .er-nav button { font: inherit; font-weight: 600; font-size: 1rem; min-height: 46px; padding: .6rem 1.3rem; border-radius: 8px; cursor: pointer; }
+    .er-back { background: #fff; color: var(--link); border: 1px solid var(--link); }
+    .er-back:hover { background: var(--note-bg); }
+    .er-next { background: var(--link); color: #fff; border: 1px solid var(--link); margin-left: auto; }
+    .er-next:hover { background: var(--link-hover); }
+    .er-nav.first .er-next { margin-left: 0; }
+    .er-step b, .er-step strong { font-weight: 600; }
+    .er-box dd span.line { display: block; }
+
+    .er-sum { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .er-sum th, .er-sum td { text-align: left; vertical-align: top; padding: .8rem .75rem .8rem 0; border-bottom: 1px solid var(--line); }
+    .er-sum thead th { font-size: .82rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+    .er-sum tbody th { color: var(--ink); }
+    .er-sum .mark { margin-left: 0; }
+
+    @media (max-width: 680px) {
+      .er { padding-top: 1.25rem; }
+      .er-card { padding: 1.25rem 1.1rem; }
+      .er-cols { grid-template-columns: 1fr; }
+      .er-list { columns: 1; }
+      .er-field select, .er-field input[type="text"], .er-field input[type="number"], .er-money { max-width: none; }
+      .er-sum thead { display: none; }
+      .er-sum tr { display: block; padding: .7rem 0; border-bottom: 1px solid var(--line); }
+      .er-sum th, .er-sum td { display: block; border: 0; padding: .15rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <span class="brand">
+        <img src="../assets/logo-flag.png" alt="" width="40" height="40">
+        <span><span class="brand-name">RDSP Canada</span><span class="brand-tag">Disability benefits information</span></span>
+      </span>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="er">
+      <div class="er-progress" aria-hidden="true"><span id="bar"></span></div>
+      <p class="er-count" id="count"></p>
+
+      <div class="er-card">
+
+        <!-- 1. Intro -->
+        <section class="er-step" data-step="intro">
+          <span class="eyebrow">Eligibility review</span>
+          <h2>Disability benefits programs: qualifications and applications</h2>
+          <p class="lead">We'll go through a few questions about the person, then review each program, what it requires, and how to apply.</p>
+          <ul class="er-list">
+            <li>Canada Disability Benefit (CDB)</li>
+            <li>Canadian Dental Care Plan (CDCP)</li>
+            <li>Registered Disability Savings Plan (RDSP)</li>
+            <li>Canada Pension Plan Disability (CPP-D)</li>
+            <li>Guaranteed Access Program (GAP)</li>
+            <li>Disability Tax Credit (DTC)</li>
+          </ul>
+        </section>
+
+        <!-- 2. About the person -->
+        <section class="er-step" data-step="about" hidden>
+          <h2>About the person</h2>
+          <div class="er-field">
+            <label for="province">Province or territory of residence</label>
+            <select id="province">
+              <option value="">Select</option>
+              <option>Alberta</option><option>British Columbia</option><option>Manitoba</option><option>New Brunswick</option>
+              <option>Newfoundland and Labrador</option><option>Northwest Territories</option><option>Nova Scotia</option><option>Nunavut</option>
+              <option>Ontario</option><option>Prince Edward Island</option><option>Quebec</option><option>Saskatchewan</option><option>Yukon</option>
+            </select>
+          </div>
+          <div class="er-field">
+            <span class="er-label">Marital status</span>
+            <div class="er-choices" data-q="marital">
+              <button type="button">Single</button><button type="button">Married</button><button type="button">Common-law</button>
+              <button type="button">Separated</button><button type="button">Divorced</button><button type="button">Widowed</button>
+            </div>
+          </div>
+          <div class="er-field">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="0" max="120" inputmode="numeric" style="max-width:140px">
+          </div>
+          <div class="er-field">
+            <span class="er-label">Does this person have any children age 25 or under?</span>
+            <div class="er-choices" data-q="children"><button type="button">Yes</button><button type="button">No</button></div>
+          </div>
+        </section>
+
+        <!-- 3. Income and coverage -->
+        <section class="er-step" data-step="income" hidden>
+          <h2>Income and coverage</h2>
+          <div class="er-field">
+            <span class="er-label">Source(s) of income<small>Select all that apply.</small></span>
+            <div class="er-choices" data-q="sources" data-multi>
+              <button type="button">CPP Disability</button><button type="button">Provincial disability payments</button>
+              <button type="button">Long-term disability (LTD)</button><button type="button">Employment</button>
+              <button type="button">Savings</button><button type="button">Other</button>
+            </div>
+            <input type="text" id="sourcesOther" class="er-other" placeholder="Other source of income" hidden>
+          </div>
+          <div class="er-field">
+            <label for="income">Adjusted family net income (2025)<small>Approximate. From the 2025 tax return, including a spouse's or partner's income.</small></label>
+            <div class="er-money"><span>$</span><input type="text" id="income" inputmode="numeric" autocomplete="off"></div>
+          </div>
+          <div class="er-field">
+            <span class="er-label">Disability Tax Credit (DTC) status</span>
+            <div class="er-choices" data-q="dtc"><button type="button">Qualified</button><button type="button">Has not qualified</button></div>
+          </div>
+          <div class="er-field">
+            <span class="er-label">Is this person already enrolled in the Guaranteed Access Program?</span>
+            <div class="er-choices" data-q="gap"><button type="button">Yes</button><button type="button">No</button></div>
+          </div>
+          <div class="er-field">
+            <span class="er-label">Does this person have access to private dental coverage?</span>
+            <div class="er-choices" data-q="dental"><button type="button">Yes</button><button type="button">No</button></div>
+          </div>
+        </section>
+
+        <!-- 4. CDB -->
+        <section class="er-step" data-step="cdb" hidden>
+          <span class="eyebrow">Program 1 of 5</span>
+          <h2>Canada Disability Benefit (CDB)</h2>
+          <p class="lead">A federal monthly payment for low- and moderate-income working-age people with disabilities: up to <strong>$204.20 a month</strong> (<strong>$2,450.40 a year</strong>) from July 2026.</p>
+          <div class="er-cols">
+            <div class="er-box">
+              <h3>Requirements</h3>
+              <dl>
+                <dt>Age</dt><dd>18 to 64</dd>
+                <dt>Disability Tax Credit</dt><dd>Required</dd>
+                <dt>Adjusted family net income (2025)</dt><dd>Full benefit up to $23,000 (single) or $32,500 (couple), then reduced gradually</dd>
+                <dt>Working income exemption</dt><dd>$10,210 (single), $14,294 (couple)</dd>
+                <dt>Tax returns</dt><dd>Filed for 2025, including a spouse's or partner's</dd>
+              </dl>
+            </div>
+            <div class="er-box person">
+              <h3>Applicant's qualifiers</h3>
+              <dl id="cdbPerson"></dl>
+            </div>
+          </div>
+          <p class="er-note">Income thresholds are the latest published by the Government of Canada. The working income exemption is subtracted before the threshold applies.</p>
+          <div class="er-apply"><a class="btn" href="https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit/apply.html" target="_blank" rel="noopener">Apply on Canada.ca</a></div>
+        </section>
+
+        <!-- 5. CDCP -->
+        <section class="er-step" data-step="cdcp" hidden>
+          <span class="eyebrow">Program 2 of 5</span>
+          <h2>Canadian Dental Care Plan (CDCP)</h2>
+          <p class="lead">A federal plan, administered by Sun Life, that helps cover dental care for Canadian residents without access to dental insurance.</p>
+          <div class="er-cols">
+            <div class="er-box">
+              <h3>Requirements</h3>
+              <dl>
+                <dt>Adjusted family net income</dt><dd>Under $90,000</dd>
+                <dt>Co-payment</dt><dd><span class="line">Under $70,000: no co-payment</span><span class="line">$70,000 to $79,999: 40% co-payment</span><span class="line">$80,000 to $89,999: 60% co-payment</span></dd>
+                <dt>Private dental coverage</dt><dd>Not permitted</dd>
+                <dt>Age</dt><dd>All ages</dd>
+                <dt>Disability Tax Credit</dt><dd>Not required</dd>
+              </dl>
+            </div>
+            <div class="er-box person">
+              <h3>Applicant's qualifiers</h3>
+              <dl id="cdcpPerson"></dl>
+            </div>
+          </div>
+          <div class="er-apply"><a class="btn" href="https://www.canada.ca/en/services/benefits/dental/dental-care-plan/apply.html" target="_blank" rel="noopener">Apply on Canada.ca</a></div>
+        </section>
+
+        <!-- 6. RDSP -->
+        <section class="er-step" data-step="rdsp" hidden>
+          <span class="eyebrow">Program 3 of 5</span>
+          <h2>Registered Disability Savings Plan (RDSP)</h2>
+          <p class="lead">A long-term savings plan. The government can add money through two programs:</p>
+          <ul>
+            <li><b>Canada Disability Savings Grant:</b> matches contributions up to <strong>300%</strong>, depending on income. Up to <strong>$3,500 a year</strong> (<strong>$10,500</strong> with unused past years), <strong>$70,000</strong> lifetime.</li>
+            <li><b>Canada Disability Savings Bond:</b> up to <strong>$1,000 a year</strong> with no contributions needed, <strong>$20,000</strong> lifetime.</li>
+          </ul>
+          <div class="er-cols">
+            <div class="er-box">
+              <h3>Requirements</h3>
+              <dl>
+                <dt>Disability Tax Credit</dt><dd>Required</dd>
+                <dt>Age</dt><dd>Grant and Bond paid until the end of the year the person turns 49. An RDSP can be opened until the end of the year they turn 59.</dd>
+                <dt>Income • Grant</dt><dd>No income requirement. The match is highest for lower incomes.</dd>
+                <dt>Income • Bond (2026)</dt><dd>Full $1,000 up to $38,237; partial up to $58,523</dd>
+              </dl>
+            </div>
+            <div class="er-box person">
+              <h3>Applicant's qualifiers</h3>
+              <dl id="rdspPerson"></dl>
+            </div>
+          </div>
+          <div class="er-ask">
+            <p>Does this person wish to apply for the Disability Savings Bond and/or Grant?</p>
+            <div class="er-choices" data-q="rdspApply"><button type="button">Yes</button><button type="button">No</button><button type="button">Not qualified</button></div>
+          </div>
+        </section>
+
+        <!-- 7. CPP-D -->
+        <section class="er-step" data-step="cppd" hidden>
+          <span class="eyebrow">Program 4 of 5</span>
+          <h2>Canada Pension Plan Disability (CPP-D)</h2>
+          <p class="lead">A monthly payment for people under 65 who have paid into the CPP and can't work regularly because of a severe and prolonged disability. In 2026: a basic <strong>$610.46 a month</strong>, up to <strong>$1,741.20</strong> depending on contributions.</p>
+          <div class="er-cols">
+            <div class="er-box">
+              <h3>Requirements</h3>
+              <dl>
+                <dt>Age</dt><dd>18 to 64</dd>
+                <dt>CPP contributions</dt><dd>In 4 of the last 6 years, or 3 of the last 6 with at least 25 years of contributions, or under the late applicant provision</dd>
+                <dt>Disability</dt><dd>Severe and prolonged; regularly prevents working</dd>
+                <dt>Disability Tax Credit</dt><dd>Not required</dd>
+              </dl>
+            </div>
+            <div class="er-box person">
+              <h3>Applicant's qualifiers</h3>
+              <dl id="cppdPerson"></dl>
+            </div>
+          </div>
+          <p class="er-note"><b>Late applicant provision:</b> a person can apply years later if they had enough CPP contributions when they became disabled, and have been continuously disabled since. For example, someone disabled at 45 who applies at 55 must show they were disabled at 45 and have remained disabled the whole time.</p>
+          <div class="er-apply"><a class="btn" href="https://www.canada.ca/en/services/benefits/publicpensions/cpp-disability-benefit/apply.html" target="_blank" rel="noopener">Apply on Canada.ca</a></div>
+        </section>
+
+        <!-- 8. GAP -->
+        <section class="er-step" data-step="gap" hidden>
+          <span class="eyebrow">Program 5 of 5</span>
+          <h2>Guaranteed Access Program (GAP)</h2>
+          <p class="lead">A one-time, tax-free payment (minimum <strong>$10,000</strong>) to a person's loved ones at the time of their passing. Participants make a monthly contribution, typically <strong>$1 to $2 a day</strong>, guaranteed never to increase.</p>
+          <div class="er-cols">
+            <div class="er-box">
+              <h3>Requirements</h3>
+              <dl>
+                <dt>Province</dt><dd>British Columbia or Ontario</dd>
+                <dt>Age</dt><dd>6 months to 80</dd>
+                <dt>Health</dt><dd>Living with a long-term medical condition. No medical tests required.</dd>
+                <dt>Eligibility</dt><dd>Determined by the health questionnaire</dd>
+              </dl>
+            </div>
+            <div class="er-box person">
+              <h3>Applicant's qualifiers</h3>
+              <dl id="gapPerson"></dl>
+            </div>
+          </div>
+          <div class="er-apply"><a class="btn" href="https://access.rdspcanada.ca/" target="_blank" rel="noopener">Open the health questionnaire</a></div>
+        </section>
+
+        <!-- 9. DTC application -->
+        <section class="er-step" data-step="dtc" hidden>
+          <span class="eyebrow">Disability Tax Credit</span>
+          <h2>Disability Tax Credit (DTC) application</h2>
+          <div id="dtcDone" hidden>
+            <p class="lead">This person has already qualified for the DTC <span class="mark ok">Qualified</span>. No application is needed.</p>
+          </div>
+          <div id="dtcApply">
+            <p class="lead">DTC approval is required for the CDB and the RDSP. How does this person wish to apply?</p>
+            <div class="er-choices" data-q="dtcHow"><button type="button">Apply with assistance</button><button type="button">Apply on their own</button></div>
+            <div class="er-apply" id="dtcLink" hidden></div>
+          </div>
+        </section>
+
+        <!-- 10. Summary -->
+        <section class="er-step" data-step="summary" hidden>
+          <span class="eyebrow">Summary</span>
+          <h2>Review</h2>
+          <table class="er-sum">
+            <thead><tr><th scope="col">Program</th><th scope="col">Based on the answers</th><th scope="col">Next step</th></tr></thead>
+            <tbody id="sumBody"></tbody>
+          </table>
+          <p class="er-note">This is an initial review based on the answers given. Each program makes its own final decision.</p>
+        </section>
+
+        <div class="er-nav">
+          <button type="button" class="er-back" id="back">Back</button>
+          <button type="button" class="er-next" id="next">Continue</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    var steps = [].slice.call(document.querySelectorAll('.er-step'));
+    var i = 0, A = {};
+    var $ = function (id) { return document.getElementById(id); };
+
+    // Choice buttons (single or multi select)
+    document.querySelectorAll('.er-choices').forEach(function (g) {
+      var q = g.dataset.q, multi = g.hasAttribute('data-multi');
+      if (g.querySelectorAll('button').length > 2) g.classList.add('stack');
+      g.querySelectorAll('button').forEach(function (b) {
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () {
+          if (multi) {
+            b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+            A[q] = [].slice.call(g.querySelectorAll('[aria-pressed="true"]')).map(function (x) { return x.textContent; });
+            if (q === 'sources') $('sourcesOther').hidden = A[q].indexOf('Other') < 0;
+          } else {
+            g.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+            b.setAttribute('aria-pressed', 'true');
+            A[q] = b.textContent;
+          }
+          if (q === 'dtcHow') showDtcLink();
+        });
+      });
+    });
+
+    // Format income with commas as it's typed
+    $('income').addEventListener('input', function (e) {
+      var d = e.target.value.replace(/[^0-9]/g, '');
+      e.target.value = d ? Number(d).toLocaleString('en-CA') : '';
+    });
+
+    function income() { var d = $('income').value.replace(/[^0-9]/g, ''); return d === '' ? null : Number(d); }
+    function age() { var v = $('age').value; return v === '' ? null : Number(v); }
+    function money(n) { return '$' + n.toLocaleString('en-CA'); }
+    function couple() { return A.marital === 'Married' || A.marital === 'Common-law'; }
+    function mark(cls, txt) { return ' <span class="mark ' + cls + '">' + txt + '</span>'; }
+    function row(label, value, m) { return '<dt>' + label + '</dt><dd>' + (value == null || value === '' ? '<span style="color:var(--muted)">Not answered</span>' : value) + (m || '') + '</dd>'; }
+    function inRange(a, lo, hi) { return a == null ? '' : (a >= lo && a <= hi ? mark('ok', 'Meets') : mark('no', 'Does not meet')); }
+    function dtcMark() { return A.dtc === 'Qualified' ? mark('ok', 'Meets') : A.dtc ? mark('no', 'Needs the DTC') : ''; }
+    function sources() {
+      var s = (A.sources || []).filter(function (x) { return x !== 'Other'; });
+      var o = $('sourcesOther').value.trim();
+      if ((A.sources || []).indexOf('Other') >= 0) s.push(o ? 'Other: ' + o : 'Other');
+      return s.join(', ');
+    }
+
+    // Program assessments: [css class, label]
+    function cdbIncome() {
+      var n = income(); if (n == null) return null;
+      var full = couple() ? 32500 : 23000, zero = couple() ? 44500 : 35000;
+      if (n <= full) return ['ok', 'Full benefit range'];
+      if (n < zero) return ['part', 'Partial benefit'];
+      return A.sources && A.sources.indexOf('Employment') >= 0 ? ['check', 'Check working income exemption'] : ['no', 'Likely above the limit'];
+    }
+    function cdcpIncome() {
+      var n = income(); if (n == null) return null;
+      if (n < 70000) return ['ok', 'No co-payment'];
+      if (n < 90000) return ['part', 'With co-payment'];
+      return ['no', 'Above the limit'];
+    }
+    function bondIncome() {
+      var n = income(); if (n == null) return null;
+      if (n <= 38237) return ['ok', 'Full Bond'];
+      if (n < 58523) return ['part', 'Partial Bond'];
+      return ['no', 'No Bond; Grant still available'];
+    }
+    function m(r) { return r ? mark(r[0], r[1]) : ''; }
+
+    function fill() {
+      var n = income(), a = age(), inc = n == null ? null : money(n);
+      $('cdbPerson').innerHTML =
+        row('Age', a, inRange(a, 18, 64)) + row('Disability Tax Credit', A.dtc, dtcMark()) +
+        row('Marital status', A.marital) + row('Adjusted family net income (2025)', inc, m(cdbIncome())) +
+        row('Income sources', sources());
+      $('cdcpPerson').innerHTML =
+        row('Adjusted family net income (2025)', inc, m(cdcpIncome())) +
+        row('Private dental coverage', A.dental, A.dental === 'Yes' ? mark('no', 'Not permitted') : A.dental === 'No' ? mark('ok', 'Meets') : '');
+      $('rdspPerson').innerHTML =
+        row('Disability Tax Credit', A.dtc, dtcMark()) +
+        row('Age', a, a == null ? '' : a <= 49 ? mark('ok', 'Grant and Bond') : a <= 59 ? mark('part', 'Can open; no Grant or Bond') : mark('no', 'Over 59')) +
+        row('Adjusted family net income (2025)', inc, m(bondIncome()));
+      var cpp = (A.sources || []).indexOf('CPP Disability') >= 0;
+      $('cppdPerson').innerHTML =
+        row('Age', a, inRange(a, 18, 64)) +
+        row('Income sources', sources(), cpp ? mark('ok', 'Already receiving CPP-D') : '') +
+        row('CPP contributions', 'Confirm with the person', mark('check', 'Review'));
+      var prov = $('province').value, gapProv = prov === 'British Columbia' || prov === 'Ontario';
+      $('gapPerson').innerHTML =
+        row('Province', prov, prov ? (gapProv ? mark('ok', 'Meets') : mark('no', 'BC and Ontario only')) : '') +
+        row('Age', a, inRange(a, 0, 80)) +
+        row('Enrolled in the Guaranteed Access Program', A.gap, A.gap === 'Yes' ? mark('check', 'Already enrolled') : '');
+      $('dtcDone').hidden = A.dtc !== 'Qualified';
+      $('dtcApply').hidden = A.dtc === 'Qualified';
+    }
+
+    function showDtcLink() {
+      var el = $('dtcLink');
+      if (A.dtcHow === 'Apply with assistance') el.innerHTML = '<a class="btn" href="https://dtcc.ca/" target="_blank" rel="noopener">Open the DTC Application Assistance Program</a>';
+      else if (A.dtcHow === 'Apply on their own') el.innerHTML = '<a class="btn" href="https://resources.rdspcanada.ca/" target="_blank" rel="noopener">Open the Disability Resources</a>';
+      el.hidden = !A.dtcHow;
+    }
+
+    function summary() {
+      var a = age(), prov = $('province').value, dtcOk = A.dtc === 'Qualified', none = mark('check', 'Review');
+      function st(ok, r) { return ok === false ? mark('no', 'Not eligible') : r ? m(r) : none; }
+      var rows = [
+        ['Canada Disability Benefit', (a != null && (a < 18 || a > 64)) || A.dtc === 'Has not qualified' ? st(false) : st(null, cdbIncome()), A.dtc === 'Has not qualified' ? 'Apply for the DTC first' : 'Apply on Canada.ca'],
+        ['Canadian Dental Care Plan', A.dental === 'Yes' ? st(false) : st(null, cdcpIncome()), 'Apply on Canada.ca'],
+        ['RDSP: Grant and Bond', A.dtc === 'Has not qualified' || (a != null && a > 59) ? st(false) : (a != null && a > 49) ? mark('part', 'Can open; no Grant or Bond') : st(null, bondIncome()), A.dtc === 'Has not qualified' ? 'Apply for the DTC first' : (A.rdspApply ? 'Wishes to apply: ' + A.rdspApply : 'Discuss')],
+        ['CPP Disability', (a != null && (a < 18 || a > 64)) ? st(false) : (A.sources || []).indexOf('CPP Disability') >= 0 ? mark('ok', 'Already receiving') : none, 'Confirm CPP contributions'],
+        ['Guaranteed Access Program', A.gap === 'Yes' ? mark('check', 'Already enrolled') : (prov && prov !== 'British Columbia' && prov !== 'Ontario') || (a != null && a > 80) ? st(false) : prov ? mark('ok', 'May be eligible') : none, 'Health questionnaire'],
+        ['Disability Tax Credit', dtcOk ? mark('ok', 'Qualified') : A.dtc ? mark('part', 'Not yet qualified') : none, dtcOk ? 'None needed' : (A.dtcHow || 'Discuss how to apply')]
+      ];
+      $('sumBody').innerHTML = rows.map(function (r) { return '<tr><th scope="row">' + r[0] + '</th><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>'; }).join('');
+    }
+
+    function show(n) {
+      i = Math.max(0, Math.min(steps.length - 1, n));
+      fill(); if (steps[i].dataset.step === 'summary') summary();
+      steps.forEach(function (s, k) { s.hidden = k !== i; });
+      $('bar').style.width = (i / (steps.length - 1) * 100) + '%';
+      $('count').textContent = 'Step ' + (i + 1) + ' of ' + steps.length;
+      $('back').hidden = i === 0;
+      document.querySelector('.er-nav').classList.toggle('first', i === 0);
+      $('next').textContent = i === 0 ? 'Begin' : i === steps.length - 1 ? 'Start over' : 'Continue';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    $('next').addEventListener('click', function () {
+      if (i === steps.length - 1) { location.reload(); return; }
+      show(i + 1);
+    });
+    $('back').addEventListener('click', function () { show(i - 1); });
+    show(0);
+  })();
+  </script>
+</body>
+</html>
