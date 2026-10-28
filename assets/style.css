@@ -610,3 +610,12 @@ main { display: block; }
   .site-header nav, .nav-toggle, .site-footer, .embed { display: none; }
   .page-intro { background: none; }
 }
+
+/* "No income needed" note and tags in the DTC benefits table */
+.noinc-intro { margin: .25rem 0 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: .9rem 1.1rem; }
+.noinc-intro p { margin: 0; max-width: none; }
+.noinc-intro strong { font-weight: 600; }
+.noinc-tag { display: inline-block; margin-top: .3rem; font-size: .75rem; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: #1f5e3a; background: #e3f2e8; border: 1px solid #b7dcc4; border-radius: 999px; padding: .1rem .55rem; white-space: nowrap; }
+/* Mobile-only wording for the "How often" column (its heading is hidden on phones) */
+.m-only { display: none; }
+@media (max-width: 640px) { .d-only { display: none; } .m-only { display: inline; } }

@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
   <link rel="apple-touch-icon" href="../assets/favicon-256.png">
   <link rel="canonical" href="https://www.rdspcanada.ca/disability-benefits-assessment-tool/">
-  <link rel="stylesheet" href="../assets/style.css?v=10">
+  <link rel="stylesheet" href="../assets/style.css?v=11">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -77,25 +77,30 @@
   <h3>The Disability Tax Credit comes first</h3>
   <p>DTC approval is required before you can open an RDSP or collect the Disability Savings Bond and Grant, and for most of the other benefits programs. It is for people whose health condition has lasted, or is expected to last, at least 12 months.</p>
   <h4>What DTC approval can mean</h4>
+
+  <div class="noinc-intro">
+    <p><strong>You don't need an income to benefit.</strong> Benefits marked <span class="noinc-tag">No income needed</span> are paid even if you have little or no income.</p>
+  </div>
+
   <table class="dtc-table">
     <thead><tr><th scope="col">Benefit</th><th scope="col">Amount (2026)</th><th scope="col">How often</th></tr></thead>
     <tbody>
-      <tr><th scope="row">Tax refund for past years</th><td>Up to $40,000. The CRA can adjust up to 10 previous tax returns to apply the disability amount.</td><td>Once, when approved</td></tr>
-      <tr><th scope="row">Canada Disability Benefit</th><td>Up to $204.20 a month ($2,450.40 a year), for adults aged 18 to 64.</td><td>Monthly</td></tr>
-      <tr><th scope="row">Child Disability Benefit</th><td>Up to $290 a month ($3,480 a year) for each eligible child, tax-free.</td><td>Monthly</td></tr>
-      <tr><th scope="row">Disability amount (tax credit)</th><td>$10,341, plus up to $6,032 for a person under 18. Unused amounts can be transferred to a supporting family member.</td><td>Annually</td></tr>
-      <tr><th scope="row">Home Accessibility Tax Credit</th><td>Claim up to $20,000 a year in eligible renovation costs, worth up to $2,800.</td><td>Annually</td></tr>
-      <tr><th scope="row">Home Buyers' Amount</th><td>A credit on up to $10,000 (worth up to $1,400) when buying a more accessible home, even if it is not a first home.</td><td>When buying a home</td></tr>
-      <tr><th scope="row">Child care expense deduction</th><td>Deduct up to $11,000 a year in child care costs for a child eligible for the DTC, instead of $8,000 or $5,000.</td><td>Annually</td></tr>
-      <tr><th scope="row">Canada Disability Savings Grant</th><td>Matches up to 300% of deposits: up to $3,500 a year, $70,000 in a lifetime.</td><td>Annually</td></tr>
-      <tr><th scope="row">Canada Disability Savings Bond</th><td>Up to $1,000 a year and $20,000 in a lifetime. No deposits needed.</td><td>Annually</td></tr>
-      <tr><th scope="row">Registered Disability Savings Plan (RDSP)</th><td>The account that holds the Grant and Bond. Savings grow tax-sheltered, with up to $200,000 in personal contributions.</td><td>Ongoing</td></tr>
-      <tr><th scope="row">Canada Workers Benefit disability supplement</th><td>Up to $860 a year for lower-income workers.</td><td>Annually</td></tr>
-      <tr><th scope="row">Attendant care expenses</th><td>Claim up to $10,000 a year ($20,000 in the year of death) in attendant care as a medical expense, in addition to the disability amount.</td><td>Annually</td></tr>
-      <tr><th scope="row">Qualified disability trust</th><td>Income in a trust for a person with the DTC can be taxed at lower, graduated rates.</td><td>Annually</td></tr>
+      <tr><th scope="row">Tax refund for past years</th><td>Up to $40,000. The CRA can adjust up to 10 previous tax returns to apply the disability amount.</td><td><span class="d-only">Once, when approved</span><span class="m-only">Refunded once upon approval</span></td></tr>
+      <tr><th scope="row">Canada Disability Benefit<br><span class="noinc-tag">No income needed</span></th><td>Up to $204.20 a month ($2,450.40 a year), for adults aged 18 to 64.</td><td><span class="d-only">Monthly</span><span class="m-only">Paid monthly</span></td></tr>
+      <tr><th scope="row">Child Disability Benefit<br><span class="noinc-tag">No income needed</span></th><td>Up to $290 a month ($3,480 a year) for each eligible child, tax-free.</td><td><span class="d-only">Monthly</span><span class="m-only">Paid monthly</span></td></tr>
+      <tr><th scope="row">Disability amount (tax credit)</th><td>$10,341, plus up to $6,032 for a person under 18. Unused amounts can be transferred to a supporting family member.</td><td><span class="d-only">Annually</span><span class="m-only">Tax credit, claimed annually</span></td></tr>
+      <tr><th scope="row">Home Accessibility Tax Credit</th><td>Claim up to $20,000 a year in eligible renovation costs, worth up to $2,800.</td><td><span class="d-only">Annually</span><span class="m-only">Tax credit, claimed annually</span></td></tr>
+      <tr><th scope="row">Home Buyers' Amount</th><td>A credit on up to $10,000 (worth up to $1,400) when buying a more accessible home, even if it is not a first home.</td><td><span class="d-only">When buying a home</span><span class="m-only">Tax credit, claimed when buying a home</span></td></tr>
+      <tr><th scope="row">Child care expense deduction</th><td>Deduct up to $11,000 a year in child care costs for a child eligible for the DTC, instead of $8,000 or $5,000.</td><td><span class="d-only">Annually</span><span class="m-only">Deduction, claimed annually</span></td></tr>
+      <tr><th scope="row">Canada Disability Savings Grant<br><span class="noinc-tag">No income needed</span></th><td>Matches up to 300% of deposits: up to $3,500 a year, $70,000 in a lifetime.</td><td><span class="d-only">Annually</span><span class="m-only">Paid into the RDSP annually</span></td></tr>
+      <tr><th scope="row">Canada Disability Savings Bond<br><span class="noinc-tag">No income needed</span></th><td>Up to $1,000 a year and $20,000 in a lifetime. No deposits needed.</td><td><span class="d-only">Annually</span><span class="m-only">Paid into the RDSP annually</span></td></tr>
+      <tr><th scope="row">Registered Disability Savings Plan (RDSP)<br><span class="noinc-tag">No income needed</span></th><td>The account that holds the Grant and Bond. Savings grow tax-sheltered, with up to $200,000 in personal contributions.</td><td>Ongoing</td></tr>
+      <tr><th scope="row">Canada Workers Benefit disability supplement</th><td>Up to $860 a year for lower-income workers.</td><td><span class="d-only">Annually</span><span class="m-only">Paid annually</span></td></tr>
+      <tr><th scope="row">Attendant care expenses</th><td>Claim up to $10,000 a year ($20,000 in the year of death) in attendant care as a medical expense, in addition to the disability amount.</td><td><span class="d-only">Annually</span><span class="m-only">Claimed annually as a medical expense</span></td></tr>
+      <tr><th scope="row">Qualified disability trust</th><td>Income in a trust for a person with the DTC can be taxed at lower, graduated rates.</td><td><span class="d-only">Annually</span><span class="m-only">Lower tax, annually</span></td></tr>
     </tbody>
   </table>
-  <p class="dtc-fine">Federal amounts for 2026. Most depend on income and other rules. Provinces and territories offer additional amounts.</p>
+  <p class="dtc-fine">Federal amounts for 2026. Some depend on income and other rules. DTC approval also lowers your provincial or territorial income tax.</p>
 
   <div class="dtc-apply">
     <h4>Apply for the Disability Tax Credit</h4>
