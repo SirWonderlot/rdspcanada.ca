@@ -9,6 +9,24 @@
   <link rel="apple-touch-icon" href="../assets/favicon-256.png">
   <link rel="stylesheet" href="../assets/style.css?v=11">
   <script>document.documentElement.classList.add('js')</script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-eq3lLSt92POxpNUJ3IeP6.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    // Count clicks on the main next-step links (no personal information is sent).
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.closest('footer')) return;
+      var h = a.href, n = /dtcc\.ca/.test(h) ? 'Apply for DTC'
+        : /access\.rdspcanada\.ca/.test(h) ? 'Open Health Questionnaire'
+        : /calendly\.com/.test(h) ? 'Book Review'
+        : /canada-disability-benefit\/apply/.test(h) ? 'Apply CDB'
+        : /dental-care-plan\/apply/.test(h) ? 'Apply CDCP'
+        : /cpp-disability-benefit\/apply/.test(h) ? 'Apply CPP-D'
+        : /registered-disability-savings-plan-rdsp\.html|disability\/savings\.html/.test(h) ? 'Open RDSP' : null;
+      if (n) plausible(n);
+    });
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -47,7 +65,7 @@
             <p><b>In short:</b></p>
             <ul>
               <li>You can use this website without an account and without giving us any personal information.</li>
-              <li>We don't use cookies, analytics, or tracking of any kind.</li>
+              <li>We don't use cookies. We count visits with privacy-friendly analytics that never identify you.</li>
               <li>We don't run advertising, and we don't sell, rent, or share information with anyone.</li>
               <li>If you email us, we use your message only to reply to you.</li>
             </ul>
@@ -59,7 +77,8 @@
           <p>We never ask for your name, address, Social Insurance Number (SIN), date of birth, health information, or banking details. When you are eligible for a program, we link you directly to the official government application so that you give your information only to the program itself.</p>
 
           <h2>2. Cookies, analytics, and advertising</h2>
-          <p>This website does not set cookies and does not use analytics or tracking tools. There is no advertising on this site, and we do not accept payment from anyone to promote a program or service.</p>
+          <p>This website does not set cookies. To understand how the site is used and improve it, we use Plausible Analytics, a privacy-friendly service that does not use cookies and does not collect personal information. It counts things like which pages are visited, which page a visit ends on, the type of device, the country, and how often our main links are clicked. It does not store your IP address, track you across other websites, or record the answers you give in the assessment tool.</p>
+          <p>There is no advertising on this site, and we do not accept payment from anyone to promote a program or service.</p>
 
           <h2>3. Website hosting</h2>
           <p>Like every website, this site is delivered by a hosting provider. When you visit a page, the hosting provider's servers may automatically record basic technical information, such as your IP address and the time of the request, for security and to keep the service running. We do not use this information to identify or track visitors.</p>
