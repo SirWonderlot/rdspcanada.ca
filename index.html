@@ -245,7 +245,12 @@
         ['yes', 'no'].forEach(function (p) { var el = document.getElementById('dtc-' + p); if (el) el.hidden = (p !== k); });
       }
       btns.forEach(function (b) {
-        b.addEventListener('click', function () { open(b.getAttribute('aria-expanded') === 'true' ? null : b.dataset.dtcOpen); });
+        b.addEventListener('click', function () {
+          var opening = b.getAttribute('aria-expanded') !== 'true';
+          open(opening ? b.dataset.dtcOpen : null);
+          // Count which answer people open (analytics, no personal information).
+          if (opening && window.plausible) plausible(b.dataset.dtcOpen === 'yes' ? 'Opened DTC: Yes' : 'Opened DTC: No');
+        });
       });
       var m = /open=(yes|no)/.exec(location.search); if (m) open(m[1]);
     })();
