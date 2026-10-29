@@ -433,7 +433,7 @@
 
     function showDtcLink() {
       var el = $('dtcLink');
-      if (A.dtcHow === 'Apply with assistance') el.innerHTML = '<a class="btn" href="https://dtcc.ca/rdsp-canada" target="_blank" rel="noopener">Open the DTC Application Assistance Program</a>';
+      if (A.dtcHow === 'Apply with assistance') el.innerHTML = '<a class="btn" href="https://dtcc.ca/rdsp-canada/?code=RDSP49" target="_blank" rel="noopener">Open the DTC Application Assistance Program</a>';
       else if (A.dtcHow === 'Apply on their own') el.innerHTML = '<a class="btn" href="https://resources.rdspcanada.ca/" target="_blank" rel="noopener">Open the Disability Resources</a>';
       el.hidden = !A.dtcHow;
     }
