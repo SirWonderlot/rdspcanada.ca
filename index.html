@@ -7,7 +7,7 @@
   <meta name="description" content="Free, plain-language information about Canadian federal and provincial disability benefits programs, eligibility, and how to apply.">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/favicon-256.png">
-  <link rel="stylesheet" href="assets/style.css?v=12">
+  <link rel="stylesheet" href="assets/style.css?v=13">
   <script>document.documentElement.classList.add('js')</script>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-eq3lLSt92POxpNUJ3IeP6.js"></script>
@@ -41,130 +41,54 @@
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-        <li><a href="disability-benefits-programs/">Benefits Programs</a></li>
         <li><a href="cdsb-eligibility/">Disability Bond</a></li>
         <li><a href="https://resources.rdspcanada.ca/">Disability Resources</a></li>
         <li><a href="programs/additional-programs/">Additional Programs</a></li>
-        <li><a class="nav-tool" href="disability-benefits-assessment-tool/">Assessment Tool</a></li>
+        <li><a class="nav-tool" href="https://assessment.rdspcanada.ca/assessment.html">Assessment Tool</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <div class="page-intro">
-    <div class="wrap">
-      <span class="eyebrow">Purpose</span>
-      <h1>Disability benefits programs</h1>
-      <p class="lede">Use the Disability Benefits Assessment Tool to review the disability benefits programs, check your eligibility, and learn how to apply.</p>
+    <div class="home-hero">
+      <div class="wrap">
+        <h1>Disability Benefits</h1>
+        <p class="lede">Use the Disability Benefits Assessment Tool to review the various disability benefits programs, assess your eligibility, and learn how to apply.</p>
+        <a class="btn btn-wide" href="https://assessment.rdspcanada.ca/assessment.html">Benefits Assessment Tool <span aria-hidden="true">&rarr;</span></a>
+      </div>
     </div>
-    </div>
-    <section class="section dtc-acc-sec">
-      <div class="wrap dtc-q">
-        <span class="eyebrow">Start here</span>
-        <h2>Have you qualified for the Disability Tax Credit (DTC)?</h2>
-        <p class="prose">The DTC is required for the RDSP and most of the benefits programs on the site, so it is the first thing to check. Please indicate whether you have qualified for the Disability Tax Credit certificate.</p>
-        <div class="acc">
-          <div class="acc-item">
-            <button class="acc-head" type="button" data-dtc-open="yes" aria-expanded="false" aria-controls="dtc-yes">
-              <span class="acc-ic yes"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg></span><span class="acc-t">Yes, I have qualified for the DTC<small>Programs available with DTC approval, and next steps</small></span><span class="chev" aria-hidden="true"></span>
-            </button>
-            <div class="dtc-panel acc-body" id="dtc-yes" hidden>
-  <h3>You can proceed</h3>
-  <p>DTC approval is a requirement for the following programs. You may be eligible for:</p>
-  <ul class="dtc-unlocks">
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Canada Disability Savings Grant</b>Up to $70,000 in matching contributions.</span></li>
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Canada Disability Savings Bond</b>Up to $20,000, with no deposits needed.</span></li>
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Registered Disability Savings Plan (RDSP)</b>The account that holds the Grant and Bond.</span></li>
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Disability Amount</b>A $10,341 tax credit (2026), transferable to family.</span></li>
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Child Disability Benefit</b>Up to $290 a month for each eligible child.</span></li>
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Canada Disability Benefit</b>Up to $204.20 a month, ages 18 to 64.</span></li>
-    <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6"/></svg><span><b>Home buying and accessibility</b>The Home Buyers' Amount and Home Accessibility Tax Credit.</span></li>
-  </ul>
-  <div class="dtc-next">
-    <p>Next, use the assessment tool to see which programs you can collect, and how to apply.</p>
-    <a class="btn" href="https://assessment.rdspcanada.ca/assessment.html">Continue to the Assessment Tool</a>
-  </div>
-</div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button" data-dtc-open="no" aria-expanded="false" aria-controls="dtc-no">
-              <span class="acc-ic no"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><span class="acc-t">No, I have not qualified for the DTC<small>Why DTC approval matters, and how to apply</small></span><span class="chev" aria-hidden="true"></span>
-            </button>
-            <div class="dtc-panel acc-body" id="dtc-no" hidden>
-  <h3>The Disability Tax Credit comes first</h3>
-  <p>DTC approval is required before you can open an RDSP or collect the Disability Savings Bond and Grant, and for most of the other benefits programs. It is for people whose health condition has lasted, or is expected to last, at least 12 months.</p>
-  <h4>What DTC approval can mean</h4>
-
-  <div class="noinc-intro">
-    <p><strong>You don't need an income to benefit.</strong> Benefits marked <span class="noinc-tag">No income needed</span> are paid even if you have little or no income.</p>
-  </div>
-
-  <table class="dtc-table">
-    <thead><tr><th scope="col">Benefit</th><th scope="col">Amount (2026)</th><th scope="col">How often</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Tax refund for past years</th><td>Up to $40,000. The CRA can adjust up to 10 previous tax returns to apply the disability amount.</td><td><span class="d-only">Once, when approved</span><span class="m-only">Refunded once upon approval</span></td></tr>
-      <tr><th scope="row">Canada Disability Benefit<br><span class="noinc-tag">No income needed</span></th><td>Up to $204.20 a month ($2,450.40 a year), for adults aged 18 to 64.</td><td><span class="d-only">Monthly</span><span class="m-only">Paid monthly</span></td></tr>
-      <tr><th scope="row">Child Disability Benefit<br><span class="noinc-tag">No income needed</span></th><td>Up to $290 a month ($3,480 a year) for each eligible child, tax-free.</td><td><span class="d-only">Monthly</span><span class="m-only">Paid monthly</span></td></tr>
-      <tr><th scope="row">Disability amount (tax credit)</th><td>$10,341, plus up to $6,032 for a person under 18. Unused amounts can be transferred to a supporting family member.</td><td><span class="d-only">Annually</span><span class="m-only">Tax credit, claimed annually</span></td></tr>
-      <tr><th scope="row">Home Accessibility Tax Credit</th><td>Claim up to $20,000 a year in eligible renovation costs, worth up to $2,800.</td><td><span class="d-only">Annually</span><span class="m-only">Tax credit, claimed annually</span></td></tr>
-      <tr><th scope="row">Home Buyers' Amount</th><td>A credit on up to $10,000 (worth up to $1,400) when buying a more accessible home, even if it is not a first home.</td><td><span class="d-only">When buying a home</span><span class="m-only">Tax credit, claimed when buying a home</span></td></tr>
-      <tr><th scope="row">Child care expense deduction</th><td>Deduct up to $11,000 a year in child care costs for a child eligible for the DTC, instead of $8,000 or $5,000.</td><td><span class="d-only">Annually</span><span class="m-only">Deduction, claimed annually</span></td></tr>
-      <tr><th scope="row">Canada Disability Savings Grant<br><span class="noinc-tag">No income needed</span></th><td>Matches up to 300% of deposits: up to $3,500 a year, $70,000 in a lifetime.</td><td><span class="d-only">Annually</span><span class="m-only">Paid into the RDSP annually</span></td></tr>
-      <tr><th scope="row">Canada Disability Savings Bond<br><span class="noinc-tag">No income needed</span></th><td>Up to $1,000 a year and $20,000 in a lifetime. No deposits needed.</td><td><span class="d-only">Annually</span><span class="m-only">Paid into the RDSP annually</span></td></tr>
-      <tr><th scope="row">Registered Disability Savings Plan (RDSP)<br><span class="noinc-tag">No income needed</span></th><td>The account that holds the Grant and Bond. Savings grow tax-sheltered, with up to $200,000 in personal contributions.</td><td>Ongoing</td></tr>
-      <tr><th scope="row">Canada Workers Benefit disability supplement</th><td>Up to $860 a year for lower-income workers.</td><td><span class="d-only">Annually</span><span class="m-only">Paid annually</span></td></tr>
-      <tr><th scope="row">Attendant care expenses</th><td>Claim up to $10,000 a year ($20,000 in the year of death) in attendant care as a medical expense, in addition to the disability amount.</td><td><span class="d-only">Annually</span><span class="m-only">Claimed annually as a medical expense</span></td></tr>
-      <tr><th scope="row">Qualified disability trust</th><td>Income in a trust for a person with the DTC can be taxed at lower, graduated rates.</td><td><span class="d-only">Annually</span><span class="m-only">Lower tax, annually</span></td></tr>
-    </tbody>
-  </table>
-  <p class="dtc-fine">Federal amounts for 2026. Some depend on income and other rules. DTC approval also lowers your provincial or territorial income tax.</p>
-
-  <div class="dtc-apply">
-    <h4>Apply for the Disability Tax Credit</h4>
-    <p>The DTC Application Assistance Program helps you prepare a complete application from plain-language questions, including guidance for your medical practitioner, to give you the best opportunity for approval.</p>
-    <a class="btn" href="/apply-for-the-dtc/">Apply for the DTC</a>
-  </div>
-</div>
-          </div>
-        </div>
-        <p class="dtc-help">Not sure? If you were approved, the CRA mailed you a letter confirming it (a Notice of Determination), and your approval also shows in CRA My Account.</p>
+    <section class="section" id="how">
+      <div class="wrap">
+        <span class="eyebrow">How does it work?</span>
+        <h2>Three steps</h2>
+        <ol class="home-steps">
+          <li>Review each benefits program</li>
+          <li>Determine your eligibility</li>
+          <li>Apply</li>
+        </ol>
+        <div class="home-note"><p>Not eligible for a program? You'll see why, along with any steps that could help you qualify.</p></div>
       </div>
     </section>
     <section class="section alt" id="programs">
       <div class="wrap">
-        <span class="eyebrow">Which programs are available?</span>
+        <span class="eyebrow">What benefits programs are accessible?</span>
         <h2>Disability benefits programs</h2>
         <p class="prose">Several federal and provincial disability benefits programs are available to people living with long-term medical conditions. They include the following:</p>
-        <ul class="program-list linked">
-          <li><a href="canada-disability-benefit/"><span class="name">Canada Disability Benefit (CDB)</span><span class="what">Monthly income payments</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
-          <li><a href="canadian-dental-care-plan/"><span class="name">Canadian Dental Care Plan (CDCP)</span><span class="what">Free dental care</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
-          <li><a href="cdsb-eligibility/"><span class="name">Canada Disability Savings Bond (CDSB)</span><span class="what">Up to $20,000</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
-          <li><a href="registered-disability-savings-plan/"><span class="name">Canada Disability Savings Grant (CDSG)</span><span class="what">Up to $70,000</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
-          <li><a href="canada-pension-plan-disability/"><span class="name">Canada Pension Plan Disability (CPP-D)</span><span class="what">Monthly income payments</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
-          <li><a href="program-guaranteed-access/"><span class="name">Guaranteed Access Program (GAP)</span><span class="what">One-time lump-sum payout</span><span class="tag">BC and Ontario only</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
-          <li><a href="disability-tax-credit/"><span class="name">Disability Amount</span><span class="what">Transferable credit for annual refunds</span><span class="go" aria-hidden="true">&rarr;</span></a></li>
+        <ul class="home-programs">
+          <li><b>Canada Disability Benefit (CDB)</b><span>Monthly income payments</span></li>
+          <li><b>Canadian Dental Care Plan (CDCP)</b><span>Free dental care</span></li>
+          <li><b>Canada Disability Savings Bond (CDSB)</b><span>Up to $20,000</span></li>
+          <li><b>Canada Disability Savings Grant (CDSG)</b><span>Up to $70,000</span></li>
+          <li><b>Canada Pension Plan Disability (CPP-D)</b><span>Monthly income payments</span></li>
+          <li><b>Guaranteed Access Program (GAP)</b><span>One-time lump-sum payout</span></li>
+          <li><b>Disability Amount</b><span>Transferable credit for annual refunds</span></li>
+          <li><b>Provincial benefits programs</b><span>Programs in each province and territory</span></li>
         </ul>
-        <h3>Provincial benefits programs</h3>
-        <p class="prose">For people who qualify for the Disability Tax Credit (DTC), each province and territory also has its own programs.</p>
-        <p><a class="more" href="disability-benefits-programs/">Disability benefits programs: information and applications</a></p>
+        <a class="btn btn-wide" href="https://assessment.rdspcanada.ca/assessment.html">Benefits Assessment Tool <span aria-hidden="true">&rarr;</span></a>
       </div>
     </section>
-    <section class="section" id="process">
-      <div class="wrap">
-        <span class="eyebrow">How do I collect my benefits?</span>
-        <h2>The process</h2>
-        <p class="prose">Collecting disability benefits takes four steps.</p>
-        <ol class="steps">
-          <li><h3>Eligibility</h3><p>Find out whether you are eligible for each program. Every program has its own qualification criteria. You can check with the <a href="disability-benefits-assessment-tool/">Disability Benefits Assessment Tool</a>.</p></li>
-          <li><h3>Confirmation</h3><p>Receive confirmation of your eligibility. If you are not eligible, you will be told why and pointed to resources that may help, where available. Direct links to each program are provided.</p></li>
-          <li><h3>Apply</h3><p>If you are eligible, you must apply for each benefit. Some programs allow unclaimed amounts from previous eligible years to be collected retroactively.</p></li>
-          <li><h3>Collect</h3><p>Once you have applied and been approved, you can begin receiving the benefit. Some programs require you to reapply at set intervals to keep receiving it.</p></li>
-        </ol>
-        <div class="note"><p><b>Please note:</b> RDSP Canada does not collect any personal information. If you are eligible for a program, we give you a direct link to its official online application. This protects your privacy and keeps you secure while you explore these programs.</p></div>
-      </div>
-    </section>
-    <section class="section alt" id="fees">
+    <section class="section" id="fees">
       <div class="wrap">
         <div class="prose">
           <span class="eyebrow">How much does this cost?</span>
@@ -173,51 +97,29 @@
         </div>
       </div>
     </section>
-    <section class="section" id="eligibility">
-      <div class="wrap">
-        <span class="eyebrow">Am I eligible?</span>
-        <h2>Eligibility</h2>
-        <p class="prose">To find out whether you are eligible to collect disability benefits, use the assessment tool below.</p>
-      <div class="tool-callout">
-        <p><strong>Disability Benefits Assessment Tool</strong>Check which programs you may be eligible for, and how to apply.</p>
-        <a class="btn" href="disability-benefits-assessment-tool/">Open the Assessment Tool</a>
-      </div>
-        <div class="note"><p><b>Please note:</b> RDSP Canada does not ask for personal information such as your address, SIN, or date of birth. Always protect your privacy online.</p></div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-grid">
         <div class="footer-about">
-          <div class="footer-brand"><img src="assets/logo-flag.png" alt="" width="32" height="32"> RDSP Canada</div>
-          <p>Plain-language information about federal and provincial disability benefits programs.</p>
+          <div class="footer-brand"><img src="/assets/logo-flag.png" alt="" width="32" height="32"> RDSP Canada</div>
+          <p>A disability benefits resource that offers tools to assist Canadians in collecting their disability benefits.</p>
         </div>
         <div>
-          <h2>Information</h2>
+          <h2>Resources</h2>
           <ul>
-            <li><a href="disability-benefits-assessment-tool/">Assessment Tool</a></li>
-            <li><a href="disability-benefits-programs/">Benefits Programs</a></li>
-            <li><a href="cdsb-eligibility/">Disability Bond</a></li>
-            <li><a href="https://resources.rdspcanada.ca/">Disability Resources</a></li>
-            <li><a href="programs/additional-programs/">Additional Programs</a></li>
+            <li><a href="https://assessment.rdspcanada.ca/assessment.html">Benefits Assessment Tool</a></li>
             <li><a href="/apply-for-the-dtc/">Disability Tax Credit</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Government sources</h2>
-          <ul>
-            <li><a href="https://www.canada.ca/en/revenue-agency.html" target="_blank" rel="noopener">Canada Revenue Agency (CRA)</a></li>
-            <li><a href="https://www.canada.ca/en/services/benefits/finder.html" target="_blank" rel="noopener">Benefits Finder</a></li>
+            <li><a href="/provincial-benefits/">Provincial Benefits</a></li>
           </ul>
         </div>
         <div>
           <h2>About</h2>
           <ul>
-            <li><a href="contact/">Contact</a></li>
-            <li><a href="privacy-policy/">Privacy</a></li>
-            <li><a href="terms-of-use/">Terms of Use</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/privacy-policy/">Privacy</a></li>
+            <li><a href="/terms-of-use/">Terms of Use</a></li>
           </ul>
         </div>
       </div>
@@ -235,25 +137,6 @@
         var open = n.classList.toggle('open');
         b.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
-    })();
-  </script>
-
-  <script>
-    (function () {
-      var btns = document.querySelectorAll('[data-dtc-open]');
-      function open(k) {
-        btns.forEach(function (b) { b.setAttribute('aria-expanded', b.dataset.dtcOpen === k ? 'true' : 'false'); });
-        ['yes', 'no'].forEach(function (p) { var el = document.getElementById('dtc-' + p); if (el) el.hidden = (p !== k); });
-      }
-      btns.forEach(function (b) {
-        b.addEventListener('click', function () {
-          var opening = b.getAttribute('aria-expanded') !== 'true';
-          open(opening ? b.dataset.dtcOpen : null);
-          // Count which answer people open (analytics, no personal information).
-          if (opening && window.plausible) plausible(b.dataset.dtcOpen === 'yes' ? 'Opened DTC: Yes' : 'Opened DTC: No');
-        });
-      });
-      var m = /open=(yes|no)/.exec(location.search); if (m) open(m[1]);
     })();
   </script>
 </body>
