@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Apply for the DTC with Assistance | RDSP Canada</title>
-  <meta name="description" content="Apply for the Disability Tax Credit (DTC) with assistance: what qualifying means for you, and a reduced fee of $49 for people referred by RDSP Canada.">
+  <title>Apply for the DTC | RDSP Canada</title>
+  <meta name="description" content="Apply for the Disability Tax Credit (DTC): what qualifying would mean in your situation, and a benefits review session with a Benefits Specialist.">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
   <link rel="apple-touch-icon" href="../assets/favicon-256.png">
   <link rel="stylesheet" href="../assets/style.css?v=13">
@@ -20,7 +20,7 @@
       var h = a.href, n = /dtcc\.ca|apply-for-the-dtc\/continue/.test(h) ? 'Apply for DTC'
         : /disability-tax-credit\/about-dtc\.html/.test(h) ? 'Apply DTC Independently'
         : /access\.rdspcanada\.ca/.test(h) ? 'Open Health Questionnaire'
-        : /calendly\.com/.test(h) ? 'Book Review'
+        : /calendly\.com|apply-for-the-dtc\/schedule/.test(h) ? 'Schedule DTC Review'
         : /canada-disability-benefit\/apply/.test(h) ? 'Apply CDB'
         : /dental-care-plan\/apply/.test(h) ? 'Apply CDCP'
         : /cpp-disability-benefit\/apply/.test(h) ? 'Apply CPP-D'
@@ -38,15 +38,18 @@
     .gets { list-style: none; padding: 0; margin: .4rem 0 0; max-width: 46rem; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
     .gets li { display: grid; grid-template-columns: 1fr auto; gap: 1rem; margin: 0; padding: .85rem 1.1rem; border-top: 1px solid var(--line); font-size: 1.05rem; }
     .gets li:first-child { border-top: 0; }
-    .gets li span:first-child { color: var(--ink); }
-    .gets li span:last-child { text-align: right; }
+    .gets li > span:first-child { color: var(--ink); }
+    .gets li > span:last-child { text-align: right; color: var(--muted); }
+    .gets .amt { color: #1c2630; }
     .gets li[hidden] { display: none; }
     .apply-wrap strong { font-weight: 600; }
-    .apply-code { color: var(--muted); }
+    .call-list { list-style: none; padding: 0; margin: .4rem 0 0; max-width: 46rem; }
+    .call-list li { position: relative; padding-left: 2rem; margin: 0 0 .7rem; font-size: 1.05rem; }
+    .call-list li::before { content: ""; position: absolute; left: 0; top: .2rem; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: #e3f1e8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4 10.5l4 4 8-9' fill='none' stroke='%232e7d4f' stroke-width='3'/%3E%3C/svg%3E") center / 70% no-repeat; }
     .apply-go { margin-top: 1.6rem; }
     @media (max-width: 640px) {
       .gets li { grid-template-columns: 1fr; gap: .15rem; }
-      .gets li span:last-child { text-align: left; color: var(--muted); }
+      .gets li > span:last-child { text-align: left; color: var(--muted); }
     }
   </style>
 </head>
@@ -73,27 +76,29 @@
   <main id="main">
     <section class="section">
       <div class="wrap apply-wrap">
-        <h1 class="apply-title">Apply for the DTC with assistance (risk-free)</h1>
+        <h1 class="apply-title">Apply for the DTC</h1>
         <div class="apply-rule" aria-hidden="true"></div>
-        <p>RDSP Canada does not assist with Disability Tax Credit applications. Because qualifying is so important, and because of the benefits you will receive once you qualify, we refer you to a service built by DTC professionals and endorsed by RDSP Canada. This is the only service endorsed by RDSP Canada.</p>
+        <p>Because qualifying for the <strong>Disability Tax Credit</strong> is so important for persons living with long-term medical conditions, RDSP Canada has Benefits Specialists who will assist you with applying.</p>
 
-        <h2>What qualifying means for you</h2>
+        <h2 id="gets-h">What qualifying can mean</h2>
+        <p id="gets-intro">After qualifying for the <strong>Disability Tax Credit</strong>, you may be eligible to receive each of the following.</p>
         <ul class="gets" id="gets">
-          <li data-needs="age"><span>Canada Disability Benefit</span><span>Up to $204.20 a month</span></li>
-          <li data-needs="rdsp"><span>Canada Disability Savings Grant</span><span>Up to $70,000 deposited into your RDSP</span></li>
-          <li data-needs="rdsp bond"><span>Canada Disability Savings Bond</span><span>Up to $20,000 deposited into your RDSP</span></li>
-          <li><span>Refund from the CRA</span><span>Up to $40,000, for up to 10 past tax years</span></li>
-          <li><span>Disability amount</span><span>$10,341 a year on your tax return (2026)</span></li>
+          <li data-needs="age"><span>Canada Disability Benefit</span><span>Up to <span class="amt">$204.20</span> a month</span></li>
+          <li data-needs="rdsp"><span>Canada Disability Savings Grant</span><span>Up to <span class="amt">$70,000</span> deposited into your RDSP</span></li>
+          <li data-needs="rdsp bond"><span>Canada Disability Savings Bond</span><span>Up to <span class="amt">$20,000</span> deposited into your RDSP</span></li>
+          <li><span>Refund from the CRA</span><span>Up to <span class="amt">$40,000</span>, for up to 10 past tax years</span></li>
+          <li><span>Disability amount</span><span><span class="amt">$10,341</span> a year on your tax return (2026)</span></li>
         </ul>
 
-        <h2>Why apply with assistance</h2>
-        <p>Applying with assistance gives you the best chance of qualifying.</p>
+        <h2>Schedule your benefits review session</h2>
+        <ul class="call-list">
+          <li>Your Benefits Specialist will go through each benefits program with you to make sure you are receiving all of your government entitlements.</li>
+          <li>They will walk you through the DTC application process, show you the options you have when applying, and answer any of your questions.</li>
+          <li>If needed, your Benefits Specialist will assist you in applying for the <strong>Disability Tax Credit</strong>.</li>
+          <li>There are no fees to speak with a Benefits Specialist.</li>
+        </ul>
 
-        <h2>Apply risk-free</h2>
-        <p>The regular fee is $149. Because you are being referred through RDSP Canada, your fee is significantly reduced to $49. Should you <strong>not</strong> qualify for the Disability Tax Credit, <strong>your $49 is refunded to you in full</strong>. This means applying for the DTC carries no risk for you.</p>
-        <p class="apply-code">Referral code RDSP49 is applied automatically.</p>
-
-        <div class="apply-go"><a class="btn btn-wide" href="/apply-for-the-dtc/continue/" target="_blank" rel="noopener">Continue</a></div>
+        <div class="apply-go"><a class="btn btn-wide" href="/apply-for-the-dtc/schedule/">Schedule your call</a></div>
       </div>
     </section>
   </main>
@@ -144,6 +149,11 @@
     // Without those (any other way here), every benefit is shown.
     (function () {
       var q = new URLSearchParams(location.search);
+      // Arriving from the assessment tool (?age= ?rdsp= ?bond=): the list is specific to this person.
+      if (q.has('age') || q.has('rdsp') || q.has('bond')) {
+        document.getElementById('gets-h').textContent = 'What qualifying means for you';
+        document.getElementById('gets-intro').innerHTML = 'After qualifying for the <strong>Disability Tax Credit</strong>, you will be eligible to receive each of the following.';
+      }
       document.querySelectorAll('#gets [data-needs]').forEach(function (li) {
         li.hidden = li.getAttribute('data-needs').split(' ').some(function (k) { return q.get(k) === 'no'; });
       });

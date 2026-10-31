@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule Your Benefits Review Session | RDSP Canada</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Schedule your benefits review session with a Benefits Specialist.">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../assets/favicon-256.png">
+  <link rel="stylesheet" href="../../assets/style.css?v=13">
+  <script>document.documentElement.classList.add('js')</script>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-eq3lLSt92POxpNUJ3IeP6.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+    // Count a completed booking (Calendly tells the page when a time is booked; no personal information is sent).
+    window.addEventListener('message', function (e) {
+      if (e.origin !== 'https://calendly.com' || !e.data) return;
+      // Grow the calendar box to fit Calendly's content, so the whole form and its
+      // Schedule Event button are on the page instead of hidden inside the box.
+      if (e.data.event === 'calendly.page_height' && e.data.payload && e.data.payload.height) {
+        var h = parseInt(e.data.payload.height, 10);
+        if (h > 300) document.getElementById('booking').style.height = (h + 20) + 'px';
+        return;
+      }
+      // Once a time is picked, ask for a cell phone number so they get text reminders.
+      if (e.data.event === 'calendly.date_and_time_selected') {
+        var note = document.getElementById('sms-note');
+        note.hidden = false;
+        note.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      if (e.data.event !== 'calendly.event_scheduled') return;
+      plausible('DTC Review Booked');
+      // Show our own confirmation in place of Calendly's.
+      document.getElementById('before-booking').hidden = true;
+      document.getElementById('booked').hidden = false;
+      document.getElementById('page-title').textContent = 'Thank you';
+      window.scrollTo(0, 0);
+    });
+  </script>
+
+  <style>
+    .apply-title { margin: 0; }
+    .apply-rule { width: 96px; height: 5px; background: var(--accent); border-radius: 2px; margin: .9rem 0 1.4rem; }
+    .apply-wrap p { font-size: 1.1rem; max-width: 46rem; }
+    .apply-wrap strong { font-weight: 600; }
+    .sms-note { margin: 1.2rem 0 0; padding: .85rem 1rem; border-radius: 10px; background: #eef4fa; border: 1px solid #c9dbec; color: #1c2630; scroll-margin-top: 12px; }
+    .booked { margin-top: .5rem; }
+    .booked h2 { font-size: 1.3rem; margin: 0 0 .6rem; }
+    .booked-check { width: 52px; height: 52px; border-radius: 50%; background: #2e7d4f; display: grid; place-items: center; margin: 0 0 1rem; }
+    .booking { min-width: 320px; height: 760px; margin: 1rem -16px 0; }
+    @media (min-width: 700px) { .booking { height: 760px; margin: 1.2rem 0 0; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../../">
+        <img src="../../assets/logo-flag.png" alt="" width="40" height="40">
+        <span><span class="brand-name">RDSP Canada</span><span class="brand-tag">Disability benefits information</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+        <li><a href="../../cdsb-eligibility/">Disability Bond</a></li>
+        <li><a href="/provincial-benefits/">Provincial Programs</a></li>
+        <li><a class="nav-tool" href="https://assessment.rdspcanada.ca/assessment.html">Assessment Tool</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="wrap apply-wrap">
+        <h1 class="apply-title" id="page-title">Schedule your benefits review session</h1>
+        <div class="apply-rule" aria-hidden="true"></div>
+        <div id="before-booking">
+        <p>A typical session takes approximately 20 minutes and is conducted over Zoom, allowing your Benefits Specialist to share their screen and guide you through the process.</p>
+        <p>By following along visually, you’ll gain a clearer understanding of how to apply for the <strong>Disability Tax Credit</strong>, what information is required, and how to give your application the best possible chance of being approved.</p>
+        <p>Please choose a <strong>day</strong> and <strong>time</strong> that works best for you.</p>
+        <p class="sms-note" id="sms-note" hidden>Would you like a text reminder before your session? Please add your cell phone number under <strong>Send text messages to</strong>, at the bottom of the form.</p>
+        <div class="booking" id="booking"></div>
+        </div>
+        <div class="booked" id="booked" hidden>
+          <div class="booked-check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
+          <h2>Your benefits review session is booked</h2>
+          <p>You will receive a confirmation email with your Zoom link. Your Benefits Specialist looks forward to meeting with you.</p>
+        </div>
+        <noscript><p><a href="https://calendly.com/benefits-rdspcanada/benefits-review-session-clone">Open the booking calendar</a></p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-brand"><img src="/assets/logo-flag.png" alt="" width="32" height="32"> RDSP Canada</div>
+          <p>A disability benefits resource that offers tools to assist Canadians in collecting their disability benefits.</p>
+        </div>
+        <div>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="https://assessment.rdspcanada.ca/assessment.html">Benefits Assessment Tool</a></li>
+            <li><a href="/apply-for-the-dtc/">Disability Tax Credit</a></li>
+            <li><a href="/provincial-benefits/">Provincial Benefits</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>About</h2>
+          <ul>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/privacy-policy/">Privacy</a></li>
+            <li><a href="/terms-of-use/">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; RDSP Canada 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var b = document.querySelector('.nav-toggle'), n = document.getElementById('site-nav');
+      if (!b || !n) return;
+      b.addEventListener('click', function () {
+        var open = n.classList.toggle('open');
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <script src="https://assets.calendly.com/assets/external/widget.js"></script>
+  <script>
+    // hide_gdpr_banner: Calendly's cookie notice otherwise covers half the calendar on phones.
+    Calendly.initInlineWidget({
+      url: 'https://calendly.com/benefits-rdspcanada/benefits-review-session-clone?hide_gdpr_banner=1&hide_event_type_details=1',
+      parentElement: document.getElementById('booking')
+    });
+  </script>
+</body>
+</html>
