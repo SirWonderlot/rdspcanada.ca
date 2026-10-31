@@ -17,7 +17,7 @@
     // Count clicks on the main next-step links (no personal information is sent).
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.closest('footer')) return;
-      var h = a.href, n = /dtcc\.ca/.test(h) ? 'Apply for DTC'
+      var h = a.href, n = /dtcc\.ca|apply-for-the-dtc\/continue/.test(h) ? 'Apply for DTC'
         : /disability-tax-credit\/about-dtc\.html/.test(h) ? 'Apply DTC Independently'
         : /access\.rdspcanada\.ca/.test(h) ? 'Open Health Questionnaire'
         : /calendly\.com/.test(h) ? 'Book Review'
@@ -93,7 +93,7 @@
         <p>The regular fee is $149. Because you are being referred through RDSP Canada, your fee is significantly reduced to $49. Should you <strong>not</strong> qualify for the Disability Tax Credit, <strong>your $49 is refunded to you in full</strong>. This means applying for the DTC carries no risk for you.</p>
         <p class="apply-code">Referral code RDSP49 is applied automatically.</p>
 
-        <div class="apply-go"><a class="btn btn-wide" href="https://dtcc.ca/apply/?code=RDSP49" target="_blank" rel="noopener">Continue</a></div>
+        <div class="apply-go"><a class="btn btn-wide" href="/apply-for-the-dtc/continue/" target="_blank" rel="noopener">Continue</a></div>
       </div>
     </section>
   </main>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transfer in Progress | RDSP Canada</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../../assets/favicon-256.png">
+  <link rel="stylesheet" href="../../assets/style.css?v=13">
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-eq3lLSt92POxpNUJ3IeP6.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <style>
+    body { background: #fff; }
+    .go { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 2rem 16px; }
+    .go-box { width: 100%; max-width: 26rem; text-align: center; }
+    .go-brand { display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; color: #1c2630; font-size: 1.1rem; margin-bottom: 2rem; }
+    .go h1 { font-size: 1.45rem; font-weight: 600; margin: 0 0 1.6rem; }
+    .go-bar { height: 14px; border-radius: 999px; background: #e1ecf5; overflow: hidden; margin: 0 0 1.8rem; }
+    .go-bar span { display: block; height: 100%; width: 0; background: #3a85bb; border-radius: inherit; animation: fill 5.5s linear forwards; }
+    @keyframes fill { to { width: 100%; } }
+    .go-steps { list-style: none; padding: 0; margin: 0 auto; display: inline-block; text-align: left; }
+    .go-steps li { display: flex; align-items: center; gap: .7rem; margin: 0 0 .9rem; font-size: 1.05rem; color: #5a6876; opacity: .45; transition: opacity .3s, color .3s; }
+    .go-steps li.on, .go-steps li.done { opacity: 1; color: #1c2630; }
+    .go-ico { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; border: 2px solid #cfd8e1; }
+    .go-steps li.on .go-ico { border-color: #3a85bb; border-top-color: transparent; animation: spin .8s linear infinite; }
+    .go-steps li.done .go-ico { border-color: #3a85bb; background: #3a85bb; animation: none; }
+    .go-ico svg { display: none; }
+    .go-steps li.done .go-ico svg { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .go-now { margin-top: 1.4rem; font-size: .95rem; color: var(--muted); }
+    @media (prefers-reduced-motion: reduce) {
+      .go-steps li.on .go-ico { animation: none; border-top-color: #3a85bb; }
+    }
+  </style>
+</head>
+<body>
+  <main class="go">
+    <div class="go-box">
+      <div class="go-brand"><img src="../../assets/logo-flag.png" alt="" width="32" height="32"> RDSP Canada</div>
+      <h1>Transfer in progress…</h1>
+      <div class="go-bar" aria-hidden="true"><span></span></div>
+      <ul class="go-steps" aria-live="polite">
+        <li class="on"><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Connecting to the application</li>
+        <li><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Applying referral code RDSP49</li>
+        <li><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Reduced fee of $49 applied</li>
+      </ul>
+      <noscript><p class="go-now"><a href="https://dtcc.ca/apply/?code=RDSP49">Continue to the application</a></p></noscript>
+    </div>
+  </main>
+  <script>
+    // Each step finishes in turn over about 5.5 seconds, then the application opens
+    // with the referral code already applied.
+    (function () {
+      var URL = 'https://dtcc.ca/apply/?code=RDSP49';
+      var steps = document.querySelectorAll('.go-steps li');
+      [1600, 3300, 4900].forEach(function (ms, i) {
+        setTimeout(function () {
+          steps[i].className = 'done';
+          if (steps[i + 1]) steps[i + 1].className = 'on';
+        }, ms);
+      });
+      setTimeout(function () { location.replace(URL); }, 5800);
+    })();
+  </script>
+</body>
+</html>
