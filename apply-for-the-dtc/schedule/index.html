@@ -2,7 +2,12 @@
 <html lang="en-CA">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" id="vp" content="width=device-width, initial-scale=1">
+  <script>
+    // iPhones zoom in when someone taps a field in Calendly's form (its text is small) and stay
+    // zoomed in afterwards. maximum-scale=1 stops that on iPhones only; people can still pinch to zoom.
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) document.getElementById('vp').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
+  </script>
   <title>Schedule Your Benefits Review Session | RDSP Canada</title>
   <meta name="robots" content="noindex">
   <meta name="description" content="Schedule your benefits review session with a Benefits Specialist.">
@@ -38,6 +43,10 @@
       document.getElementById('before-booking').hidden = true;
       document.getElementById('booked').hidden = false;
       document.getElementById('page-title').textContent = 'Thank you';
+      // If the phone zoomed in while they filled in the form, zoom back out so the confirmation fits.
+      var vp = document.getElementById('vp'), was = vp.getAttribute('content');
+      vp.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
+      setTimeout(function () { vp.setAttribute('content', was); }, 400);
       window.scrollTo(0, 0);
     });
   </script>
