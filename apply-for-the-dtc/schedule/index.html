@@ -58,6 +58,19 @@
     .apply-wrap strong { font-weight: 600; }
     .sms-note { margin: 1.2rem 0 0; padding: .85rem 1rem; border-radius: 10px; background: #eef4fa; border: 1px solid #c9dbec; color: #1c2630; scroll-margin-top: 12px; }
     .booked { margin-top: .5rem; }
+    .no-time { max-width: 46rem; margin: .4rem 0 0; }
+    .no-time-open-wrap { text-align: center; margin: 0; }
+    .no-time-open { background: none; border: 0; padding: 4px 0; color: var(--link); font: inherit; font-size: 1.05rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .no-time-form { margin-top: .6rem; padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .no-time-form[hidden], .no-time-open[hidden], .no-time-error[hidden], .no-time[hidden] { display: none; }
+    .no-time-form label[for], .no-time-label { display: block; font-weight: 600; font-size: 1rem; margin: 0 0 .35rem; color: var(--ink); }
+    .no-time-form input[type="text"], .no-time-form input[type="tel"], .no-time-form input[type="email"], .no-time-form input[type="date"] { display: block; width: 100%; padding: .65rem .75rem; font: inherit; font-size: 1rem; border: 1.5px solid #c3ccd5; border-radius: 8px; background: #fff; margin: 0 0 .9rem; }
+    .no-time-form input[type="date"] { max-width: 16rem; }
+    .no-time-periods { display: grid; gap: .6rem; margin: 0 0 1rem; }
+    .no-time-periods label { display: flex; align-items: center; gap: .5rem; font-size: 1rem; }
+    .no-time-error { color: #b42318; font-size: .98rem; margin: -.2rem 0 .8rem; }
+    .no-time-form .btn { width: 100%; font: inherit; font-weight: 600; font-size: 1.05rem; border: 0; cursor: pointer; }
+    .nt-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
     .booked h2 { font-size: 1.3rem; margin: 0 0 .6rem; }
     .booked-check { width: 52px; height: 52px; border-radius: 50%; background: #2e7d4f; display: grid; place-items: center; margin: 0 0 1rem; }
     .booking { min-width: 320px; height: 760px; margin: 1rem -16px 0; }
@@ -93,8 +106,38 @@
         <p>A typical session takes approximately 20 minutes and is conducted over Zoom, allowing your Benefits Specialist to share their screen and guide you through the process.</p>
         <p>By following along visually, you’ll gain a clearer understanding of how to apply for the <strong>Disability Tax Credit</strong>, what information is required, and how to give your application the best possible chance of being approved.</p>
         <p>Please choose a <strong>day</strong> and <strong>time</strong> that works best for you.</p>
+        <!-- When no calendar time suits them: their details and a preferred day and time of day,
+             sent to the questionnaire server (access.rdspcanada.ca), which adds it to Todd's dashboard. -->
+        <div class="no-time" id="no-time">
+          <p class="no-time-open-wrap"><button type="button" class="no-time-open" id="no-time-open">None of these times work for me</button></p>
+          <form class="no-time-form" id="no-time-form" hidden novalidate>
+            <p>No problem. Choose a <strong>day</strong> and <strong>time</strong> that works best for you, and your Benefits Specialist will contact you to arrange your benefits review session.</p>
+            <label for="nt-name">Full name</label>
+            <input type="text" id="nt-name" autocomplete="name">
+            <label for="nt-phone">Phone number</label>
+            <input type="tel" id="nt-phone" autocomplete="tel">
+            <label for="nt-email">Email address</label>
+            <input type="email" id="nt-email" autocomplete="email">
+            <label for="nt-day">Preferred day</label>
+            <input type="date" id="nt-day">
+            <p class="no-time-label">Time of day</p>
+            <div class="no-time-periods">
+              <label><input type="radio" name="nt-period" value="Morning"> Morning</label>
+              <label><input type="radio" name="nt-period" value="Afternoon"> Afternoon</label>
+              <label><input type="radio" name="nt-period" value="Evening"> Evening</label>
+            </div>
+            <input type="text" id="nt-website" class="nt-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="no-time-error" id="nt-error" hidden></p>
+            <button type="submit" class="btn btn-wide">Send my preferred time</button>
+          </form>
+        </div>
         <p class="sms-note" id="sms-note" hidden>Would you like a text reminder before your session? Please add your cell phone number under <strong>Send text messages to</strong>, at the bottom of the form.</p>
         <div class="booking" id="booking"></div>
+        </div>
+        <div class="booked" id="time-sent" hidden>
+          <div class="booked-check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
+          <h2>Thank you</h2>
+          <p id="time-sent-text"></p>
         </div>
         <div class="booked" id="booked" hidden>
           <div class="booked-check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
@@ -143,6 +186,52 @@
       b.addEventListener('click', function () {
         var open = n.classList.toggle('open');
         b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <script>
+    // "None of these times work for me": details and a preferred day and time of day.
+    (function () {
+      var REQUEST_URL = 'https://access.rdspcanada.ca/dtc-request';
+      var form = document.getElementById('no-time-form'), err = document.getElementById('nt-error');
+      var day = document.getElementById('nt-day');
+      function iso(d) { return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+      var t = new Date(); t.setDate(t.getDate() + 1); day.min = iso(t);
+      var l = new Date(); l.setDate(l.getDate() + 60); day.max = iso(l);
+      document.getElementById('no-time-open').addEventListener('click', function () {
+        this.hidden = true; form.hidden = false; document.getElementById('nt-name').focus();
+      });
+      form.addEventListener('input', function () { err.hidden = true; });
+      form.addEventListener('change', function () { err.hidden = true; });
+      function show(msg) { err.textContent = msg; err.hidden = false; }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = document.getElementById('nt-name').value.trim();
+        var phone = document.getElementById('nt-phone').value.trim();
+        var email = document.getElementById('nt-email').value.trim();
+        var p = form.querySelector('input[name="nt-period"]:checked');
+        if (!name) return show('Please enter your full name.');
+        if (phone.replace(/\D/g, '').length < 10) return show('Please enter your phone number, including the area code.');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show('Please enter a valid email address.');
+        if (!day.value || day.value < day.min || day.value > day.max) return show('Please choose a day within the next two months.');
+        if (!p) return show('Please choose a time of day.');
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true; btn.textContent = 'Sending...';
+        fetch(REQUEST_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name, phone: phone, email: email, day: day.value, period: p.value, website: document.getElementById('nt-website').value })
+        }).then(function (r) { return r.json(); }).then(function (r) {
+          if (!r.success) throw new Error('not saved');
+          if (window.plausible) plausible('DTC Time Requested');
+          var label = new Date(day.value + 'T12:00:00').toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
+          document.getElementById('time-sent-text').textContent = 'Your Benefits Specialist will contact you by phone or email to arrange your benefits review session on ' + label + ' (' + p.value.toLowerCase() + ').';
+          document.getElementById('before-booking').hidden = true;
+          document.getElementById('time-sent').hidden = false;
+          window.scrollTo(0, 0);
+        }).catch(function () {
+          show('Your preferred time could not be sent. Please try again.');
+          btn.disabled = false; btn.textContent = 'Send my preferred time';
+        });
       });
     })();
   </script>
