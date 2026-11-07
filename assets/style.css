@@ -257,7 +257,6 @@ main { display: block; }
   justify-content: space-between;
   gap: 1rem 2rem;
   border: 1px solid var(--line);
-  border-left: 4px solid var(--link);
   border-radius: var(--radius);
   background: var(--bg);
   padding: 1.25rem 1.5rem;
@@ -281,8 +280,8 @@ main { display: block; }
 
 .note {
   background: var(--note-bg);
-  border-left: 4px solid var(--note-line);
-  border-radius: 0 var(--radius) var(--radius) 0;
+  border: 1px solid var(--note-line);
+  border-radius: var(--radius);
   padding: 1rem 1.25rem;
   margin: 1.5rem 0;
   max-width: var(--prose);
@@ -522,7 +521,7 @@ main { display: block; }
 .key-info b { color: var(--ink); }
 
 /* Program quick check ("Not sure if you qualify?") */
-.qc { max-width: var(--prose); background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--link); border-radius: var(--radius); margin: 1.5rem 0; overflow: hidden; }
+.qc { max-width: var(--prose); background: #fff; border: 1px solid var(--line); border-radius: var(--radius); margin: 1.5rem 0; overflow: hidden; }
 .qc-toggle { width: 100%; display: flex; align-items: center; gap: 1rem; text-align: left; background: #fff; border: 0; padding: 1.15rem 1.4rem; font: inherit; color: var(--ink); cursor: pointer; }
 .qc-toggle:hover { background: var(--surface); }
 .qc-toggle span { flex: 1; }
