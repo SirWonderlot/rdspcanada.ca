@@ -47,8 +47,14 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ invitee: invitee || '' })
       }).catch(function () {});
-      // Show our own confirmation in place of Calendly's.
-      document.getElementById('before-booking').hidden = true;
+      // Show our confirmation, but keep Calendly's box on screen just below it: after booking it
+      // asks people who want text reminders to verify their phone number with a code. Hiding it
+      // stopped that, so no texts were sent.
+      var cal = document.getElementById('booking');
+      Array.prototype.forEach.call(document.getElementById('before-booking').children, function (el) {
+        if (el !== cal) el.hidden = true;
+      });
+      cal.parentNode.insertBefore(document.getElementById('booked'), cal);
       document.getElementById('booked').hidden = false;
       document.getElementById('page-title').textContent = 'Thank you';
       // If the phone zoomed in while they filled in the form, zoom back out so the confirmation fits.
@@ -65,7 +71,7 @@
     .apply-wrap p { font-size: 1.1rem; max-width: 46rem; }
     .apply-wrap strong { font-weight: 600; }
     .sms-note { margin: 1.2rem 0 0; padding: .85rem 1rem; border-radius: 10px; background: #eef4fa; border: 1px solid #c9dbec; color: #1c2630; scroll-margin-top: 12px; }
-    .booked { margin-top: .5rem; }
+    .booked { margin-top: .5rem; margin-bottom: 1rem; }
     .no-time { max-width: 46rem; margin: .4rem 0 0; }
     .no-time-open-wrap { text-align: center; margin: 0; }
     .no-time-open { background: none; border: 0; padding: 4px 0; color: var(--link); font: inherit; font-size: 1.05rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
