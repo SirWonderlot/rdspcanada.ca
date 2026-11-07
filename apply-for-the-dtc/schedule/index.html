@@ -39,6 +39,8 @@
       }
       if (e.data.event !== 'calendly.event_scheduled') return;
       plausible('DTC Review Booked');
+      // Add the booking to Todd's dashboard (Calendly does not tell the page who booked or when).
+      fetch('https://access.rdspcanada.ca/dtc-booked', { method: 'POST', keepalive: true }).catch(function () {});
       // Show our own confirmation in place of Calendly's.
       document.getElementById('before-booking').hidden = true;
       document.getElementById('booked').hidden = false;
