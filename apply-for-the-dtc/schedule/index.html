@@ -10,7 +10,7 @@
   </script>
   <title>Schedule Your Benefits Review Session | RDSP Canada</title>
   <meta name="robots" content="noindex">
-  <meta name="description" content="Schedule your benefits review session with a Benefits Specialist.">
+  <meta name="description" content="Schedule your Benefits Review session with a Benefits Specialist.">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
   <link rel="apple-touch-icon" href="../../assets/favicon-256.png">
   <link rel="stylesheet" href="../../assets/style.css?v=15">
@@ -114,7 +114,7 @@
   <main id="main">
     <section class="section">
       <div class="wrap apply-wrap">
-        <h1 class="apply-title" id="page-title">Schedule your benefits review session</h1>
+        <h1 class="apply-title" id="page-title">Schedule your Benefits Review session</h1>
         <div class="apply-rule" aria-hidden="true"></div>
         <div id="before-booking">
         <p>A typical session takes approximately 20 minutes and is conducted over Zoom, allowing your Benefits Specialist to share their screen and guide you through the process.</p>
@@ -125,7 +125,7 @@
         <div class="no-time" id="no-time">
           <p class="no-time-open-wrap"><button type="button" class="no-time-open" id="no-time-open">None of these times work for me</button></p>
           <form class="no-time-form" id="no-time-form" hidden novalidate>
-            <p>No problem. Choose a <strong>day</strong> and <strong>time</strong> that works best for you, and your Benefits Specialist will contact you to arrange your benefits review session.</p>
+            <p>No problem. Choose a <strong>day</strong> and <strong>time</strong> that works best for you, and your Benefits Specialist will contact you to arrange your Benefits Review session.</p>
             <label for="nt-name">Full name</label>
             <input type="text" id="nt-name" autocomplete="name">
             <label for="nt-phone">Phone number</label>
@@ -155,7 +155,7 @@
         </div>
         <div class="booked" id="booked" hidden>
           <div class="booked-check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
-          <h2>Your benefits review session is booked</h2>
+          <h2>Your Benefits Review session is booked</h2>
           <p>You will receive a confirmation email with your Zoom link. Your Benefits Specialist looks forward to meeting with you.</p>
         </div>
         <noscript><p><a href="https://calendly.com/benefits-rdspcanada/benefits-review-session-clone">Open the booking calendar</a></p></noscript>
@@ -238,7 +238,7 @@
           if (!r.success) throw new Error('not saved');
           if (window.plausible) plausible('DTC Time Requested');
           var label = new Date(day.value + 'T12:00:00').toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
-          document.getElementById('time-sent-text').textContent = 'Your Benefits Specialist will contact you by phone or email to arrange your benefits review session on ' + label + ' (' + p.value.toLowerCase() + ').';
+          document.getElementById('time-sent-text').textContent = 'Your Benefits Specialist will contact you by phone or email to arrange your Benefits Review session on ' + label + ' (' + p.value.toLowerCase() + ').';
           document.getElementById('before-booking').hidden = true;
           document.getElementById('time-sent').hidden = false;
           window.scrollTo(0, 0);
