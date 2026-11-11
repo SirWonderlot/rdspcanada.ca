@@ -30,6 +30,7 @@
     .er-dob { display: grid; grid-template-columns: 2fr 1fr 1.3fr; gap: .6rem; max-width: 420px; }
     .er-dob label { font-size: .88rem; color: var(--muted); display: block; margin-bottom: .2rem; }
     .er-sub { margin-top: .6rem; }
+    .er-sub[hidden] { display: none; }
     .er-sub label { font-weight: 400; color: var(--muted); font-size: .92rem; display: block; margin-bottom: .2rem; }
 
     .er-choices { display: flex; flex-wrap: wrap; gap: .45rem; }
@@ -53,6 +54,27 @@
     .er-next:hover { background: var(--link-hover); }
     .er-nav.first .er-next { margin-left: 0; }
     .er-nav[hidden] { display: none; }
+    .ben { border-top: 1px solid var(--line); margin-top: .4rem; }
+    .ben:first-child { border-top: 0; margin-top: 0; }
+    .ben-head { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 .1rem; }
+    .ben-head h3 { margin: 0; font-size: 1.15rem; color: var(--ink); }
+    .ben-head[hidden] { display: none; }
+    .ben-remove { font: inherit; font-size: .95rem; background: none; border: 0; color: #b42318; text-decoration: underline; cursor: pointer; padding: 4px 0; }
+    .ben-n2 .er-field:first-of-type, .ben .er-field:first-of-type { border-top: 0; }
+    .er-more { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: .9rem 1rem; margin: .8rem 0 .4rem; }
+    .er-more[hidden] { display: none; }
+    .er-more-q { font-weight: 600; color: var(--ink); margin: 0 0 .6rem; }
+    .er-more-note { font-size: .9rem; color: var(--muted); margin: .5rem 0 0; }
+    .er-add { font: inherit; font-size: 1rem; font-weight: 600; min-height: 42px; padding: .35rem 1rem; border-radius: 8px; border: 1.5px solid var(--link); background: #fff; color: var(--link); cursor: pointer; }
+    .er-add:hover { background: var(--note-bg); }
+    .er-shares { margin-top: .6rem; }
+    .share-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .55rem 0; border-bottom: 1px solid var(--line); max-width: 420px; }
+    .share-row span { color: var(--ink); }
+    .share-pct { display: flex; align-items: center; gap: .35rem; }
+    .er-field .share-pct input { width: 5.5rem; text-align: right; min-height: 40px; }
+    .er-total { display: flex; justify-content: space-between; max-width: 420px; padding: .6rem 0 0; font-weight: 600; }
+    .er-total.ok b { color: #1f5e3a; } .er-total.off b { color: #b42318; }
+
     .er-send-err { color: #b42318; margin-top: .8rem; }
     .er-next:disabled { opacity: .6; cursor: default; }
 
@@ -113,19 +135,20 @@
         </section>
 
         <section class="er-step" data-step="beneficiary">
-                    <h2>Beneficiary Information</h2>
+          <h2>Beneficiary Information</h2>
           <p>Please provide the required information about your beneficiary. Your beneficiary is the person who will be receiving your benefit amount.</p>
-          <div class="er-field"><span class="er-label">Name<small>Please provide the <strong>first</strong> and <strong>last</strong> names of the person you would like to receive these funds.</small></span>
-            <div class="er-row"><div><input id="benFirst" name="Beneficiary first name" aria-label="Beneficiary first name" placeholder="First name" required></div><div><input id="benLast" name="Beneficiary last name" aria-label="Beneficiary last name" placeholder="Last name" required></div></div>
-            <p class="er-err">Please enter the beneficiary's first and last names.</p></div>
-          <div class="er-field" data-choice="Beneficiary gender"><span class="er-label">Gender<small>Is your beneficiary <strong>male</strong> or <strong>female</strong>?</small></span>
-            <div class="er-choices"><button type="button">Male</button><button type="button">Female</button></div><p class="er-err">Please choose one.</p></div>
-          <div class="er-field" data-dob><span class="er-label">Date of birth<small>Please provide your beneficiary's <strong>date of birth</strong>.</small></span>
-            <div class="er-dob"><div><label for="dobM">Month</label><select id="dobM"></select></div><div><label for="dobD">Day</label><input id="dobD" inputmode="numeric" maxlength="2"></div><div><label for="dobY">Year</label><input id="dobY" inputmode="numeric" maxlength="4"></div></div>
-            <p class="er-err">Please enter a complete date of birth.</p></div>
-          <div class="er-field" data-choice="Beneficiary relationship"><span class="er-label">Relationship<small>What is your relationship to the beneficiary? The beneficiary is your:</small></span>
-            <div class="er-choices"><button type="button">Spouse</button><button type="button">Son</button><button type="button">Daughter</button><button type="button">Mother</button><button type="button">Father</button><button type="button">Fiancé</button><button type="button">Brother</button><button type="button">Sister</button></div><p class="er-err">Please choose one.</p></div>
-          <div class="er-field"><label for="benProv">Province of residence<small>Please indicate the province where your beneficiary currently resides.</small></label><select id="benProv" name="Beneficiary province of residence" required></select><p class="er-err">Please choose a province or territory.</p></div>
+          <div id="bens"></div>
+          <div class="er-more" id="more">
+            <p class="er-more-q">Do you have another beneficiary you would like to add?</p>
+            <button type="button" class="er-add" id="addBen"><span aria-hidden="true">+</span> Add another beneficiary</button>
+            <p class="er-more-note">You can add up to 4 beneficiaries.</p>
+          </div>
+          <div class="er-field er-shares" id="shares" data-shares hidden>
+            <span class="er-label">Percentage for each beneficiary<small>Please enter the percentage of the benefit amount each beneficiary will receive. The total must equal 100%.</small></span>
+            <div id="shareRows"></div>
+            <div class="er-total" id="total"></div>
+            <p class="er-err">The percentages must add up to 100%.</p>
+          </div>
         </section>
 
         <section class="er-step" data-step="cheque">
@@ -187,20 +210,77 @@
     var i = 0;
     var PROVS = ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Yukon'];
     var opts = '<option value="">Select</option>' + PROVS.map(function (p) { return '<option>' + p + '</option>'; }).join('');
-    $('prov').innerHTML = opts; $('benProv').innerHTML = opts;
-    $('dobM').innerHTML = '<option value="">Month</option>' + ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(function (m, k) { return '<option value="' + (k + 1) + '">' + m + '</option>'; }).join('');
+    $('prov').innerHTML = opts;
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var RELS = ['Spouse', 'Common-law partner', 'Son', 'Daughter', 'Mother', 'Father', 'Brother', 'Sister', 'Grandchild', 'Grandparent', 'Niece', 'Nephew', 'Aunt', 'Uncle', 'Cousin', 'Fiancé', 'Friend', 'Other'];
 
-    // Choice buttons: one answer per question.
-    document.querySelectorAll('[data-choice] .er-choices').forEach(function (g) {
-      g.addEventListener('click', function (e) {
-        var b = e.target.closest('button'); if (!b) return;
-        g.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-        g.closest('.er-field').classList.remove('bad');
+    // ---- Beneficiaries: up to 4, each with the same questions; percentages once there is more than one ----
+    var MAX_BENS = 4;
+    function benHTML() {
+      return '<div class="ben">' +
+        '<div class="ben-head"><h3></h3><button type="button" class="ben-remove">Remove</button></div>' +
+        '<div class="er-field"><span class="er-label">Name<small>Please provide the <strong>first</strong> and <strong>last</strong> names of the person you would like to receive these funds.</small></span>' +
+          '<div class="er-row"><div><input class="b-first" aria-label="First name" placeholder="First name" required></div><div><input class="b-last" aria-label="Last name" placeholder="Last name" required></div></div>' +
+          '<p class="er-err">Please enter the beneficiary\'s first and last names.</p></div>' +
+        '<div class="er-field" data-choice="gender"><span class="er-label">Gender<small>Is your beneficiary <strong>male</strong> or <strong>female</strong>?</small></span>' +
+          '<div class="er-choices"><button type="button">Male</button><button type="button">Female</button></div><p class="er-err">Please choose one.</p></div>' +
+        '<div class="er-field" data-dob><span class="er-label">Date of birth<small>Please provide your beneficiary\'s <strong>date of birth</strong>.</small></span>' +
+          '<div class="er-dob"><div><label>Month</label><select class="b-m"><option value="">Month</option>' + MONTHS.map(function (m, k) { return '<option value="' + (k + 1) + '">' + m + '</option>'; }).join('') + '</select></div>' +
+          '<div><label>Day</label><input class="b-d" inputmode="numeric" maxlength="2"></div><div><label>Year</label><input class="b-y" inputmode="numeric" maxlength="4"></div></div>' +
+          '<p class="er-err">Please enter a complete date of birth.</p></div>' +
+        '<div class="er-field" data-choice="relationship"><span class="er-label">Relationship<small>What is your relationship to the beneficiary? The beneficiary is your:</small></span>' +
+          '<div class="er-choices">' + RELS.map(function (r) { return '<button type="button">' + r + '</button>'; }).join('') + '</div>' +
+          '<div class="er-sub b-other-wrap" hidden><label>Please describe the relationship</label><input class="b-other" maxlength="60"></div>' +
+          '<p class="er-err">Please choose one. If you choose Other, please describe the relationship.</p></div>' +
+        '<div class="er-field"><span class="er-label">Province of residence<small>Please indicate the province where your beneficiary currently resides.</small></span><select class="b-prov" aria-label="Province of residence" required>' + opts + '</select><p class="er-err">Please choose a province or territory.</p></div>' +
+        '</div>';
+    }
+    function bens() { return [].slice.call(document.querySelectorAll('#bens .ben')); }
+    function benName(b, n) { var f = b.querySelector('.b-first').value.trim(), l = b.querySelector('.b-last').value.trim(); return (f + ' ' + l).trim() || 'Beneficiary ' + n; }
+    function refreshBens(resetShares) {
+      var list = bens(), many = list.length > 1;
+      list.forEach(function (b, k) {
+        b.querySelector('.ben-head').hidden = !many;
+        b.querySelector('.ben-head h3').textContent = 'Beneficiary ' + (k + 1);
+        b.querySelector('.ben-remove').hidden = k === 0;
       });
+      $('more').hidden = list.length >= MAX_BENS;
+      $('shares').hidden = !many;
+      // Keep any percentages already typed; a new or removed beneficiary resets to an even split.
+      var old = [].slice.call(document.querySelectorAll('#shareRows input')).map(function (x) { return x.value; });
+      var even = Math.floor(100 / list.length), rest = 100 - even * list.length;
+      $('shareRows').innerHTML = list.map(function (b, k) {
+        var v = resetShares || old[k] === undefined ? String(even + (k < rest ? 1 : 0)) : old[k];
+        return '<div class="share-row"><span class="s-name">' + esc(benName(b, k + 1)) + '</span><span class="share-pct"><input class="s-pct" inputmode="numeric" maxlength="3" value="' + v + '" aria-label="Percentage for ' + esc(benName(b, k + 1)) + '">%</span></div>';
+      }).join('');
+      total();
+    }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function pcts() { return [].slice.call(document.querySelectorAll('#shareRows .s-pct')).map(function (x) { return x.value.trim() === '' ? NaN : +x.value; }); }
+    function total() {
+      var p = pcts(), t = p.reduce(function (s, v) { return s + (isNaN(v) ? 0 : v); }, 0);
+      $('total').className = 'er-total ' + (t === 100 ? 'ok' : 'off');
+      $('total').innerHTML = '<span>Total</span><b>' + t + '%</b>';
+    }
+    function addBen() { $('bens').insertAdjacentHTML('beforeend', benHTML()); refreshBens(true); }
+    $('addBen').addEventListener('click', function () { addBen(); var l = bens(); l[l.length - 1].scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    $('bens').addEventListener('click', function (e) { var r = e.target.closest('.ben-remove'); if (r) { r.closest('.ben').remove(); refreshBens(true); } });
+    $('bens').addEventListener('input', function (e) {
+      if (e.target.matches('.b-first, .b-last')) bens().forEach(function (b, k) { var s = document.querySelectorAll('#shareRows .s-name')[k]; if (s) s.textContent = benName(b, k + 1); });
     });
-    document.querySelectorAll('input, select').forEach(function (el) {
-      el.addEventListener('input', function () { el.closest('.er-field').classList.remove('bad'); });
+    $('shareRows').addEventListener('input', function (e) { e.target.value = e.target.value.replace(/\D/g, ''); total(); $('shares').classList.remove('bad'); });
+    addBen();
+
+    // Choice buttons: one answer per question (works for beneficiaries added later too).
+    $('form').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-choice] .er-choices button'); if (!b) return;
+      var g = b.parentNode;
+      g.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      var f = g.closest('.er-field'), other = f.querySelector('.b-other-wrap');
+      if (other) { other.hidden = b.textContent !== 'Other'; if (!other.hidden) other.querySelector('input').focus(); }
+      f.classList.remove('bad');
     });
+    $('form').addEventListener('input', function (e) { var f = e.target.closest('.er-field'); if (f) f.classList.remove('bad'); });
 
     var digits = function (v) { return v.replace(/\D/g, ''); };
     var CHECKS = {
@@ -212,8 +292,8 @@
       account: function (v) { return /^\d{5,12}$/.test(v.replace(/[\s-]/g, '')); }
     };
     function chosen(f) { var b = f.querySelector('button[aria-pressed="true"]'); return b ? b.textContent : ''; }
-    function dobOK() {
-      var m = +$('dobM').value, d = +$('dobD').value, y = +$('dobY').value, now = new Date().getFullYear();
+    function dobOK(f) {
+      var m = +f.querySelector('.b-m').value, d = +f.querySelector('.b-d').value, y = +f.querySelector('.b-y').value, now = new Date().getFullYear();
       if (!m || !d || !y || y < now - 120 || y > now) return false;
       var dt = new Date(y, m - 1, d); return dt.getMonth() === m - 1 && dt <= new Date();
     }
@@ -222,8 +302,9 @@
       var ok = true;
       step.querySelectorAll('.er-field').forEach(function (f) {
         var bad = false;
-        if (f.hasAttribute('data-choice')) bad = !chosen(f);
-        else if (f.hasAttribute('data-dob')) bad = !dobOK();
+        if (f.hasAttribute('data-choice')) bad = !chosen(f) || (chosen(f) === 'Other' && !f.querySelector('.b-other').value.trim());
+        else if (f.hasAttribute('data-dob')) bad = !dobOK(f);
+        else if (f.hasAttribute('data-shares')) { if (f.hidden) return; var p = pcts(); bad = p.some(function (v) { return isNaN(v) || v < 1; }) || p.reduce(function (s, v) { return s + v; }, 0) !== 100; }
         else f.querySelectorAll('input[required], select[required]').forEach(function (el) {
           var v = el.value.trim(); if (!v || (el.dataset.check && !CHECKS[el.dataset.check](v))) bad = true;
         });
@@ -235,8 +316,19 @@
     function answers() {
       var a = {};
       document.querySelectorAll('input[name], select[name]').forEach(function (el) { if (el.value.trim()) a[el.name] = el.value.trim(); });
-      document.querySelectorAll('[data-choice]').forEach(function (f) { a[f.dataset.choice] = chosen(f); });
-      a['Beneficiary date of birth'] = $('dobM').options[$('dobM').selectedIndex].text + ' ' + (+$('dobD').value) + ', ' + $('dobY').value;
+      a['Other active life insurance policies'] = chosen(document.querySelector('[data-choice="Other active life insurance policies"]'));
+      var list = bens(), p = pcts();
+      list.forEach(function (b, k) {
+        var n = 'Beneficiary ' + (k + 1) + ' ', m = b.querySelector('.b-m');
+        a[n + 'first name'] = b.querySelector('.b-first').value.trim();
+        a[n + 'last name'] = b.querySelector('.b-last').value.trim();
+        a[n + 'gender'] = chosen(b.querySelector('[data-choice="gender"]'));
+        a[n + 'date of birth'] = m.options[m.selectedIndex].text + ' ' + (+b.querySelector('.b-d').value) + ', ' + b.querySelector('.b-y').value;
+        var rel = chosen(b.querySelector('[data-choice="relationship"]'));
+        a[n + 'relationship'] = rel === 'Other' ? 'Other: ' + b.querySelector('.b-other').value.trim() : rel;
+        a[n + 'province of residence'] = b.querySelector('.b-prov').value;
+        a[n + 'percentage'] = (list.length > 1 ? p[k] : 100) + '%';
+      });
       return a;
     }
 
