@@ -80,6 +80,9 @@
     .no-time-form label[for], .no-time-label { display: block; font-weight: 600; font-size: 1rem; margin: 0 0 .35rem; color: var(--ink); }
     .no-time-form input[type="text"], .no-time-form input[type="tel"], .no-time-form input[type="email"], .no-time-form input[type="date"] { display: block; width: 100%; padding: .65rem .75rem; font: inherit; font-size: 1rem; border: 1.5px solid #c3ccd5; border-radius: 8px; background: #fff; margin: 0 0 .9rem; }
     .no-time-form input[type="date"] { max-width: 16rem; }
+    .no-time-form select { display: block; width: 100%; max-width: 20rem; padding: .65rem .75rem; font: inherit; font-size: 1rem; border: 1px solid #b8c3ce; border-radius: 8px; margin: 0 0 1rem; background: #fff; color: var(--ink); }
+    .no-time-form .no-time-tz { font-size: .92rem; color: var(--muted); margin: -.5rem 0 1rem; }
+    .no-time-form .no-time-note { background: var(--surface); border-radius: 8px; padding: .65rem .8rem; font-size: .95rem; margin: 0 0 1rem; }
     .no-time-periods { display: grid; gap: .6rem; margin: 0 0 1rem; }
     .no-time-periods label { display: flex; align-items: center; gap: .5rem; font-size: 1rem; }
     .no-time-error { color: #b42318; font-size: .98rem; margin: -.2rem 0 .8rem; }
@@ -132,14 +135,12 @@
             <input type="tel" id="nt-phone" autocomplete="tel">
             <label for="nt-email">Email address</label>
             <input type="email" id="nt-email" autocomplete="email">
-            <label for="nt-day">Preferred day</label>
-            <input type="date" id="nt-day">
-            <p class="no-time-label">Time of day</p>
-            <div class="no-time-periods">
-              <label><input type="radio" name="nt-period" value="Morning"> Morning</label>
-              <label><input type="radio" name="nt-period" value="Afternoon"> Afternoon</label>
-              <label><input type="radio" name="nt-period" value="Evening"> Evening</label>
-            </div>
+            <label for="nt-day">Day</label>
+            <select id="nt-day"></select>
+            <label for="nt-time">Time</label>
+            <select id="nt-time"></select>
+            <p class="no-time-tz" id="nt-tz"></p>
+            <p class="no-time-note">We will do our best to accommodate the day and time you choose. You will receive an email confirming your time, or offering another time if it is not available.</p>
             <input type="text" id="nt-website" class="nt-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <p class="no-time-error" id="nt-error" hidden></p>
             <button type="submit" class="btn btn-wide">Send my preferred time</button>
@@ -204,41 +205,83 @@
     })();
   </script>
   <script>
-    // "None of these times work for me": details and a preferred day and time of day.
+    // "None of these times work for me": details and a day and time from the free times.
+    // Day and time picker: the times the server says are free, shown in the person's own time zone.
+    function slotPicker(daySel, timeSel, tzNote, url) {
+      var byDay = {}, order = [];
+      var tz = '';
+      try { tz = new Intl.DateTimeFormat('en-CA', { timeZoneName: 'long' }).formatToParts(new Date()).filter(function (p) { return p.type === 'timeZoneName'; })[0].value; } catch (e) {}
+      tzNote.textContent = 'Times are shown in your time zone' + (tz ? ' (' + tz + ')' : '') + '.';
+      function fillTimes() {
+        var list = byDay[daySel.value] || [];
+        timeSel.innerHTML = '<option value="">' + (list.length ? 'Choose a time' : 'Choose a day first') + '</option>' + list.map(function (s) {
+          return '<option value="' + s + '">' + new Date(s).toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit' }) + '</option>';
+        }).join('');
+        timeSel.disabled = !list.length;
+      }
+      function load() {
+        daySel.disabled = true; timeSel.disabled = true;
+        daySel.innerHTML = '<option value="">Loading times...</option>'; timeSel.innerHTML = '<option value="">Choose a day first</option>';
+        return fetch(url).then(function (r) { return r.json(); }).then(function (r) {
+          if (!r.success) throw new Error('no times');
+          byDay = {}; order = [];
+          r.slots.forEach(function (s) {
+            var d = new Date(s), key = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+            if (!byDay[key]) { byDay[key] = []; order.push([key, d]); }
+            byDay[key].push(s);
+          });
+          daySel.innerHTML = '<option value="">' + (order.length ? 'Choose a day' : 'No times available') + '</option>' + order.map(function (o) {
+            return '<option value="' + o[0] + '">' + o[1].toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' }) + '</option>';
+          }).join('');
+          daySel.disabled = !order.length;
+        }).catch(function () {
+          daySel.innerHTML = '<option value="">Times could not be loaded</option>';
+          throw new Error('load failed');
+        });
+      }
+      daySel.addEventListener('change', fillTimes);
+      return {
+        load: load, tz: function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { return ''; } },
+        label: function () { return timeSel.value ? new Date(timeSel.value).toLocaleString('en-CA', { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : ''; }
+      };
+    }
     (function () {
       var REQUEST_URL = 'https://access.rdspcanada.ca/dtc-request';
       var form = document.getElementById('no-time-form'), err = document.getElementById('nt-error');
-      var day = document.getElementById('nt-day');
-      function iso(d) { return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
-      var t = new Date(); t.setDate(t.getDate() + 1); day.min = iso(t);
-      var l = new Date(); l.setDate(l.getDate() + 60); day.max = iso(l);
+      var day = document.getElementById('nt-day'), time = document.getElementById('nt-time');
+      var picker = slotPicker(day, time, document.getElementById('nt-tz'), 'https://access.rdspcanada.ca/available-times');
+      function show(msg) { err.textContent = msg; err.hidden = false; }
       document.getElementById('no-time-open').addEventListener('click', function () {
         this.hidden = true; form.hidden = false; document.getElementById('nt-name').focus();
+        picker.load().catch(function () { show('The available times could not be loaded. Please check your connection and try again.'); });
       });
       form.addEventListener('input', function () { err.hidden = true; });
       form.addEventListener('change', function () { err.hidden = true; });
-      function show(msg) { err.textContent = msg; err.hidden = false; }
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var name = document.getElementById('nt-name').value.trim();
         var phone = document.getElementById('nt-phone').value.trim();
         var email = document.getElementById('nt-email').value.trim();
-        var p = form.querySelector('input[name="nt-period"]:checked');
         if (!name) return show('Please enter your full name.');
         if (phone.replace(/\D/g, '').length < 10) return show('Please enter your phone number, including the area code.');
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show('Please enter a valid email address.');
-        if (!day.value || day.value < day.min || day.value > day.max) return show('Please choose a day within the next two months.');
-        if (!p) return show('Please choose a time of day.');
+        if (!day.value) return show('Please choose a day.');
+        if (!time.value) return show('Please choose a time.');
         var btn = form.querySelector('button[type="submit"]');
         btn.disabled = true; btn.textContent = 'Sending...';
         fetch(REQUEST_URL, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name, phone: phone, email: email, day: day.value, period: p.value, website: document.getElementById('nt-website').value })
+          body: JSON.stringify({ name: name, phone: phone, email: email, slot: time.value, tz: picker.tz(), website: document.getElementById('nt-website').value })
         }).then(function (r) { return r.json(); }).then(function (r) {
+          if (r.taken) {
+            show('Sorry, that time was just taken. Please choose another time.');
+            btn.disabled = false; btn.textContent = 'Send my preferred time';
+            picker.load().catch(function () {});
+            return;
+          }
           if (!r.success) throw new Error('not saved');
           if (window.plausible) plausible('DTC Time Requested');
-          var label = new Date(day.value + 'T12:00:00').toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
-          document.getElementById('time-sent-text').textContent = 'Your Benefits Specialist will contact you by phone or email to arrange your Benefits Review session on ' + label + ' (' + p.value.toLowerCase() + ').';
+          document.getElementById('time-sent-text').textContent = 'We will do our best to accommodate your selected day and time: ' + picker.label().replace(/\.$/, '') + '. You will receive an email confirming your time, or offering another time if it is not available.';
           document.getElementById('before-booking').hidden = true;
           document.getElementById('time-sent').hidden = false;
           window.scrollTo(0, 0);
