@@ -81,7 +81,7 @@
         <p>Because qualifying for the <strong>Disability Tax Credit</strong> is so important for persons living with long-term medical conditions, RDSP Canada has Benefits Specialists who will assist you with applying.</p>
 
         <h2 id="gets-h">What qualifying can mean</h2>
-        <p id="gets-intro">After qualifying for the <strong>Disability Tax Credit</strong>, you may be eligible to receive each of the following.</p>
+        <p id="gets-intro">After qualifying for the <strong>Disability Tax Credit</strong>, you may be eligible to receive each of the following:</p>
         <ul class="gets" id="gets">
           <li data-needs="age"><span>Canada Disability Benefit</span><span>Up to <span class="amt">$204.20</span> a month</span></li>
           <li data-needs="rdsp"><span>Canada Disability Savings Grant</span><span>Up to <span class="amt">$70,000</span> deposited into your RDSP</span></li>
@@ -152,7 +152,7 @@
       // Arriving from the assessment tool (?age= ?rdsp= ?bond=): the list is specific to this person.
       if (q.has('age') || q.has('rdsp') || q.has('bond')) {
         document.getElementById('gets-h').textContent = 'What qualifying means for you';
-        document.getElementById('gets-intro').innerHTML = 'After qualifying for the <strong>Disability Tax Credit</strong>, you will be eligible to receive each of the following.';
+        document.getElementById('gets-intro').innerHTML = 'After qualifying for the <strong>Disability Tax Credit</strong>, you will be eligible to receive each of the following:';
       }
       document.querySelectorAll('#gets [data-needs]').forEach(function (li) {
         li.hidden = li.getAttribute('data-needs').split(' ').some(function (k) { return q.get(k) === 'no'; });
