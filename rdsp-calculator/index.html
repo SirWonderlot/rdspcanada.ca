@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>RDSP Calculator | RDSP Canada</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="stylesheet" href="../assets/style.css?v=15">
+  <style>
+    .rc { padding: 1.75rem 0 3rem; }
+    .rc h1 { margin: 0 0 .25rem; font-size: clamp(1.8rem, 3.5vw, 2.3rem); }
+    .rc-sub { margin: 0 0 1.5rem; color: var(--muted); max-width: none; }
+    .rc-grid { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 960px) { .rc-grid { grid-template-columns: 1fr; } }
+
+    .rc-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.35rem; }
+    .rc-form h2 { font-size: 1.05rem; margin: 0 0 .1rem; color: var(--ink); text-transform: uppercase; letter-spacing: .04em; }
+    .rc-form h2:not(:first-child) { margin-top: 1.1rem; }
+    .rc-field { padding: .6rem 0; border-top: 1px solid var(--line); }
+    .rc-form h2 + .rc-field { border-top: 0; }
+    .rc-field[hidden] { display: none; }
+    .rc-field label { display: block; font-weight: 600; color: var(--ink); font-size: 1rem; line-height: 1.3; margin-bottom: .35rem; }
+    .rc-field small { display: block; font-weight: 400; color: var(--muted); font-size: .88rem; line-height: 1.35; margin-top: .1rem; }
+    .rc-field input, .rc-field select { font: inherit; font-size: 1.05rem; padding: .4rem .65rem; border: 1px solid #b8c3ce; border-radius: 8px; background: #fff; color: var(--ink); width: 100%; min-height: 42px; }
+    .rc-field input:focus, .rc-field select:focus { outline: 3px solid var(--note-line); outline-offset: 1px; border-color: var(--link); }
+    .rc-money { position: relative; }
+    .rc-money::before { content: "$"; position: absolute; left: .65rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 1.05rem; pointer-events: none; }
+    .rc-money input { padding-left: 1.45rem; }
+    .rc-two { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; align-items: end; }
+    .rc-two label { font-weight: 400; font-size: .9rem; color: var(--muted); margin-bottom: .2rem; }
+    .rc-err { color: #b42318; font-size: .92rem; margin: .35rem 0 0; }
+    .rc-err:empty { display: none; }
+    .rc-field.bad input { border-color: #b42318; }
+
+    .rc-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem; }
+    @media (max-width: 700px) { .rc-tiles { grid-template-columns: 1fr; } }
+    .rc-tile { background: var(--note-bg); border-radius: var(--radius); padding: 1rem 1.1rem; }
+    .rc-tile .k { font-size: .95rem; color: var(--text); font-weight: 600; line-height: 1.3; }
+    .rc-tile .v { font-size: clamp(1.9rem, 3.2vw, 2.4rem); font-weight: 700; color: var(--ink); line-height: 1.15; margin: .3rem 0 .2rem; font-variant-numeric: tabular-nums; }
+    .rc-tile .s { font-size: .9rem; color: var(--muted); line-height: 1.35; }
+
+    .rc-note { margin: .9rem 0 0; padding: .7rem .95rem; background: #fff8e6; border: 1px solid #ecd9a3; border-radius: 8px; font-size: .98rem; max-width: none; color: var(--ink); }
+    .rc-note[hidden] { display: none; }
+
+    .rc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; margin-top: 1rem; }
+    @media (max-width: 700px) { .rc-cols { grid-template-columns: 1fr; } }
+    .rc-list h3 { font-size: 1rem; margin: .4rem 0 .2rem; color: var(--ink); }
+    .rc-list dl { margin: 0; }
+    .rc-list .row { display: flex; justify-content: space-between; gap: 1rem; padding: .38rem 0; border-top: 1px solid var(--line); font-size: 1rem; }
+    .rc-list .row dt { color: var(--text); }
+    .rc-list .row dd { margin: 0; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .rc-list .row.total { border-top: 2px solid var(--ink); }
+
+    .rc-chart { margin-top: 1rem; }
+    .rc-chart h3 { font-size: 1rem; margin: 0 0 .4rem; color: var(--ink); }
+    .rc-plot { position: relative; height: 260px; }
+    .rc-plot svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .rc-plot .grid line { stroke: var(--surface-2); stroke-width: 1; }
+    .rc-plot .axis text { fill: var(--muted); font-size: 12px; font-family: var(--font); }
+    .rc-tip { position: absolute; pointer-events: none; background: var(--ink); color: #fff; font-size: .88rem; line-height: 1.35; padding: .4rem .6rem; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -110%); opacity: 0; transition: opacity .1s; }
+    .rc-tip b { font-weight: 600; }
+
+    .rc-details { margin-top: 1rem; }
+    .rc-details summary { cursor: pointer; font-weight: 600; color: var(--link); font-size: 1rem; }
+    .rc-table-wrap { overflow-x: auto; margin-top: .6rem; }
+    .rc-table { border-collapse: collapse; width: 100%; font-size: .9rem; font-variant-numeric: tabular-nums; }
+    .rc-table th, .rc-table td { padding: .3rem .5rem; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    .rc-table th { font-weight: 600; color: var(--ink); background: var(--surface); position: sticky; top: 0; }
+    .rc-table td:first-child, .rc-table th:first-child { text-align: left; }
+    .rc-table tr.start td { background: var(--note-bg); }
+    .rc-key { margin: .5rem 0 0; font-size: .9rem; color: var(--muted); max-width: none; }
+    .rc-key span { display: inline-block; width: .9em; height: .9em; background: var(--note-bg); border: 1px solid var(--note-line); border-radius: 2px; vertical-align: -.1em; margin-right: .35rem; }
+
+    .rc-foot { margin-top: 1.25rem; font-size: .88rem; color: var(--muted); max-width: none; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <span class="brand">
+        <img src="../assets/logo-flag.png" alt="" width="40" height="40">
+        <span><span class="brand-name">RDSP Canada</span><span class="brand-tag">Disability benefits information</span></span>
+      </span>
+    </div>
+  </header>
+
+  <main id="main" class="wrap rc">
+    <h1>RDSP Calculator</h1>
+    <p class="rc-sub">Estimated grants, bonds and payments from a Registered Disability Savings Plan.</p>
+
+    <div class="rc-grid">
+      <form class="rc-card rc-form" id="form" autocomplete="off" onsubmit="return false">
+        <h2>About them</h2>
+        <div class="rc-field" id="f-age">
+          <label for="age">Current age</label>
+          <input id="age" type="number" inputmode="numeric" min="0" max="59" value="30">
+          <p class="rc-err"></p>
+        </div>
+        <div class="rc-field" id="f-opened">
+          <label for="opened">Year the RDSP is opened</label>
+          <input id="opened" type="number" inputmode="numeric" min="2008">
+          <p class="rc-err"></p>
+        </div>
+        <div class="rc-field" id="f-dtc">
+          <label for="dtc">Year they first qualified for the DTC</label>
+          <input id="dtc" type="number" inputmode="numeric" min="1980" placeholder="Not yet or not sure">
+          <small>Grants and bonds can be caught up for up to 10 years before the plan is opened.</small>
+          <p class="rc-err"></p>
+        </div>
+        <div class="rc-field" id="f-fam">
+          <label for="fam">Family income while they are 18 or under</label>
+          <div class="rc-money"><input id="fam" type="text" inputmode="numeric" placeholder="0"></div>
+          <small>Their parents’ net family income.</small>
+        </div>
+        <div class="rc-field" id="f-own">
+          <label for="own">Their income at 19 and older</label>
+          <div class="rc-money"><input id="own" type="text" inputmode="numeric" placeholder="0"></div>
+          <small>Their net income, plus their spouse’s if they have one.</small>
+        </div>
+
+        <h2>Contributions</h2>
+        <div class="rc-field" id="f-contrib">
+          <label for="contrib">Yearly contribution</label>
+          <div class="rc-money"><input id="contrib" type="text" inputmode="numeric" value="1,500"></div>
+          <small>$1,500 a year gets the full $3,500 grant when income is $117,045 or less.</small>
+        </div>
+        <div class="rc-field" id="f-until">
+          <label for="until">Contribute until age</label>
+          <input id="until" type="number" inputmode="numeric" min="0" max="59" value="49">
+          <small>Grants stop after age 49. Contributions can continue until 59.</small>
+          <p class="rc-err"></p>
+        </div>
+        <div class="rc-field">
+          <div class="rc-two">
+            <div>
+              <label for="rb">Growth before payments</label>
+              <select id="rb"></select>
+            </div>
+            <div>
+              <label for="ra">Growth after payments start</label>
+              <select id="ra"></select>
+            </div>
+          </div>
+        </div>
+
+        <h2>Payments</h2>
+        <div class="rc-field" id="f-start">
+          <label for="start">Age to start payments</label>
+          <input id="start" type="number" inputmode="numeric" min="0" max="60" value="60">
+          <small>Payments must start by 60.</small>
+          <p class="rc-err"></p>
+        </div>
+      </form>
+
+      <section aria-live="polite">
+        <div class="rc-tiles">
+          <div class="rc-tile">
+            <div class="k">Government grants and bonds</div>
+            <div class="v" id="t-gov">$0</div>
+            <div class="s" id="t-gov-s"></div>
+          </div>
+          <div class="rc-tile">
+            <div class="k" id="t-val-k">Plan value at age 60</div>
+            <div class="v" id="t-val">$0</div>
+            <div class="s" id="t-val-s"></div>
+          </div>
+          <div class="rc-tile">
+            <div class="k">Average yearly payment</div>
+            <div class="v" id="t-pay">$0</div>
+            <div class="s" id="t-pay-s"></div>
+          </div>
+        </div>
+
+        <p class="rc-note" id="note" hidden></p>
+
+        <div class="rc-card rc-chart">
+          <h3>Plan value by age</h3>
+          <div class="rc-plot" id="plot"><div class="rc-tip" id="tip"></div></div>
+        </div>
+
+        <div class="rc-cols">
+          <div class="rc-list">
+            <h3>Government money</h3>
+            <dl id="l-gov"></dl>
+          </div>
+          <div class="rc-list">
+            <h3>The plan</h3>
+            <dl id="l-plan"></dl>
+          </div>
+        </div>
+
+        <details class="rc-details">
+          <summary>Year by year</summary>
+          <div class="rc-table-wrap"><table class="rc-table" id="table"></table></div>
+          <p class="rc-key" id="key"></p>
+        </details>
+
+        <p class="rc-foot" id="foot"></p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    // ---- Federal limits (update each January) ----
+    // Income thresholds are indexed to inflation every year. These are the 2026 figures.
+    var LIMITS_YEAR = 2026;
+    var L = {
+      grantIncome: 117045,      // up to this: $3 per $1 on the first $500, $2 per $1 on the next $1,000; above it: $1 per $1 on the first $1,000
+      bondFull: 38237,          // full $1,000 bond at or below this income
+      bondNone: 58523,          // no bond at or above this income; reduced in between
+      bondYear: 1000,
+      bondLifetime: 20000,
+      grantYearMax: 10500,      // most grant paid in one year, including catch-up
+      grantLifetime: 70000,
+      contribLifetime: 200000,
+      lastGovAge: 49,           // grants and bonds are paid until the end of the year they turn 49
+      lastContribAge: 59,       // contributions until the end of the year they turn 59
+      latestStart: 60,          // payments must start by the end of the year they turn 60
+      carryYears: 10,           // unused grants and bonds carry forward for 10 years
+      firstYear: 2008,          // the RDSP started in 2008
+      endAge: 83,               // the projection pays the plan out by 83 (payment formula: value / (83 - age))
+      inflation: 0.02           // for "today's dollars"
+    };
+    var NOW = new Date().getFullYear();
+
+    var $ = function (id) { return document.getElementById(id); };
+    var money = function (n) { return '$' + Math.round(n || 0).toLocaleString('en-CA'); };
+    var num = function (el) { var v = String(el.value).replace(/[^\d.]/g, ''); return v === '' ? null : Number(v); };
+    var int = function (el) { var v = String(el.value).trim(); return v === '' ? null : Math.round(Number(v)); };
+
+    var rates = [[0.11, '11%'], [0.09, '9%'], [0.07, '7%'], [0.05, '5%'], [0.03, '3%'], [0.01, '1%']];
+    ['rb', 'ra'].forEach(function (id) {
+      $(id).innerHTML = rates.map(function (r) { return '<option value="' + r[0] + '">' + r[1] + '</option>'; }).join('');
+    });
+    $('rb').value = '0.05'; $('ra').value = '0.03';
+    $('opened').value = NOW;
+
+    function bondFor(income) {
+      if (income <= L.bondFull) return L.bondYear;
+      if (income >= L.bondNone) return 0;
+      return L.bondYear * (L.bondNone - income) / (L.bondNone - L.bondFull);
+    }
+    // Grant room earned in one year: a list of [match rate, contribution that gets matched at that rate].
+    function grantRoom(income) {
+      return income <= L.grantIncome ? [[3, 500], [2, 1000]] : [[1, 1000]];
+    }
+
+    // ---- The projection, one calendar year at a time ----
+    function project(i) {
+      var birth = NOW - i.age;
+      var ageIn = function (yr) { return yr - birth; };
+      var openAge = ageIn(i.opened);
+      var dtc = i.dtc == null ? i.opened : i.dtc;
+      // Catch-up reaches back to the year they qualified for the DTC, at most 10 years, not before 2008 or birth.
+      var first = Math.max(i.opened - L.carryYears, dtc, L.firstYear, birth);
+      if (first > i.opened) first = i.opened;
+      var incomeAt = function (a) { return a <= 18 ? i.fam : i.own; };
+
+      var room = [];   // unused grant room: { year, rate, left }
+      var owed = [];   // unpaid bonds: { year, left }
+      var rows = [], grants = 0, bonds = 0, contribs = 0;
+
+      for (var yr = first; ageIn(yr) <= L.endAge; yr++) {
+        var a = ageIn(yr);
+        if (a <= L.lastGovAge) {
+          var inc = incomeAt(a);
+          grantRoom(inc).forEach(function (g) { room.push({ year: yr, rate: g[0], left: g[1] }); });
+          owed.push({ year: yr, left: bondFor(inc) });
+        }
+        // Anything older than 10 years is lost.
+        room = room.filter(function (r) { return yr - r.year <= L.carryYears && r.left > 0; });
+        owed = owed.filter(function (b) { return yr - b.year <= L.carryYears && b.left > 0; });
+        if (yr < i.opened) continue;
+
+        var row = { year: yr, age: a, contrib: 0, grant: 0, bond: 0, gain: 0, payment: 0, value: 0 };
+        if (a <= Math.min(i.until, L.lastContribAge)) {
+          row.contrib = Math.max(0, Math.min(i.contrib, L.contribLifetime - contribs));
+          contribs += row.contrib;
+        }
+        if (a <= L.lastGovAge) {
+          // Grant: highest match rate first, oldest room first, within the yearly and lifetime limits.
+          var left = row.contrib, cap = Math.min(L.grantYearMax, L.grantLifetime - grants);
+          [3, 2, 1].forEach(function (rate) {
+            room.filter(function (r) { return r.rate === rate; }).sort(function (x, y) { return x.year - y.year; }).forEach(function (r) {
+              var take = Math.min(r.left, left, cap / rate);
+              if (take <= 0) return;
+              r.left -= take; left -= take; cap -= take * rate; row.grant += take * rate;
+            });
+          });
+          grants += row.grant;
+          // Bond: this year plus any unpaid bonds from the last 10 years, within the lifetime limit.
+          var bondCap = L.bondLifetime - bonds;
+          owed.sort(function (x, y) { return x.year - y.year; }).forEach(function (b) {
+            var take = Math.min(b.left, bondCap);
+            if (take <= 0) return;
+            b.left -= take; bondCap -= take; row.bond += take;
+          });
+          bonds += row.bond;
+        }
+        rows.push(row);
+      }
+
+      // Payments made within 10 years of the last grant or bond mean paying some of it back,
+      // so the start is moved to 11 years after the last one, but never past 60.
+      var lastGov = 0;
+      rows.forEach(function (r) { if (r.grant > 0 || r.bond > 0) lastGov = r.age; });
+      var earliest = lastGov ? lastGov + 11 : 0;
+      var start = Math.min(L.latestStart, Math.max(i.start, earliest));
+
+      var prevValue = 0, prevPay = 0;
+      rows.forEach(function (r) {
+        var rate = r.age < start ? i.rb : i.ra;
+        var base = prevValue + r.contrib + r.grant + r.bond - prevPay;
+        r.gain = base * rate;
+        r.value = Math.max(0, base + r.gain);
+        r.payment = r.age >= start && r.age < L.endAge ? r.value / (L.endAge - r.age) : 0;
+        r.today = r.value / Math.pow(1 + L.inflation, Math.max(0, r.year - NOW));
+        prevValue = r.value; prevPay = r.payment;
+      });
+
+      var paid = rows.filter(function (r) { return r.payment > 0; });
+      var sum = function (list, k) { return list.reduce(function (t, r) { return t + r[k]; }, 0); };
+      var atStart = rows.filter(function (r) { return r.age === start; })[0] || rows.filter(function (r) { return r.age >= start; })[0];
+      var firstRow = rows[0] || {};
+      return {
+        rows: rows, start: start, asked: i.start, lastGov: lastGov, openAge: openAge, first: first,
+        grants: grants, bonds: bonds, contribs: contribs,
+        grantsMinor: sum(rows.filter(function (r) { return r.age <= 18; }), 'grant'),
+        bondsMinor: sum(rows.filter(function (r) { return r.age <= 18; }), 'bond'),
+        firstGrant: firstRow.grant || 0, firstBond: firstRow.bond || 0,
+        gainBefore: sum(rows.filter(function (r) { return r.age < start; }), 'gain'),
+        gainAfter: sum(rows.filter(function (r) { return r.age >= start; }), 'gain'),
+        valueAtStart: atStart ? atStart.value : 0,
+        valueAtStartToday: atStart ? atStart.today : 0,
+        totalPaid: sum(paid, 'payment'),
+        avgPay: paid.length ? sum(paid, 'payment') / paid.length : 0,
+        firstPay: paid.length ? paid[0].payment : 0,
+        lastPayAge: paid.length ? paid[paid.length - 1].age : 0,
+        payYears: paid.length
+      };
+    }
+
+    // ---- Reading the form ----
+    function setErr(id, msg) {
+      var f = $(id); f.classList.toggle('bad', !!msg); f.querySelector('.rc-err').textContent = msg || '';
+    }
+    function read() {
+      var i = {
+        age: int($('age')), opened: int($('opened')), dtc: int($('dtc')),
+        fam: num($('fam')) || 0, own: num($('own')) || 0, contrib: num($('contrib')) || 0,
+        until: int($('until')), rb: Number($('rb').value), ra: Number($('ra').value), start: int($('start'))
+      };
+      var ok = true;
+      ['f-age', 'f-opened', 'f-dtc', 'f-until', 'f-start'].forEach(function (id) { setErr(id, ''); });
+      if (i.age == null || i.age < 0 || i.age > 59) { setErr('f-age', 'Enter an age from 0 to 59.'); ok = false; }
+      if (i.opened == null || i.opened < L.firstYear) { setErr('f-opened', 'The RDSP started in 2008.'); ok = false; }
+      else if (i.age != null && i.age + (i.opened - NOW) > L.lastContribAge) { setErr('f-opened', 'An RDSP must be opened by the end of the year they turn 59.'); ok = false; }
+      else if (i.age != null && i.opened < NOW - i.age) { setErr('f-opened', 'That is before they were born.'); ok = false; }
+      if (i.dtc != null && i.opened != null && i.dtc > i.opened) i.dtc = i.opened;
+      if (i.until == null) i.until = 49;
+      if (i.until > L.lastContribAge) { setErr('f-until', 'Contributions stop at the end of the year they turn 59.'); ok = false; }
+      if (i.start == null) i.start = 60;
+      if (i.start > L.latestStart) { setErr('f-start', 'Payments must start by 60.'); ok = false; }
+      return ok ? i : null;
+    }
+
+    // ---- Showing the results ----
+    function rowsHTML(list) {
+      return list.map(function (r) {
+        return '<div class="row' + (r[2] ? ' total' : '') + '"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>';
+      }).join('');
+    }
+    function render() {
+      var i = read();
+      if (!i) return;
+      var p = project(i);
+
+      // Only ask for the parents' income when some grant or bond year falls at 18 or under.
+      $('f-fam').hidden = !(p.first - (NOW - i.age) <= 18);
+      if ($('f-fam').hidden && num($('fam'))) { $('fam').value = ''; i.fam = 0; p = project(i); }
+      $('f-own').hidden = (i.age + (i.opened - NOW)) > L.lastGovAge || L.lastGovAge < 19;
+
+      $('t-gov').textContent = money(p.grants + p.bonds);
+      $('t-gov-s').textContent = money(p.grants) + ' in grants and ' + money(p.bonds) + ' in bonds';
+      $('t-val-k').textContent = 'Plan value at age ' + p.start;
+      $('t-val').textContent = money(p.valueAtStart);
+      $('t-val-s').textContent = money(p.valueAtStartToday) + ' in today’s dollars';
+      $('t-pay').textContent = money(p.avgPay);
+      $('t-pay-s').textContent = p.payYears ? 'From age ' + p.start + ' to ' + p.lastPayAge + ', ' + money(p.totalPaid) + ' in all' : 'No payments';
+
+      var note = '';
+      if (p.start > i.start) {
+        note = 'Payments start at ' + p.start + ', not ' + i.start + '. The last grant or bond is paid at ' + p.lastGov +
+          ', and payments made within 10 years of a grant or bond mean paying some of it back.';
+      }
+      if (p.openAge > L.lastGovAge) note = 'Grants and bonds are only paid until the end of the year they turn 49, so this plan gets none.';
+      $('note').hidden = !note; $('note').textContent = note;
+
+      var gov = [];
+      if (p.grantsMinor || p.bondsMinor) {
+        gov.push(['Grants, age 18 and under', money(p.grantsMinor)]);
+        gov.push(['Grants, age 19 to 49', money(p.grants - p.grantsMinor)]);
+        gov.push(['Bonds, age 18 and under', money(p.bondsMinor)]);
+        gov.push(['Bonds, age 19 to 49', money(p.bonds - p.bondsMinor)]);
+      } else {
+        gov.push(['Grants', money(p.grants)]);
+        gov.push(['Bonds', money(p.bonds)]);
+      }
+      gov.push(['Total from the government', money(p.grants + p.bonds), true]);
+      if (p.rows.length) {
+        gov.push(['Grant in the first year (' + p.rows[0].year + ')', money(p.firstGrant)]);
+        gov.push(['Bond in the first year (' + p.rows[0].year + ')', money(p.firstBond)]);
+      }
+      $('l-gov').innerHTML = rowsHTML(gov);
+
+      $('l-plan').innerHTML = rowsHTML([
+        ['Their contributions', money(p.contribs)],
+        ['Grants and bonds', money(p.grants + p.bonds)],
+        ['Growth before payments', money(p.gainBefore)],
+        ['Value at age ' + p.start, money(p.valueAtStart), true],
+        ['Growth after payments start', money(p.gainAfter)],
+        ['First yearly payment', money(p.firstPay)],
+        ['Total payments', money(p.totalPaid), true]
+      ]);
+
+      table(p);
+      chart(p);
+      $('foot').textContent = 'Estimates only, using ' + LIMITS_YEAR + ' government limits. Income limits rise each year with inflation and are assumed to stay the same here. ' +
+        'Grants and bonds assume the plan is open and they apply each year. Payments use the RDSP payment formula (plan value divided by 83 minus their age), which pays the plan out by age 83. ' +
+        'Today’s dollars assume 2% inflation a year. Growth is not guaranteed.';
+    }
+
+    function table(p) {
+      var h = '<thead><tr><th>Year</th><th>Age</th><th>Contribution</th><th>Grant</th><th>Bond</th><th>Growth</th><th>Payment</th><th>Value</th></tr></thead><tbody>';
+      p.rows.forEach(function (r) {
+        if (r.age > p.lastPayAge + 1 && r.value === 0) return;
+        h += '<tr' + (r.age === p.start ? ' class="start"' : '') + '><td>' + r.year + '</td><td>' + r.age + '</td><td>' + money(r.contrib) + '</td><td>' + money(r.grant) +
+          '</td><td>' + money(r.bond) + '</td><td>' + money(r.gain) + '</td><td>' + money(r.payment) + '</td><td>' + money(r.value) + '</td></tr>';
+      });
+      $('table').innerHTML = h + '</tbody>';
+      $('key').innerHTML = p.payYears ? '<span></span>Shaded: age ' + p.start + ', the first year of payments.' : '';
+    }
+
+    // ---- Chart: plan value by age ----
+    var lastP = null;
+    function chart(p) {
+      lastP = p;
+      var box = $('plot'), tip = $('tip');
+      var W = box.clientWidth, H = box.clientHeight;
+      var m = { l: 62, r: 14, t: 20, b: 28 };
+      var rows = p.rows.filter(function (r) { return r.age <= Math.max(p.lastPayAge + 1, p.start); });
+      if (rows.length < 2) { box.querySelectorAll('svg').forEach(function (s) { s.remove(); }); return; }
+      var max = Math.max.apply(null, rows.map(function (r) { return r.value; })) || 1;
+      var step = niceStep(max / 4), top = Math.ceil(max / step) * step;
+      var a0 = rows[0].age, a1 = rows[rows.length - 1].age;
+      var x = function (a) { return m.l + (a - a0) / (a1 - a0) * (W - m.l - m.r); };
+      var y = function (v) { return H - m.b - v / top * (H - m.t - m.b); };
+      var blue = getComputedStyle(document.documentElement).getPropertyValue('--link').trim() || '#1a4d8f';
+
+      var s = '<svg role="img" aria-label="Plan value by age, peaking at ' + money(max) + '">';
+      s += '<g class="grid">';
+      for (var v = 0; v <= top; v += step) s += '<line x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y(v) + '" y2="' + y(v) + '"/>';
+      s += '</g><g class="axis">';
+      for (v = 0; v <= top; v += step) s += '<text x="' + (m.l - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + short(v) + '</text>';
+      var ageStep = (a1 - a0) > 40 ? 10 : 5;
+      for (var a = Math.ceil(a0 / ageStep) * ageStep; a <= a1; a += ageStep) s += '<text x="' + x(a) + '" y="' + (H - 8) + '" text-anchor="middle">' + a + '</text>';
+      s += '</g>';
+      var line = rows.map(function (r, k) { return (k ? 'L' : 'M') + x(r.age).toFixed(1) + ' ' + y(r.value).toFixed(1); }).join(' ');
+      s += '<path d="' + line + ' L' + x(a1) + ' ' + y(0) + ' L' + x(a0) + ' ' + y(0) + ' Z" fill="' + blue + '" fill-opacity=".12"/>';
+      s += '<path d="' + line + '" fill="none" stroke="' + blue + '" stroke-width="2" stroke-linejoin="round"/>';
+      if (p.start >= a0 && p.start <= a1) {
+        s += '<line x1="' + x(p.start) + '" x2="' + x(p.start) + '" y1="' + m.t + '" y2="' + y(0) + '" stroke="#5a6876" stroke-width="1" stroke-dasharray="4 4"/>';
+        s += '<text x="' + (x(p.start) + (x(p.start) > W - 170 ? -6 : 6)) + '" y="' + (m.t + 2) + '" text-anchor="' + (x(p.start) > W - 170 ? 'end' : 'start') + '" fill="#2e3a46" font-size="12" font-family="inherit">Payments start at ' + p.start + '</text>';
+      }
+      s += '<line id="cross" x1="0" x2="0" y1="' + m.t + '" y2="' + y(0) + '" stroke="#1c2630" stroke-width="1" opacity="0"/>';
+      s += '<circle id="dot" r="5" fill="' + blue + '" stroke="#fff" stroke-width="2" opacity="0"/>';
+      s += '<rect x="' + m.l + '" y="0" width="' + (W - m.l - m.r) + '" height="' + (H - m.b) + '" fill="transparent" id="hit"/>';
+      s += '</svg>';
+      box.querySelectorAll('svg').forEach(function (el) { el.remove(); });
+      box.insertAdjacentHTML('afterbegin', s);
+
+      var hit = box.querySelector('#hit'), cross = box.querySelector('#cross'), dot = box.querySelector('#dot');
+      function show(evt) {
+        var rect = box.getBoundingClientRect();
+        var px = (evt.touches ? evt.touches[0].clientX : evt.clientX) - rect.left;
+        var age = Math.round(a0 + (px - m.l) / (W - m.l - m.r) * (a1 - a0));
+        var r = rows.filter(function (q) { return q.age === age; })[0];
+        if (!r) return;
+        cross.setAttribute('x1', x(age)); cross.setAttribute('x2', x(age)); cross.setAttribute('opacity', '.35');
+        dot.setAttribute('cx', x(age)); dot.setAttribute('cy', y(r.value)); dot.setAttribute('opacity', '1');
+        tip.innerHTML = 'Age ' + r.age + ' (' + r.year + ')<br><b>' + money(r.value) + '</b>' + (r.payment ? '<br>Payment ' + money(r.payment) : '');
+        tip.style.left = Math.min(Math.max(x(age), 70), W - 70) + 'px'; tip.style.top = y(r.value) + 'px'; tip.style.opacity = 1;
+      }
+      function hide() { cross.setAttribute('opacity', '0'); dot.setAttribute('opacity', '0'); tip.style.opacity = 0; }
+      hit.addEventListener('mousemove', show); hit.addEventListener('touchstart', show, { passive: true }); hit.addEventListener('touchmove', show, { passive: true });
+      hit.addEventListener('mouseleave', hide);
+    }
+    function niceStep(raw) {
+      var p = Math.pow(10, Math.floor(Math.log10(raw || 1))), n = raw / p;
+      return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p;
+    }
+    function short(v) {
+      if (v >= 1e6) return '$' + (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + 'M';
+      if (v >= 1e3) return '$' + Math.round(v / 1e3) + 'K';
+      return '$' + v;
+    }
+
+    // Money fields show commas as you type.
+    ['fam', 'own', 'contrib'].forEach(function (id) {
+      $(id).addEventListener('blur', function () { var n = num(this); this.value = n == null ? '' : Math.round(n).toLocaleString('en-CA'); });
+    });
+    $('form').addEventListener('input', render);
+    $('form').addEventListener('change', render);
+    var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { if (lastP) chart(lastP); }, 100); });
+    window.rdspProject = project; // for testing
+    render();
+  })();
+  </script>
+</body>
+</html>
