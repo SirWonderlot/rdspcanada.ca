@@ -46,17 +46,18 @@
       <div class="go-bar" aria-hidden="true"><span></span></div>
       <ul class="go-steps" aria-live="polite">
         <li class="on"><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Connecting to the application</li>
-        <li><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Applying referral code RDSP49</li>
+        <li><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Applying referral code START49</li>
         <li><span class="go-ico"><svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></span>Reduced fee of $49 applied</li>
       </ul>
-      <noscript><p class="go-now"><a href="https://dtcc.ca/apply/?code=RDSP49">Continue to the application</a></p></noscript>
+      <noscript><p class="go-now"><a href="https://dtcc.ca/apply/?code=START49">Continue to the application</a></p></noscript>
     </div>
   </main>
   <script>
     // Each step finishes in turn over about 5.5 seconds, then the application opens
-    // with the referral code already applied.
+    // with the referral code already applied. START49 (not RDSP49): the client pays and the
+    // application goes to Todd, who sends it within 48 to 72 hours; no download for the client.
     (function () {
-      var URL = 'https://dtcc.ca/apply/?code=RDSP49';
+      var URL = 'https://dtcc.ca/apply/?code=START49';
       var steps = document.querySelectorAll('.go-steps li');
       [1600, 3300, 4900].forEach(function (ms, i) {
         setTimeout(function () {
