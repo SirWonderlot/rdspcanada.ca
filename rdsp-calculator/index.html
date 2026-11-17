@@ -15,7 +15,7 @@
     @media (max-width: 960px) { .rc-grid { grid-template-columns: 1fr; } }
 
     .rc-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.35rem; }
-    .rc-form h2 { font-size: 1.05rem; margin: 0 0 .1rem; color: var(--ink); text-transform: uppercase; letter-spacing: .04em; }
+    .rc-form h2 { font-size: 1.05rem; margin: 0 0 .1rem; color: var(--accent); text-transform: uppercase; letter-spacing: .04em; }
     .rc-form h2:not(:first-child) { margin-top: 1.1rem; }
     .rc-field { padding: .6rem 0; border-top: 1px solid var(--line); }
     .rc-form h2 + .rc-field { border-top: 0; }
@@ -45,7 +45,7 @@
 
     .rc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; margin-top: 1rem; }
     @media (max-width: 700px) { .rc-cols { grid-template-columns: 1fr; } }
-    .rc-list h3 { font-size: 1rem; margin: .4rem 0 .2rem; color: var(--ink); }
+    .rc-list h3 { font-size: 1rem; margin: .4rem 0 .2rem; color: var(--accent); }
     .rc-list dl { margin: 0; }
     .rc-list .row { display: flex; justify-content: space-between; gap: 1rem; padding: .38rem 0; border-top: 1px solid var(--line); font-size: 1rem; }
     .rc-list .row dt { color: var(--text); }
@@ -53,7 +53,7 @@
     .rc-list .row.total { border-top: 2px solid var(--ink); }
 
     .rc-chart { margin-top: 1rem; }
-    .rc-chart h3 { font-size: 1rem; margin: 0 0 .4rem; color: var(--ink); }
+    .rc-chart h3 { font-size: 1rem; margin: 0 0 .4rem; color: var(--accent); }
     .rc-plot { position: relative; height: 260px; }
     .rc-plot svg { display: block; width: 100%; height: 100%; overflow: visible; }
     .rc-plot .grid line { stroke: var(--surface-2); stroke-width: 1; }
@@ -91,7 +91,7 @@
 
     <div class="rc-grid">
       <form class="rc-card rc-form" id="form" autocomplete="off" onsubmit="return false">
-        <h2>About them</h2>
+        <h2>About you</h2>
         <div class="rc-field" id="f-age">
           <label for="age">Current age</label>
           <input id="age" type="number" inputmode="numeric" min="0" max="59" value="30">
@@ -103,20 +103,20 @@
           <p class="rc-err"></p>
         </div>
         <div class="rc-field" id="f-dtc">
-          <label for="dtc">Year they first qualified for the DTC</label>
+          <label for="dtc">Year you first qualified for the DTC</label>
           <input id="dtc" type="number" inputmode="numeric" min="1980" placeholder="Not yet or not sure">
           <small>Grants and bonds can be caught up for up to 10 years before the plan is opened.</small>
           <p class="rc-err"></p>
         </div>
         <div class="rc-field" id="f-fam">
-          <label for="fam">Family income while they are 18 or under</label>
+          <label for="fam">Family income while you are 18 or under</label>
           <div class="rc-money"><input id="fam" type="text" inputmode="numeric" placeholder="0"></div>
-          <small>Their parents’ net family income.</small>
+          <small>Your parents’ net family income.</small>
         </div>
         <div class="rc-field" id="f-own">
-          <label for="own">Their income at 19 and older</label>
+          <label for="own">Your income at 19 and older</label>
           <div class="rc-money"><input id="own" type="text" inputmode="numeric" placeholder="0"></div>
-          <small>Their net income, plus their spouse’s if they have one.</small>
+          <small>Your net income, plus your spouse’s if you have one.</small>
         </div>
 
         <h2>Contributions</h2>
@@ -356,11 +356,11 @@
       ['f-age', 'f-opened', 'f-dtc', 'f-until', 'f-start'].forEach(function (id) { setErr(id, ''); });
       if (i.age == null || i.age < 0 || i.age > 59) { setErr('f-age', 'Enter an age from 0 to 59.'); ok = false; }
       if (i.opened == null || i.opened < L.firstYear) { setErr('f-opened', 'The RDSP started in 2008.'); ok = false; }
-      else if (i.age != null && i.age + (i.opened - NOW) > L.lastContribAge) { setErr('f-opened', 'An RDSP must be opened by the end of the year they turn 59.'); ok = false; }
-      else if (i.age != null && i.opened < NOW - i.age) { setErr('f-opened', 'That is before they were born.'); ok = false; }
+      else if (i.age != null && i.age + (i.opened - NOW) > L.lastContribAge) { setErr('f-opened', 'An RDSP must be opened by the end of the year you turn 59.'); ok = false; }
+      else if (i.age != null && i.opened < NOW - i.age) { setErr('f-opened', 'That is before you were born.'); ok = false; }
       if (i.dtc != null && i.opened != null && i.dtc > i.opened) i.dtc = i.opened;
       if (i.until == null) i.until = 49;
-      if (i.until > L.lastContribAge) { setErr('f-until', 'Contributions stop at the end of the year they turn 59.'); ok = false; }
+      if (i.until > L.lastContribAge) { setErr('f-until', 'Contributions stop at the end of the year you turn 59.'); ok = false; }
       if (i.start == null) i.start = 60;
       if (i.start > L.latestStart) { setErr('f-start', 'Payments must start by 60.'); ok = false; }
       return ok ? i : null;
@@ -395,7 +395,7 @@
         note = 'Payments start at ' + p.start + ', not ' + i.start + '. The last grant or bond is paid at ' + p.lastGov +
           ', and payments made within 10 years of a grant or bond mean paying some of it back.';
       }
-      if (p.openAge > L.lastGovAge) note = 'Grants and bonds are only paid until the end of the year they turn 49, so this plan gets none.';
+      if (p.openAge > L.lastGovAge) note = 'Grants and bonds are only paid until the end of the year you turn 49, so this plan gets none.';
       $('note').hidden = !note; $('note').textContent = note;
 
       var gov = [];
@@ -416,7 +416,7 @@
       $('l-gov').innerHTML = rowsHTML(gov);
 
       $('l-plan').innerHTML = rowsHTML([
-        ['Their contributions', money(p.contribs)],
+        ['Your contributions', money(p.contribs)],
         ['Grants and bonds', money(p.grants + p.bonds)],
         ['Growth before payments', money(p.gainBefore)],
         ['Value at age ' + p.start, money(p.valueAtStart), true],
@@ -428,7 +428,7 @@
       table(p);
       chart(p);
       $('foot').textContent = 'Estimates only, using ' + LIMITS_YEAR + ' government limits. Income limits rise each year with inflation and are assumed to stay the same here. ' +
-        'Grants and bonds assume the plan is open and they apply each year. Payments use the RDSP payment formula (plan value divided by 83 minus their age), which pays the plan out by age 83. ' +
+        'Grants and bonds assume the plan is open and you apply each year. Payments use the RDSP payment formula (plan value divided by 83 minus your age), which pays the plan out by age 83. ' +
         'Today’s dollars assume 2% inflation a year. Growth is not guaranteed.';
     }
 
