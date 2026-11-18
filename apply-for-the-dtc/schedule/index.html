@@ -8,9 +8,9 @@
     // zoomed in afterwards. maximum-scale=1 stops that on iPhones only; people can still pinch to zoom.
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) document.getElementById('vp').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
   </script>
-  <title>Schedule Your Benefits Review Session | RDSP Canada</title>
+  <title>Schedule Your DTC Application Review Session | RDSP Canada</title>
   <meta name="robots" content="noindex">
-  <meta name="description" content="Schedule your Benefits Review session with a Benefits Specialist.">
+  <meta name="description" content="Schedule your DTC Application Review session with a Benefits Specialist.">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
   <link rel="apple-touch-icon" href="../../assets/favicon-256.png">
   <link rel="stylesheet" href="../../assets/style.css?v=15">
@@ -84,7 +84,7 @@
     .booked h2 { font-size: 1.3rem; margin: 0 0 .6rem; }
     .booked-check { width: 52px; height: 52px; border-radius: 50%; background: #2e7d4f; display: grid; place-items: center; margin: 0 0 1rem; }
     .booking { min-width: 320px; height: 760px; margin: 1rem -16px 0; }
-    @media (min-width: 700px) { .booking { height: 760px; margin: 1.2rem 0 0; } }
+    @media (min-width: 700px) { .booking { height: 760px; margin: 1.2rem 0 0; max-width: 440px; } }
   </style>
 </head>
 <body>
@@ -110,7 +110,7 @@
   <main id="main">
     <section class="section">
       <div class="wrap apply-wrap">
-        <h1 class="apply-title" id="page-title">Schedule your Benefits Review session</h1>
+        <h1 class="apply-title" id="page-title">Schedule your DTC Application Review session</h1>
         <div class="apply-rule" aria-hidden="true"></div>
         <div id="before-booking">
         <p>A typical session takes approximately 20 minutes and is conducted over Zoom, allowing your Benefits Specialist to share their screen and guide you through the process.</p>
@@ -121,7 +121,7 @@
         <div class="no-time" id="no-time">
           <p class="no-time-open-wrap"><button type="button" class="no-time-open" id="no-time-open">None of these times work for me</button></p>
           <form class="no-time-form" id="no-time-form" hidden novalidate>
-            <p>No problem. Choose a <strong>day</strong> and <strong>time</strong> that works best for you, and your Benefits Specialist will contact you to arrange your Benefits Review session.</p>
+            <p>No problem. Choose a <strong>day</strong> and <strong>time</strong> that works best for you, and your Benefits Specialist will contact you to arrange your DTC Application Review session.</p>
             <label for="nt-name">Full name</label>
             <input type="text" id="nt-name" autocomplete="name">
             <label for="nt-phone">Phone number</label>
@@ -148,7 +148,7 @@
         </div>
         <div class="booked" id="booked" hidden>
           <div class="booked-check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
-          <h2>Your Benefits Review session is booked</h2>
+          <h2>Your DTC Application Review session is scheduled</h2>
           <p>You will receive a confirmation email with your Zoom link. Your Benefits Specialist looks forward to meeting with you.</p>
         </div>
         <noscript><p><a href="https://calendly.com/benefits-rdspcanada/benefits-review-session-clone?utm_campaign=dtc">Open the booking calendar</a></p></noscript>
