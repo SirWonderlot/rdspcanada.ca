@@ -30,13 +30,6 @@
         if (h > 300) document.getElementById('booking').style.height = (h + 20) + 'px';
         return;
       }
-      // Once a time is picked, ask for a cell phone number so they get text reminders.
-      if (e.data.event === 'calendly.date_and_time_selected') {
-        var note = document.getElementById('sms-note');
-        note.hidden = false;
-        note.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
-      }
       if (e.data.event !== 'calendly.event_scheduled') return;
       plausible('DTC Review Booked');
       // Add the booking to Todd's dashboard. Calendly gives the page only a link to the booking;
@@ -146,7 +139,6 @@
             <button type="submit" class="btn btn-wide">Send my preferred time</button>
           </form>
         </div>
-        <p class="sms-note" id="sms-note" hidden>Would you like a text reminder before your session? Please add your cell phone number under <strong>Send text messages to</strong>, at the bottom of the form.</p>
         <div class="booking" id="booking"></div>
         </div>
         <div class="booked" id="time-sent" hidden>
