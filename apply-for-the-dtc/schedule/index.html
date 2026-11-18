@@ -65,7 +65,7 @@
     .apply-wrap strong { font-weight: 600; }
     .sms-note { margin: 1.2rem 0 0; padding: .85rem 1rem; border-radius: 10px; background: #eef4fa; border: 1px solid #c9dbec; color: #1c2630; scroll-margin-top: 12px; }
     .booked { margin-top: .5rem; margin-bottom: 1rem; }
-    .no-time { max-width: 46rem; margin: .4rem 0 0; }
+    .no-time { max-width: 46rem; margin: 1rem 0 0; }
     .no-time-open-wrap { text-align: left; margin: 0; }
     .no-time-open { background: none; border: 0; padding: 4px 0; color: var(--link); font: inherit; font-size: 1.05rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
     .no-time-form { margin-top: .6rem; padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
@@ -116,6 +116,7 @@
         <p>A typical session takes approximately 20 minutes and is conducted over Zoom, allowing your Benefits Specialist to share their screen and guide you through the process.</p>
         <p>By following along visually, you’ll gain a clearer understanding of how to apply for the <strong>Disability Tax Credit</strong>, what information is required, and how to give your application the best possible chance of being approved.</p>
         <p>Please choose a <strong>day</strong> and <strong>time</strong> that works best for you.</p>
+        <div class="booking" id="booking"></div>
         <!-- When no calendar time suits them: their details and a preferred day and time of day,
              sent to the questionnaire server (access.rdspcanada.ca), which adds it to Todd's dashboard. -->
         <div class="no-time" id="no-time">
@@ -139,7 +140,6 @@
             <button type="submit" class="btn btn-wide">Send my preferred time</button>
           </form>
         </div>
-        <div class="booking" id="booking"></div>
         </div>
         <div class="booked" id="time-sent" hidden>
           <div class="booked-check" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
