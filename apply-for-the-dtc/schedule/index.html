@@ -159,7 +159,7 @@
           <h2>Your Benefits Review session is booked</h2>
           <p>You will receive a confirmation email with your Zoom link. Your Benefits Specialist looks forward to meeting with you.</p>
         </div>
-        <noscript><p><a href="https://calendly.com/benefits-rdspcanada/benefits-review-session-clone">Open the booking calendar</a></p></noscript>
+        <noscript><p><a href="https://calendly.com/benefits-rdspcanada/benefits-review-session-clone?utm_campaign=dtc">Open the booking calendar</a></p></noscript>
       </div>
     </section>
   </main>
@@ -296,7 +296,8 @@
   <script>
     // hide_gdpr_banner: Calendly's cookie notice otherwise covers half the calendar on phones.
     Calendly.initInlineWidget({
-      url: 'https://calendly.com/benefits-rdspcanada/benefits-review-session-clone?hide_gdpr_banner=1&hide_event_type_details=1',
+      // utm_campaign=dtc: the booking and reminder messages are the DTC Application Review session ones.
+      url: 'https://calendly.com/benefits-rdspcanada/benefits-review-session-clone?hide_gdpr_banner=1&hide_event_type_details=1&utm_campaign=dtc',
       parentElement: document.getElementById('booking')
     });
   </script>
