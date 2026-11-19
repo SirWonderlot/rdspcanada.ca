@@ -625,9 +625,17 @@ main { display: block; }
 @media (max-width: 640px) { .site-footer .footer-brand img { display: none; } }
 
 /* ---------- Home page (tool first) ---------- */
-.home-hero { background: var(--surface); border-bottom: 1px solid var(--line); padding: 2.25rem 0 2.4rem; }
-.home-hero h1 { font-size: 2.4rem; line-height: 1.15; margin: 0 0 .7rem; }
-.home-hero .lede { font-size: 1.2rem; margin: 0 0 1.5rem; max-width: var(--prose); }
+/* Hero: on desktop, the Parliament photo with the title and text in two white boxes (as on the old site);
+   on phones, the photo sits on top and fades into the text below it. */
+.home-hero { padding: 12px 0 0; }
+.hero-photo { max-width: calc(var(--max) + 3rem); height: 520px; margin: 0 auto; padding: 1.5rem;
+  background: var(--surface-2) url(parliament.webp) center / cover no-repeat;
+  display: flex; align-items: center; justify-content: center; }
+.hero-text { width: 100%; max-width: 600px; display: grid; gap: 10px; text-align: center; }
+.home-hero h1, .home-hero .lede { margin: 0; background: rgba(255,255,255,.94); border: 1px solid rgba(28,38,48,.18); text-wrap: balance; }
+.home-hero h1 { padding: 1.1rem 1.25rem; color: var(--accent); font-weight: 400; font-size: 2.35rem; line-height: 1.2; }
+.home-hero .lede { padding: 1rem 1.6rem 1.25rem; color: var(--link); font-size: 1.25rem; line-height: 1.6; }
+.hero-go { text-align: center; padding-top: 2rem; }
 .btn.btn-wide { display: inline-flex; justify-content: center; align-items: center; gap: .5rem; min-width: 320px; font-size: 1.15rem; font-weight: 400; padding: .95rem 1.4rem; border-radius: 10px; }
 .home-steps { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: 1.5rem; counter-reset: s; }
 .home-steps li { position: relative; margin: 0; padding-left: 2.6rem; counter-increment: s; color: var(--ink); font-weight: 600; font-size: 1.1rem; line-height: 1.8rem; }
@@ -639,8 +647,16 @@ main { display: block; }
 .home-programs b { display: block; color: var(--ink); font-weight: 600; }
 .home-programs span { display: block; color: var(--muted); font-size: .98rem; margin-top: .1rem; }
 @media (max-width: 640px) {
-  .home-hero { padding: 1.9rem 0 2rem; }
-  .home-hero h1 { font-size: 1.9rem; }
-  .home-hero .lede { font-size: 1.12rem; }
+  .home-hero { padding: 0; }
+  .hero-photo { position: relative; height: auto; display: block; padding: 275px 1.25rem 0;
+    background-color: var(--bg); background-position: 30% top; background-size: auto 300px; }
+  .hero-photo::before { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(rgba(255,255,255,0) 160px, var(--bg) 285px); }
+  .hero-text { position: relative; display: block; text-align: left; max-width: none; }
+  .home-hero h1, .home-hero .lede { background: none; border: 0; padding: 0; text-wrap: pretty; }
+  .home-hero h1 { font-size: 2.1rem; line-height: 1.1; margin: 0 0 1rem; }
+  .home-hero .lede { color: var(--text); font-size: 1.1rem; }
+  .hero-go { text-align: left; padding-top: 1.75rem; }
   .btn.btn-wide { display: flex; width: 100%; min-width: 0; }
 }
+@media (max-width: 480px) { .hero-photo { padding-left: 1rem; padding-right: 1rem; } }
