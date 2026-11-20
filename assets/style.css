@@ -705,3 +705,9 @@ main { display: block; }
   .section.program > .wrap, .section.process > .wrap { padding: 2.75rem 1.25rem; }
 }
 @media (max-width: 480px) { .hero-photo { padding-left: 1rem; padding-right: 1rem; } }
+
+/* Desktop: the photo and the grey panels run the width of the screen, 30px in from each side (as on the
+   old site). They stay the same height and get wider with the window; the text stays centred inside. */
+@media (min-width: 641px) {
+  .hero-photo, .section.program > .wrap, .section.process > .wrap, .home-band-inner { max-width: none; margin-left: 30px; margin-right: 30px; }
+}
