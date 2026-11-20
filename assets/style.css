@@ -624,9 +624,13 @@ main { display: block; }
 /* Footer: hide the flag next to the brand on phones */
 @media (max-width: 640px) { .site-footer .footer-brand img { display: none; } }
 
-/* ---------- Home page (tool first) ---------- */
-/* Hero: on desktop, the Parliament photo with the title and text in two white boxes (as on the old site);
-   on phones, the photo sits on top and fades into the text below it. */
+/* Wide button (home page and DTC pages) */
+.btn.btn-wide { display: inline-flex; justify-content: center; align-items: center; gap: .5rem; min-width: 320px; font-size: 1.15rem; font-weight: 400; padding: .95rem 1.4rem; border-radius: 10px; }
+@media (max-width: 640px) { .btn.btn-wide { display: flex; width: 100%; min-width: 0; } }
+
+/* ---------- Home page (same layout as learningbonds.ca) ---------- */
+/* Hero. Desktop: the Parliament photo with the title and text in two white boxes.
+   Phones: the photo sits on top and fades into the text below it, then the button. */
 .home-hero { padding: 12px 0 0; }
 .hero-photo { max-width: calc(var(--max) + 3rem); height: 520px; margin: 0 auto; padding: 1.5rem;
   background: var(--surface-2) url(parliament.webp) center / cover no-repeat;
@@ -634,18 +638,57 @@ main { display: block; }
 .hero-text { width: 100%; max-width: 600px; display: grid; gap: 10px; text-align: center; }
 .home-hero h1, .home-hero .lede { margin: 0; background: rgba(255,255,255,.94); border: 1px solid rgba(28,38,48,.18); text-wrap: balance; }
 .home-hero h1 { padding: 1.1rem 1.25rem; color: var(--accent); font-weight: 400; font-size: 2.35rem; line-height: 1.2; }
-.home-hero .lede { padding: 1rem 1.6rem 1.25rem; color: var(--link); font-size: 1.25rem; line-height: 1.6; }
-.hero-go { text-align: center; padding-top: 2rem; }
-.btn.btn-wide { display: inline-flex; justify-content: center; align-items: center; gap: .5rem; min-width: 320px; font-size: 1.15rem; font-weight: 400; padding: .95rem 1.4rem; border-radius: 10px; }
-.home-steps { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: 1.5rem; counter-reset: s; }
-.home-steps li { position: relative; margin: 0; padding-left: 2.6rem; counter-increment: s; color: var(--ink); font-weight: 600; font-size: 1.1rem; line-height: 1.8rem; }
-.home-steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--link); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: .95rem; }
-.home-note { background: var(--note-bg); border-radius: var(--radius); padding: 1rem 1.25rem; margin: 2rem 0 0; max-width: var(--prose); font-size: 1.05rem; }
-.home-note p { margin: 0; }
-.home-programs { list-style: none; padding: 0; margin: 1rem 0 1.5rem; border-top: 1px solid var(--line); max-width: var(--prose); }
-.home-programs li { margin: 0; padding: .75rem 0; border-bottom: 1px solid var(--line); }
-.home-programs b { display: block; color: var(--ink); font-weight: 600; }
-.home-programs span { display: block; color: var(--muted); font-size: .98rem; margin-top: .1rem; }
+.home-hero .lede { padding: 1rem 1.6rem 1.25rem; color: var(--link); font-size: 1.25rem; line-height: 1.6; max-width: none; }
+.home-hero .lede .l { display: block; }
+.home-hero .lede .l + .l { margin-top: .3rem; }
+.hero-go { display: none; }
+
+/* Centred headings; the program list and the steps sit centred under them */
+.program-head { text-align: center; margin-bottom: 1.5rem; }
+.program-head h2 { margin-bottom: 0; text-wrap: balance; }
+.program-cta { text-align: center; margin-top: 1.75rem; }
+.program .wrap > .prose, .program .facts { max-width: var(--prose); margin-left: auto; margin-right: auto; }
+.program .facts { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+.nw { white-space: nowrap; }
+
+/* Numbered steps joined by a line */
+.flow { list-style: none; padding: 0; margin: 1.25rem auto 0; counter-reset: f; max-width: 560px; }
+.flow li { counter-increment: f; position: relative; margin: 0; padding: 0 0 1.4rem 3.25rem; color: var(--ink); }
+.flow li::before { content: counter(f); position: absolute; left: 0; top: -.1rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--link); color: #fff; font-weight: 700; display: grid; place-items: center; }
+.flow li:not(:last-child)::after { content: ""; position: absolute; left: 1.05rem; top: 2.3rem; bottom: .2rem; width: 2px; background: var(--note-line); }
+.flow b { display: block; }
+.flow span { display: block; color: var(--muted); font-size: 1.02rem; }
+
+/* Panels the width of the photo: programs grey, process white, questions grey */
+.section.program, .section.process { padding: 0; border-top: 0; background: none; }
+.section.program > .wrap, .section.process > .wrap { max-width: calc(var(--max) + 3rem); padding: 3.5rem 1.5rem; }
+.section.program > .wrap, .faq-home .home-band-inner { background: #f4f4f4; }
+.faq-home { margin-bottom: 2rem; }
+.section.program { margin-top: 2rem; }
+.home-band-inner { max-width: calc(var(--max) + 3rem); margin: 0 auto; padding: 3.5rem 1.5rem; text-align: center; }
+.home-band h2 { text-wrap: balance; }
+
+/* Common questions: each opens and closes, with a plus sign on the right */
+.faq-home h2 { margin: 0 0 1.5rem; }
+.faq-home .home-band-inner { padding-bottom: 4rem; }
+.faq-list { max-width: var(--prose); margin: 0 auto; text-align: left; border-top: 1px solid var(--line); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1.1rem 0; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: ""; flex: none; width: 1.1rem; height: 1.1rem;
+  background: linear-gradient(var(--link), var(--link)) center / 100% 2px no-repeat, linear-gradient(var(--link), var(--link)) center / 2px 100% no-repeat;
+  transition: transform .2s ease; }
+.faq-list details[open] summary::after { transform: rotate(45deg); }
+.faq-list summary:hover { color: var(--link); }
+.faq-list summary:focus-visible { outline: 3px solid var(--note-line); outline-offset: 2px; }
+.faq-list details p { margin: 0; padding: 0 2.5rem 1.2rem 0; font-size: 1.1rem; color: var(--text); max-width: none; }
+
+@media (max-width: 767px) {
+  .home-band-inner, .faq-home .home-band-inner { padding: 2.75rem 1.25rem; }
+  .home-hero .lede .nw, .home-band-inner .nw { white-space: normal; }
+  .faq-list summary { font-size: 1.08rem; }
+}
 @media (max-width: 640px) {
   .home-hero { padding: 0; }
   .hero-photo { position: relative; height: auto; display: block; padding: 275px 1.25rem 0;
@@ -656,7 +699,9 @@ main { display: block; }
   .home-hero h1, .home-hero .lede { background: none; border: 0; padding: 0; text-wrap: pretty; }
   .home-hero h1 { font-size: 2.1rem; line-height: 1.1; margin: 0 0 1rem; }
   .home-hero .lede { color: var(--text); font-size: 1.1rem; }
-  .hero-go { text-align: left; padding-top: 1.75rem; }
-  .btn.btn-wide { display: flex; width: 100%; min-width: 0; }
+  .hero-go { display: block; text-align: center; padding-top: 1.4rem; padding-bottom: 2rem; }
+  .home .btn.btn-wide { display: inline-flex; width: auto; font-size: 1.02rem; padding: .7rem 1.15rem; border-radius: 8px; }
+  .section.program { margin-top: 1.75rem; }
+  .section.program > .wrap, .section.process > .wrap { padding: 2.75rem 1.25rem; }
 }
 @media (max-width: 480px) { .hero-photo { padding-left: 1rem; padding-right: 1rem; } }
