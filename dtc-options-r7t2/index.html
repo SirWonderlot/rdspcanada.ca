@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Applying for the Disability Tax Credit Certificate | Options</title>
+  <style>
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      color: #1d1d1f;
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.47059;
+      letter-spacing: -0.374px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    h1 { font-weight: 600; }
+    h1 .sep { color: inherit; }
+    .nowrap { white-space: nowrap; }
+    form { margin: 0; }
+    .q-title label { cursor: pointer; }
+    .dropdown select {
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      width: 100%;
+      height: 56px;
+      margin: 0;
+      padding: 0 44px 0 16px;
+      font: inherit;
+      letter-spacing: inherit;
+      color: #1d1d1f;
+      background: rgba(255, 255, 255, 0.8) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1.5 1.5l5.5 5.5 5.5-5.5' fill='none' stroke='%231d1d1f' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 18px center;
+      border: 1px solid #86868b;
+      border-radius: 12px;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .dropdown select:hover { border-color: #1d1d1f; }
+    .dropdown select:focus-visible { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3); }
+    .dropdown select.empty { color: #6e6e73; }
+    .dropdown option { color: #1d1d1f; }
+
+    .chosen { list-style: none; margin: 0; padding: 0; }
+    .chosen:not(:empty) { margin-top: 12px; }
+    .chosen li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #e8e8ed; }
+    .chosen li:first-child { border-top: 1px solid #e8e8ed; }
+    .chosen button { flex: none; padding: 0; border: 0; background: none; font: inherit; font-size: 15px; letter-spacing: -0.24px; color: #0066cc; cursor: pointer; }
+    .chosen button:hover { text-decoration: underline; }
+
+    .options { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .option-title { font-size: inherit; line-height: 1.3; font-weight: 600; letter-spacing: inherit; }
+    .option-desc { margin: 8px 0 0; font-size: 17px; line-height: 1.47; font-weight: 400; letter-spacing: -0.374px; color: #424245; }
+    .option.recommended { border-color: #1e9e44 !important; box-shadow: inset 0 0 0 1px #1e9e44; }
+    .results[hidden] { display: none; }
+    .results:not([hidden]) { animation: fade 0.5s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .results:not([hidden]) { animation: none; } }
+
+    .page { max-width: 1000px; margin: 0 auto; padding: 72px 22px 120px; }
+    h1 { font-size: 40px; line-height: 1.1; letter-spacing: 0; max-width: 760px; }
+    .rule { display: block; width: 72px; height: 4px; background: #af3c43; margin: 18px 0 0; border: 0; }
+    .lead { margin: 24px 0 0; max-width: 760px; font-size: 19px; line-height: 1.5; letter-spacing: -0.2px; }
+    .results-intro { margin: 0 0 28px; font-size: 17px; line-height: 1.5; }
+    .results-intro + .results-intro { margin-top: -16px; }
+    .results-intro a { color: #0066cc; }
+    .sections { margin-top: 44px; max-width: 600px; display: grid; gap: 34px; }
+    .q-title { font-size: 19px; line-height: 1.3; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 10px; }
+    .results { margin-top: 64px; max-width: 760px; }
+    .results-title { font-size: 32px; line-height: 1.15; font-weight: 600; }
+    .results .rule { margin-bottom: 20px; }
+    .option { border: 1px solid #d2d2d7; border-radius: 8px; padding: 22px 24px; font-size: 19px; line-height: 1.3; }
+    .option.recommended { border-width: 2px !important; box-shadow: none !important; padding: 21px 55px 21px 23px; }
+    a.option { position: relative; display: block; padding-right: 56px; color: inherit; text-decoration: none; transition: border-color 0.2s, background-color 0.2s; }
+    a.option::after {
+      content: ""; position: absolute; right: 24px; top: 50%; width: 9px; height: 9px; margin-top: -5px;
+      border-top: 2px solid #86868b; border-right: 2px solid #86868b; transform: rotate(45deg); transition: right 0.2s, border-color 0.2s;
+    }
+    a.option:hover { border-color: #86868b; background: #fafafc; }
+    a.option.recommended:hover { background: #f4fbf6; }
+    a.option:hover::after { right: 20px; border-color: #1d1d1f; }
+    a.option:hover .option-title { text-decoration: underline; text-underline-offset: 3px; }
+    a.option:focus-visible { outline: 3px solid #0071e3; outline-offset: 2px; }
+    .process { list-style: none; margin: 0 0 24px; padding: 0; counter-reset: step; }
+    .process > li { counter-increment: step; position: relative; padding: 0 0 26px 48px; }
+    .process > li::before {
+      content: counter(step); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%;
+      background: #f5f5f7; color: #1d1d1f; font-weight: 600; font-size: 15px; line-height: 30px; text-align: center;
+    }
+    .step-title { font-size: 19px; line-height: 1.3; font-weight: 600; letter-spacing: -0.2px; padding-top: 2px; }
+    .step-desc { margin: 6px 0 0; color: #424245; }
+    .outcomes { list-style: none; margin: 12px 0 0; padding: 0; }
+    .outcomes li { padding: 12px 0; border-top: 1px solid #e8e8ed; color: #424245; }
+    .outcomes li:last-child { border-bottom: 1px solid #e8e8ed; }
+    .outcomes strong { color: #1d1d1f; font-weight: 600; }
+    /* Type-to-search impairments */
+    .search { position: relative; }
+    .search input {
+      -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 56px; margin: 0;
+      padding: 0 16px 0 46px; font: inherit; letter-spacing: inherit; color: #1d1d1f;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Ccircle cx='7.5' cy='7.5' r='6' fill='none' stroke='%236e6e73' stroke-width='1.7'/%3E%3Cpath d='M12 12l4.5 4.5' stroke='%236e6e73' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 16px center;
+      border: 1px solid #86868b; border-radius: 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search input::placeholder { color: #6e6e73; }
+    .search input:hover { border-color: #1d1d1f; }
+    .search input:focus { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3); }
+    .matches { position: absolute; z-index: 5; left: 0; right: 0; top: 62px; margin: 0; padding: 6px; list-style: none; background: #fff;
+      border: 1px solid #d2d2d7; border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12); max-height: 300px; overflow-y: auto; }
+    .matches[hidden] { display: none; }
+    .matches li { padding: 10px 12px; border-radius: 8px; cursor: pointer; }
+    .matches li.active { background: #f5f5f7; }
+    .matches li mark { background: none; color: inherit; font-weight: 600; }
+    .matches .none { color: #6e6e73; cursor: default; }
+
+    /* Tick boxes */
+    .q-hint { margin: -4px 0 12px; color: #424245; }
+    .ticks { list-style: none; margin: 0; padding: 0; border: 1px solid #d2d2d7; border-radius: 12px; overflow: hidden; }
+    .ticks li + li { border-top: 1px solid #e8e8ed; }
+    .ticks label { display: flex; align-items: center; gap: 14px; padding: 15px 16px; cursor: pointer; }
+    .ticks label:hover { background: #fafafc; }
+    .ticks input { -webkit-appearance: none; appearance: none; flex: none; width: 22px; height: 22px; margin: 0; border: 1px solid #86868b; border-radius: 6px; background: #fff; cursor: pointer; display: grid; place-items: center; }
+    .ticks input:checked { background: #0071e3; border-color: #0071e3; }
+    .ticks input:checked::after { content: ""; width: 6px; height: 11px; margin-top: -2px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+    .yn li { display: flex; align-items: center; gap: 6px; padding: 6px 8px 6px 16px; }
+    .yn li > span { flex: 1; padding: 9px 0; }
+    .yn label { padding: 9px 10px; border-radius: 8px; gap: 10px; }
+    .ticks input:focus-visible { box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3); }
+
+    /* Timeline, version A: stacked */
+    .results.wide { max-width: 860px; }
+    .timeline { list-style: none; margin: 8px 0 64px; padding: 0; }
+    .timeline > li { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 0 22px; padding: 16px 20px 18px; margin: 0 -20px 14px; border-radius: 18px; transition: background-color 0.2s; }
+    .timeline > li:hover { background: #eef4fc; }
+    .timeline > li .t-icon { transition: background-color 0.2s, color 0.2s; }
+    .timeline > li:hover .t-icon { background: #0071e3; color: #fff; }
+    .timeline > li:hover .pill { background: #fff; }
+    .timeline .outcomes { margin-top: 10px; }
+    .timeline > li:not(:last-child)::before { content: ""; position: absolute; left: 47px; top: 80px; bottom: -10px; width: 2px; background: #e8e8ed; border-radius: 1px; }
+    .t-icon { width: 56px; height: 56px; border-radius: 50%; background: #f5f5f7; display: grid; place-items: center; color: #1d1d1f; }
+    .t-icon svg { width: 26px; height: 26px; }
+    .timeline > li.done .t-icon { background: #e9f6ed; color: #1e7a3a; }
+    .t-step { display: block; margin-top: 4px; font-size: 14px; color: #6e6e73; letter-spacing: -0.15px; }
+    .t-title { font-size: 21px; line-height: 1.25; font-weight: 600; letter-spacing: -0.3px; margin-top: 2px; }
+    .t-desc { margin: 8px 0 0; color: #424245; max-width: 640px; }
+    .t-button { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 18px; border-radius: 980px; background: #0071e3; color: #fff; font-size: 15px; text-decoration: none; letter-spacing: -0.2px; }
+    .t-button:hover { background: #0077ed; }
+    .pill { display: inline-block; margin-top: 12px; padding: 5px 14px; border-radius: 980px; background: #f5f5f7; font-size: 15px; color: #1d1d1f; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .chips li { padding: 7px 14px; border-radius: 980px; border: 1px solid #d2d2d7; font-size: 15px; color: #1d1d1f; }
+
+    /* Timeline, version B: across, one step at a time */
+    .stepper { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; }
+    .stepper::before { content: ""; position: absolute; left: 7%; right: 7%; top: 27px; height: 2px; background: #e8e8ed; }
+    .stepper button { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 0 6px; border: 0; background: none; font: inherit; font-size: 15px; line-height: 1.3; letter-spacing: -0.2px; color: #424245; cursor: pointer; text-align: center; }
+    .stepper .t-icon { border: 2px solid #fff; box-shadow: 0 0 0 1px #e8e8ed; transition: background 0.2s, color 0.2s; }
+    .stepper button:hover .t-icon { background: #e8e8ed; }
+    .stepper button.on { color: #1d1d1f; font-weight: 600; }
+    .stepper button.on .t-icon { background: #1d1d1f; color: #fff; box-shadow: none; }
+    .stepper button.seen .t-icon { background: #e9f6ed; color: #1e7a3a; }
+    .detail { margin: 28px 0 64px; padding: 30px 34px; border-radius: 18px; background: #f5f5f7; min-height: 210px; }
+    .detail .t-desc { max-width: none; }
+    .detail-nav { display: flex; justify-content: space-between; margin-top: 22px; }
+    .detail-nav button { padding: 0; border: 0; background: none; font: inherit; font-size: 15px; color: #0066cc; cursor: pointer; }
+    .detail-nav button:disabled { visibility: hidden; }
+    .more { margin: 0 0 64px; border: 1px solid #d2d2d7; border-radius: 12px; }
+    .more > summary { list-style: none; cursor: pointer; padding: 18px 56px 18px 22px; position: relative; font-weight: 600; font-size: 19px; letter-spacing: -0.2px; }
+    .more > summary::-webkit-details-marker { display: none; }
+    .more > summary::after { content: ""; position: absolute; right: 24px; top: 50%; width: 9px; height: 9px; margin-top: -7px; border-right: 2px solid #86868b; border-bottom: 2px solid #86868b; transform: rotate(45deg); transition: transform 0.2s, margin 0.2s; }
+    .more[open] > summary::after { transform: rotate(-135deg); margin-top: -2px; }
+    .more > summary:hover { background: #fafafc; border-radius: 12px; }
+    .more > div { padding: 8px 26px 0; }
+    .more .timeline, .more .detail { margin-bottom: 26px; }
+
+    .results { margin-top: 56px; }
+    .next-row { margin-top: 44px; }
+    .next { -webkit-appearance: none; appearance: none; display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 26px; border: 0; border-radius: 980px; background: #0071e3; color: #fff; font: inherit; font-size: 17px; letter-spacing: inherit; cursor: pointer; transition: background-color 0.2s; }
+    .next::after { content: ""; width: 8px; height: 8px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
+    .next:hover { background: #0077ed; }
+    .next:disabled { background: #e8e8ed; color: #86868b; cursor: default; }
+    .next:focus-visible { outline: 3px solid rgba(0, 113, 227, 0.4); outline-offset: 2px; }
+    .example > summary { list-style: none; cursor: pointer; border: 0; font: inherit; font-size: 15px; }
+    .example > summary::-webkit-details-marker { display: none; }
+    .example > summary::after { content: ""; width: 7px; height: 7px; margin: -3px 0 0 4px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg); transition: transform 0.2s, margin 0.2s; }
+    .example[open] > summary::after { transform: rotate(-135deg); margin-top: 3px; }
+    .example img { display: block; width: 100%; max-width: 640px; margin-top: 16px; border: 1px solid #d2d2d7; border-radius: 12px; }
+    .text-link { padding: 0; border: 0; background: none; font: inherit; letter-spacing: inherit; color: #0066cc; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+    .text-link:hover { color: #0071e3; }
+    .benefits-panel { overflow: hidden; margin: -12px 0 32px; transition: height 0.6s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.45s ease; }
+    .benefits-inner { padding-top: 4px; }
+    .benefits-panel .table-wrap { border: 1px solid #d2d2d7; border-radius: 12px; overflow: hidden; }
+    .benefits-panel table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; letter-spacing: -0.2px; }
+    .benefits-panel thead th { background: #f5f5f7; text-align: left; font-weight: 600; padding: 12px 16px; border-bottom: 1px solid #d2d2d7; }
+    .benefits-panel tbody th, .benefits-panel tbody td { text-align: left; vertical-align: top; padding: 14px 16px; border-top: 1px solid #e8e8ed; }
+    .benefits-panel tbody tr:first-child th, .benefits-panel tbody tr:first-child td { border-top: 0; }
+    .benefits-panel tbody th { width: 27%; font-weight: 600; }
+    .benefits-panel tbody td:nth-child(3), .benefits-panel tbody td:nth-child(4) { width: 15%; color: #424245; text-align: center; }
+    .benefits-panel thead th:nth-child(3), .benefits-panel thead th:nth-child(4) { text-align: center; }
+    /* The row under the mouse lights up, like the steps of the process, to show which one is being talked about. */
+    .benefits-panel tbody tr { transition: background-color 0.2s; }
+    .benefits-panel tbody tr:hover { background: #eef4fc; }
+    .benefits-panel .sub { display: block; margin-top: 2px; font-size: 13px; color: #a1a1a6; }
+    .benefits-panel .note { margin: 12px 0 0; font-size: 15px; line-height: 1.47; letter-spacing: -0.24px; color: #6e6e73; }
+    .benefits-panel .note + .note { margin-top: 4px; }
+    .close-panel { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; height: 44px; padding: 0 22px; border: 1px solid #d2d2d7; border-radius: 980px; background: #fff; font: inherit; font-size: 15px; letter-spacing: -0.2px; color: #1d1d1f; cursor: pointer; transition: background-color 0.2s, border-color 0.2s; }
+    .close-panel::after { content: ""; width: 7px; height: 7px; margin-top: 4px; border-left: 2px solid currentColor; border-top: 2px solid currentColor; transform: rotate(45deg); }
+    .close-panel:hover { background: #f5f5f7; border-color: #86868b; }
+    @media (max-width: 600px) { .page { padding: 40px 16px 80px; } h1 { font-size: 30px; } .lead { font-size: 17px; } .results-title { font-size: 26px; } .option { font-size: 17px; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Applying for the Disability Tax Credit <span class="nowrap">Certificate <span class="sep">| Options</span></span></h1>
+      <hr class="rule" />
+      <p class="lead">There are three different options when applying for the Disability Tax Credit Certificate. Selecting from the options below will help to determine which path is best for the applicant.</p>
+    </header>
+
+    <form class="sections" id="page-info" onsubmit="return false">
+        <section class="q">
+          <h2 class="q-title"><label for="province">Province or territory of residence</label></h2>
+          <div class="dropdown">
+              <select id="province" class="empty">
+                <option value="">Select</option>
+              <option>Alberta</option>
+              <option>British Columbia</option>
+              <option>Manitoba</option>
+              <option>New Brunswick</option>
+              <option>Newfoundland and Labrador</option>
+              <option>Northwest Territories</option>
+              <option>Nova Scotia</option>
+              <option>Nunavut</option>
+              <option>Ontario</option>
+              <option>Prince Edward Island</option>
+              <option>Quebec</option>
+              <option>Saskatchewan</option>
+              <option>Yukon</option>
+              </select>
+            </div>
+        </section>
+        <section class="q">
+          <h2 class="q-title"><label for="age">Applicant's age</label></h2>
+          <div class="dropdown">
+              <select id="age" class="empty">
+                <option value="">Select</option>
+              </select>
+            </div>
+        </section>
+        <section class="q">
+          <h2 class="q-title"><label for="impairment">Medical impairments</label></h2>
+          <div class="search">
+            <input id="impairment" type="text" placeholder="Type an impairment, for example: depression" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="matches" />
+            <ul class="matches" id="matches" role="listbox" hidden></ul>
+          </div>
+            <ul class="chosen" id="chosen" aria-label="Medical impairments selected"></ul>
+        </section>
+        <section class="q">
+          <h2 class="q-title">Applicant's circumstances</h2>
+          <ul class="ticks yn">
+            <li><span>Is the applicant currently in a hospital or infirmary?</span><label><input type="radio" name="hospital" value="yes" /> Yes</label><label><input type="radio" name="hospital" value="no" /> No</label></li>
+            <li><span>Does the applicant require a wheelchair on a daily basis?</span><label><input type="radio" name="wheelchair" value="yes" /> Yes</label><label><input type="radio" name="wheelchair" value="no" /> No</label></li>
+            <li><span>Is the applicant missing a limb?</span><label><input type="radio" name="limb" value="yes" /> Yes</label><label><input type="radio" name="limb" value="no" /> No</label></li>
+          </ul>
+        </section>
+        <section class="q">
+          <h2 class="q-title"><label for="income">Family net income</label></h2>
+          <div class="dropdown">
+              <select id="income" class="empty">
+                <option value="">Select</option>
+              <option>$0 to $20,000</option>
+              <option>$20,001 to $58,523</option>
+              <option>$58,524 to $117,045</option>
+              <option>Over $117,045</option>
+              </select>
+            </div>
+        </section>
+      <div class="next-row"><button type="button" class="next" id="to-process" disabled>Next: Application process</button></div>
+    </form>
+
+    <section class="results" id="page-process" hidden>
+      <h2 class="results-title">The application process</h2>
+      <hr class="rule" />
+      <ol class="timeline">
+<li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span><div><span class="t-step">Step 1</span><h3 class="t-title">Review the DTC application process</h3><p class="t-desc">The application is the CRA's Form T2201, the Disability Tax Credit Certificate. We help the applicant complete it.</p><a class="t-button" id="t2201-view" href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/t2201/t2201-fill-23e.pdf" target="_blank" rel="noopener">See the application</a></div></li>
+<li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9.5l1.5 1.5 3-3M8 15.5l1.5 1.5 3-3M15 10h2M15 16h2"/></svg></span><div><span class="t-step">Step 2</span><h3 class="t-title">Answer yes or no questions</h3><p class="t-desc">The applicant answers yes or no questions about how their medical conditions affect them on a day-to-day basis.</p><details class="example"><summary class="t-button">See example questions</summary><img src="images/example-questions.png" alt="Example questions from the application: three yes or no questions about walking" /></details></div></li>
+<li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><div><span class="t-step">Step 3</span><h3 class="t-title">A DTC professional prepares the application</h3><p class="t-desc">A DTC professional crafts the application in a compelling manner, using the language the CRA uses to assess eligibility, to give the applicant the best chance of qualifying.</p></div></li>
+<li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span><div><span class="t-step">Step 4</span><h3 class="t-title">The application is emailed to the applicant</h3><p class="t-desc">The completed application is emailed directly to the applicant within 48 to 72 hours.</p></div></li>
+<li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a4 4 0 0 0 8 0V3"/><path d="M10 12v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10" r="2"/></svg></span><div><span class="t-step">Step 5</span><h3 class="t-title">The doctor reviews and signs</h3><p class="t-desc">The applicant emails the application to their doctor, or prints it and takes it to them, for review and signature. It is a fillable PDF, so the doctor can change or add anything they want, and so can the applicant.</p></div></li>
+        <li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></svg></span><div><span class="t-step">Step 6</span><h3 class="t-title">Submit to the CRA for approval</h3><p class="t-desc">Once the doctor has signed it, the applicant submits the application to the CRA. The CRA reviews the application, and one of three things happens:</p>
+          <ul class="outcomes">
+            <li><strong>Approved.</strong> The application meets the criteria.</li>
+            <li><strong>Rejected right away.</strong> This typically happens when information is incomplete, or when the application is complete but does not match the criteria the CRA is looking for.</li>
+            <li><strong>Review.</strong> The CRA examines the application in greater detail and typically requests additional information from the medical professional. A decision then takes anywhere from 8 to 16 weeks.</li>
+          </ul>
+          <span class="pill">The CRA takes 4 to 16 weeks</span></div></li>
+        <li><span class="t-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.7 2.7L16.5 9"/></svg></span><div><span class="t-step">Step 7</span><h3 class="t-title">The decision</h3>
+          <ul class="outcomes">
+            <li><strong>Approval.</strong> The CRA sends the applicant a notice of determination informing them that they have been approved. We then apply for the other programs the DTC has opened up for the applicant. Which ones depends on their circumstances, and is known once we enter their information.</li>
+            <li><strong>Denial.</strong> The applicant can file an appeal.</li>
+          </ul></div></li>
+      </ol>
+      <div class="next-row"><button type="button" class="next" id="to-recs">Next: Recommendations</button></div>
+    </section>
+
+    <section class="results" id="page-recs" hidden>
+      <h2 class="results-title">Recommendations</h2>
+      <hr class="rule" />
+      <p class="results-intro">There are three recommendations below. The recommendation highlighted in green is likely the optimal path for the applicant.</p>
+      <p class="results-intro" id="why"></p>
+      <p class="results-intro">To review the benefits of qualifying for the DTC, <button type="button" class="text-link" id="benefits-toggle" aria-expanded="false" aria-controls="benefits-panel">click here</button>.</p>
+      <div class="benefits-panel" id="benefits-panel" hidden>
+        <div class="benefits-inner">
+    <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Benefit or credit</th><th scope="col">Amount</th><th scope="col">Frequency</th><th scope="col">Income requirement</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Tax refund for past years</th><td data-label="Amount">The CRA can adjust tax returns up to 10 years back. The refund may be as high as $40,000.</td><td data-label="Frequency">Upon qualification<span class="sub">(if applicable)</span></td><td data-label="Income requirement">Yes</td></tr>
+              <tr><th scope="row">Tax refund every year going forward</th><td data-label="Amount">The disability amount lowers income tax every year, which can mean a yearly refund.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+              <tr><th scope="row">Disability amount (tax credit)</th><td data-label="Amount">$10,341 for 2026, plus a supplement of up to $6,032 for a person under 18.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+              <tr><th scope="row">Child Disability Benefit</th><td data-label="Amount">A tax-free benefit of up to $290 a month ($3,480 a year), from July 2026 to June 2027.</td><td data-label="Frequency">Monthly</td><td data-label="Income requirement">No</td></tr>
+              <tr><th scope="row">Canada Disability Benefit</th><td data-label="Amount">Up to $204.20 a month ($2,450.40 a year), from July 2026 to June 2027, for adults aged 18 to 64.</td><td data-label="Frequency">Monthly</td><td data-label="Income requirement">No</td></tr>
+              <tr><th scope="row">Canada Disability Savings Bond (part of the RDSP)</th><td data-label="Amount">Up to $1,000 a year and $20,000 in a lifetime, with no deposit needed. Age 49 and under.*</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">No</td></tr>
+              <tr><th scope="row">Canada Disability Savings Grant (part of the RDSP)</th><td data-label="Amount">The government matches up to 300% of deposits, up to $3,500 a year and $70,000 in a lifetime. Age 49 and under.*</td><td data-label="Frequency">Annual<span class="sub">(deposits are required)</span></td><td data-label="Income requirement">No</td></tr>
+              <tr><th scope="row">Canada caregiver amount</th><td data-label="Amount">Up to $8,773 for an adult dependant, or $2,740 for a child (2026), claimed by a supporting family member.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+              <tr><th scope="row">Medical expenses</th><td data-label="Amount">Additional expenses can be claimed, such as attendant care.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+          <p class="note">* Until December 31 of the year the person turns 49.</p>
+          <p class="note">All amounts are federal, for 2026, and depend on income and other rules. Each of these requires an approved disability tax credit.</p>
+          <button type="button" class="close-panel" id="benefits-close">Close</button>
+        </div>
+      </div>
+      <ol class="options">
+        <li>
+          <a class="option" id="t2201-link" href="https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/t2201/t2201-fill-23e.pdf" target="_blank" rel="noopener">
+          <h3 class="option-title">Apply for the disability tax credit independently</h3>
+          <p class="option-desc">The applicant completes Part A of form T2201 on their own, and their medical professional completes Part B.</p>
+          </a>
+        </li>
+        <li>
+          <a class="option recommended" id="opt-pro" href="https://dtcc.ca/start/" target="_blank" rel="noopener">
+          <h3 class="option-title">Apply for the disability tax credit using professional assistance</h3>
+          <p class="option-desc">A professional prepares the application from the applicant's answers, in the terms the CRA assesses, for the applicant and their medical professional to review and sign.</p>
+          </a>
+        </li>
+        <li>
+          <a class="option" href="true-north.html">
+          <h3 class="option-title">Apply for the disability tax credit through True North Disability Services</h3>
+          <p class="option-desc">A company prepares and submits the application on the applicant's behalf, and charges a percentage of the benefits received.</p>
+          </a>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    // Income ranges use the 2026 RDSP levels: the bond ends at $58,523; the grant pays
+    // 300% and 200% up to $117,045, then 100%.
+    const IMPAIRMENTS = ["Alzheimer's disease", "Amyotrophic lateral sclerosis (ALS, Lou Gehrig's disease)", "Amputation", "Ankle surgery", "Anorexia nervosa", "Arthritis", "Asperger syndrome", "Asthma", "Attention deficit disorder (ADD)", "Attention deficit hyperactivity disorder (ADHD)", "Auditory processing disorder", "Autism spectrum disorder (ASD)", "Autoimmune disorder", "Back injury", "Bipolar disorder", "Bladder disorder", "Blindness", "Bowel disorder", "Brain injury", "Brain tumour", "Broken bone(s)", "Cancer", "Cavus foot", "Cerebral hemorrhage", "Cerebral palsy", "Chemical sensitivities", "Chromosome anomaly", "Chronic fatigue syndrome", "Chronic inflammatory disease", "Chronic obstructive pulmonary disease (COPD)", "Chronic pain", "Cognitive impairment", "Congenital adrenal hyperplasia", "Congenital heart defect", "Congestive heart failure", "Coronary artery disease", "Crohn's disease", "Cystic fibrosis", "Deafness", "Degenerative disc disease", "Dementia", "Demyelinating polyneuropathy", "Depression", "Developmental delay (DD)", "Dexterity issues", "Diabetes", "Diabetes (type 1)", "Dissociative identity disorder", "Down syndrome", "Dressing (cannot dress or takes significantly longer)", "Dyslexia", "Electrocution", "Elimination (bowel or bladder functions)", "Emphysema", "Epilepsy", "Failed back syndrome", "Feeding (cannot feed themselves or takes significantly longer)", "Fetal alcohol syndrome", "Fibromyalgia", "Foot ulcers", "Fused wrist", "Generalized anxiety disorder", "Hearing loss", "Heart attack", "Heart defect", "Heart disease", "Hepatitis", "Herniated discs", "Hip injury / pain", "Hip replacement", "HIV", "Huntington's disease", "Hypothyroidism", "Ileostomy", "Intellectual disability", "Irritable bowel syndrome (IBS)", "Juvenile arthritis", "Knee injury / pain", "Learning disability", "Lumbar disc disease", "Lupus", "Mobility issues", "Mood disorder", "Motor vehicle accident", "Multiple sclerosis (MS)", "Myasthenia gravis", "Myotonic myopathy", "Nerve damage", "Obsessive-compulsive disorder (OCD)", "Oppositional defiant disorder (ODD)", "Osteoarthritis", "Paralysis", "Parkinson's disease", "Personality disorder", "Physical impairment", "Polycystic kidney disease", "Polyneuropathy", "Post-polio syndrome", "Post-traumatic stress disorder (PTSD)", "Psychotic disorder", "Rheumatoid arthritis", "Schizophrenia", "Scoliosis", "Selective mutism", "Sleep disorder", "Social anxiety disorder", "Spastic paralysis", "Speech impairment", "Spina bifida", "Spinal disorder", "Spinal injury / pain", "Spinal stenosis", "Stroke", "Tourette syndrome", "Trigeminal neuralgia", "Vision impairment", "Walking impairment"];
+
+    const $ = (id) => document.getElementById(id);
+    const chosen = [];
+
+    for (let a = 0; a <= 100; a++) $("age").add(new Option(a === 100 ? "100 or older" : String(a), a));
+
+    // Placeholder text is grey until something is picked.
+    for (const id of ["province", "age", "income"]) {
+      $(id).addEventListener("change", (e) => {
+        e.target.classList.toggle("empty", !e.target.value);
+        update();
+      });
+    }
+
+    function renderChosen() {
+      $("chosen").replaceChildren(
+        ...chosen.map((name) => {
+          const li = document.createElement("li");
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.textContent = "Remove";
+          remove.setAttribute("aria-label", "Remove " + name);
+          remove.onclick = () => {
+            chosen.splice(chosen.indexOf(name), 1);
+            renderChosen();
+            update();
+          };
+          li.append(name, remove);
+          return li;
+        }),
+      );
+    }
+
+    // Type to search: matches anywhere in the name, names starting with the text first.
+    // Arrow keys move, Enter or a click adds it. An empty box shows the whole list.
+    const box = $("impairment"), list = $("matches");
+    let found = [], active = 0;
+    const esc = (t) => t.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+    function showMatches() {
+      const q = box.value.trim().toLowerCase();
+      found = IMPAIRMENTS.filter((n) => !chosen.includes(n) && n.toLowerCase().includes(q))
+        .sort((x, y) => (y.toLowerCase().startsWith(q) - x.toLowerCase().startsWith(q)));
+      active = 0;
+      list.innerHTML = found.length
+        ? found.map((n, k) => {
+            const at = n.toLowerCase().indexOf(q);
+            const label = q ? esc(n.slice(0, at)) + "<mark>" + esc(n.slice(at, at + q.length)) + "</mark>" + esc(n.slice(at + q.length)) : esc(n);
+            return `<li role="option" data-k="${k}"${k === 0 ? ' class="active"' : ""}>${label}</li>`;
+          }).join("")
+        : '<li class="none">No impairment matches. Check the spelling, or try another word.</li>';
+      list.hidden = false;
+      box.setAttribute("aria-expanded", "true");
+    }
+    function hideMatches() { list.hidden = true; box.setAttribute("aria-expanded", "false"); }
+    function add(name) {
+      if (!name) return;
+      chosen.push(name);
+      box.value = "";
+      hideMatches();
+      renderChosen();
+      update();
+    }
+    function mark(k) {
+      active = Math.max(0, Math.min(found.length - 1, k));
+      [...list.children].forEach((li, n) => li.classList.toggle("active", n === active));
+      list.children[active]?.scrollIntoView({ block: "nearest" });
+    }
+    box.addEventListener("input", showMatches);
+    box.addEventListener("focus", showMatches);
+    box.addEventListener("blur", () => setTimeout(hideMatches, 150));
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); mark(active + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); mark(active - 1); }
+      else if (e.key === "Enter") { e.preventDefault(); add(found[active]); }
+      else if (e.key === "Escape") hideMatches();
+    });
+    list.addEventListener("mousedown", (e) => { const li = e.target.closest("li[data-k]"); if (li) { e.preventDefault(); add(found[li.dataset.k]); } });
+
+    // An obvious impairment (hospital, wheelchair, missing limb) makes applying independently the
+    // likely path; otherwise professional assistance is highlighted.
+    const NAMES = ["hospital", "wheelchair", "limb"];
+    const answer = (n) => document.querySelector(`input[name=${n}]:checked`)?.value ?? "";
+    const visible = () => Object.fromEntries(NAMES.map((n) => [n, answer(n)]));
+    // Professional assistance is always the recommendation. Once all three are answered No, the
+    // reason is given.
+    function recommend() {
+      const allNo = NAMES.every((n) => answer(n) === "no");
+      $("why").hidden = !allNo;
+      $("why").textContent = "The applicant's impairment is not obvious. When an impairment is not obvious, such as a mental illness or a hip condition that limits walking, it is much harder to show the CRA that the applicant qualifies. This is why professional assistance is recommended.";
+    }
+    for (const c of document.querySelectorAll(".yn input")) c.addEventListener("change", update);
+
+
+    // Opened from the Dock app (index.html?app).
+    if (new URLSearchParams(location.search).has("app")) {
+      // The CRA's T2201, opened in its own window to show the applicant the form.
+      // The same for "See the application" in step 1 of the process.
+      for (const id of ["t2201-link", "t2201-view"]) $(id).addEventListener("click", (e) => {
+        e.preventDefault();
+        window.open(e.currentTarget.href, "t2201", "popup,width=1100,height=1000");
+      });
+    }
+
+    // The selections are kept for this window, so coming back from an option page shows
+    // the same recommendations. Closing the window clears them for the next applicant.
+    const KEY = "dtc-options";
+    function save() {
+      try {
+        sessionStorage.setItem(KEY, JSON.stringify({ province: $("province").value, age: $("age").value, income: $("income").value, chosen, visible: visible() }));
+      } catch {}
+    }
+    function restore() {
+      let saved = null;
+      try {
+        saved = JSON.parse(sessionStorage.getItem(KEY));
+      } catch {}
+      if (!saved) return;
+      for (const c of document.querySelectorAll(".yn input")) c.checked = (saved.visible ?? {})[c.name] === c.value;
+      for (const id of ["province", "age", "income"]) {
+        $(id).value = saved[id] ?? "";
+        $(id).classList.toggle("empty", !$(id).value);
+      }
+      chosen.push(...(saved.chosen ?? []));
+      renderChosen();
+      recommend();
+    }
+
+    function update() {
+      save();
+      recommend();
+      $("to-process").disabled = !answered();
+    }
+    const answered = () => !!($("province").value && $("age").value && chosen.length && $("income").value);
+
+    // Three pages: the applicant's information, the application process, the recommendations.
+    // Each page has its own address (#process, #recommendations), so the browser's Back button
+    // goes to the page before.
+    const PAGES = { "": "page-info", "#process": "page-process", "#recommendations": "page-recs" };
+    function showPage() {
+      let hash = location.hash in PAGES ? location.hash : "";
+      if (hash && !answered()) hash = "";
+      for (const [h, id] of Object.entries(PAGES)) $(id).hidden = h !== hash;
+      document.querySelector(".lead").hidden = hash !== "";
+      window.scrollTo(0, 0);
+    }
+    $("to-process").onclick = () => { location.hash = "process"; };
+    $("to-recs").onclick = () => { location.hash = "recommendations"; };
+    window.addEventListener("hashchange", showPage);
+    // The benefits table opens smoothly under "click here" and folds away again with Close (or
+    // "click here" again). Same figures as benefits.html.
+    const panel = $("benefits-panel"), toggle = $("benefits-toggle");
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function setBenefits(open) {
+      if (open === !panel.hidden && !panel.classList.contains("closing")) return;
+      toggle.setAttribute("aria-expanded", String(open));
+      panel.classList.remove("closing");
+      if (open) {
+        panel.hidden = false;
+        if (calm) return;
+        const h = panel.scrollHeight;
+        panel.style.height = "0px";
+        panel.style.opacity = "0";
+        requestAnimationFrame(() => requestAnimationFrame(() => { panel.style.height = h + "px"; panel.style.opacity = "1"; }));
+        panel.addEventListener("transitionend", function done(e) { if (e.propertyName === "height") { panel.style.height = ""; panel.removeEventListener("transitionend", done); } });
+      } else {
+        if (calm) { panel.hidden = true; return; }
+        panel.style.height = panel.scrollHeight + "px";
+        panel.classList.add("closing");
+        requestAnimationFrame(() => requestAnimationFrame(() => { panel.style.height = "0px"; panel.style.opacity = "0"; }));
+        panel.addEventListener("transitionend", function done(e) {
+          if (e.propertyName !== "height") return;
+          panel.removeEventListener("transitionend", done);
+          if (!panel.classList.contains("closing")) return;
+          panel.classList.remove("closing");
+          panel.hidden = true;
+          panel.style.height = panel.style.opacity = "";
+        });
+        toggle.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+    toggle.onclick = () => setBenefits(panel.hidden || panel.classList.contains("closing"));
+    $("benefits-close").onclick = () => setBenefits(false);
+
+    restore();
+    update();
+    showPage();
+    // Coming back to a page Chrome kept in memory: show what was there.
+    window.addEventListener("pageshow", (e) => { if (e.persisted) update(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Benefits of Qualifying for the DTC | Options</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      color: #1d1d1f;
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.47059;
+      letter-spacing: -0.374px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    h1 { font-weight: 600; }
+    h1 .sep { color: inherit; }
+    .nowrap { white-space: nowrap; }
+    form { margin: 0; }
+    .q-title label { cursor: pointer; }
+    .dropdown select {
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      width: 100%;
+      height: 56px;
+      margin: 0;
+      padding: 0 44px 0 16px;
+      font: inherit;
+      letter-spacing: inherit;
+      color: #1d1d1f;
+      background: rgba(255, 255, 255, 0.8) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1.5 1.5l5.5 5.5 5.5-5.5' fill='none' stroke='%231d1d1f' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 18px center;
+      border: 1px solid #86868b;
+      border-radius: 12px;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .dropdown select:hover { border-color: #1d1d1f; }
+    .dropdown select:focus-visible { border-color: #0071e3; box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.3); }
+    .dropdown select.empty { color: #6e6e73; }
+    .dropdown option { color: #1d1d1f; }
+
+    .chosen { list-style: none; margin: 0; padding: 0; }
+    .chosen:not(:empty) { margin-top: 12px; }
+    .chosen li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #e8e8ed; }
+    .chosen li:first-child { border-top: 1px solid #e8e8ed; }
+    .chosen button { flex: none; padding: 0; border: 0; background: none; font: inherit; font-size: 15px; letter-spacing: -0.24px; color: #0066cc; cursor: pointer; }
+    .chosen button:hover { text-decoration: underline; }
+
+    .options { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .option-title { font-size: inherit; line-height: 1.3; font-weight: 600; letter-spacing: inherit; }
+    .option-desc { margin: 8px 0 0; font-size: 17px; line-height: 1.47; font-weight: 400; letter-spacing: -0.374px; color: #424245; }
+    .option.recommended { border-color: #1e9e44 !important; box-shadow: inset 0 0 0 1px #1e9e44; }
+    .results[hidden] { display: none; }
+    .results:not([hidden]) { animation: fade 0.5s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .results:not([hidden]) { animation: none; } }
+
+    .page { max-width: 1000px; margin: 0 auto; padding: 72px 22px 120px; }
+    h1 { font-size: 40px; line-height: 1.1; letter-spacing: 0; max-width: 760px; }
+    .rule { display: block; width: 72px; height: 4px; background: #af3c43; margin: 18px 0 0; border: 0; }
+    .lead { margin: 24px 0 0; max-width: 760px; font-size: 19px; line-height: 1.5; letter-spacing: -0.2px; }
+    .results-intro { margin: 0 0 28px; font-size: 17px; line-height: 1.5; }
+    .results-intro + .results-intro { margin-top: -16px; }
+    .results-intro a { color: #0066cc; }
+    .sections { margin-top: 44px; max-width: 600px; display: grid; gap: 34px; }
+    .q-title { font-size: 19px; line-height: 1.3; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 10px; }
+    .results { margin-top: 64px; max-width: 760px; }
+    .results-title { font-size: 32px; line-height: 1.15; font-weight: 600; }
+    .results .rule { margin-bottom: 20px; }
+    .option { border: 1px solid #d2d2d7; border-left: 4px solid #d2d2d7; border-radius: 8px; padding: 22px 24px; font-size: 19px; line-height: 1.3; }
+    .option.recommended { border-width: 2px 2px 2px 6px !important; box-shadow: none !important; padding: 21px 55px 21px 22px; }
+    a.option { position: relative; display: block; padding-right: 56px; color: inherit; text-decoration: none; transition: border-color 0.2s, background-color 0.2s; }
+    a.option::after {
+      content: ""; position: absolute; right: 24px; top: 50%; width: 9px; height: 9px; margin-top: -5px;
+      border-top: 2px solid #86868b; border-right: 2px solid #86868b; transform: rotate(45deg); transition: right 0.2s, border-color 0.2s;
+    }
+    a.option:hover { border-color: #86868b; background: #fafafc; }
+    a.option.recommended:hover { background: #f4fbf6; }
+    a.option:hover::after { right: 20px; border-color: #1d1d1f; }
+    a.option:hover .option-title { text-decoration: underline; text-underline-offset: 3px; }
+    a.option:focus-visible { outline: 3px solid #0071e3; outline-offset: 2px; }
+    @media (max-width: 600px) { .page { padding: 40px 16px 80px; } h1 { font-size: 30px; } .lead { font-size: 17px; } .results-title { font-size: 26px; } .option { font-size: 17px; } }
+  </style>
+  <style>
+    /* Figures from dtc-app/src/content/benefits.js (2026), the same as the page added to the T2201 PDF. */
+    .back { display: inline-block; margin-bottom: 28px; font-size: 17px; color: #0066cc; text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+    .table-wrap { margin-top: 36px; max-width: 960px; border: 1px solid #d2d2d7; border-radius: 8px; overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: 17px; line-height: 1.47; }
+    thead th { background: #f5f5f7; text-align: left; font-weight: 600; padding: 14px 20px; border-bottom: 1px solid #d2d2d7; }
+    tbody th, tbody td { text-align: left; vertical-align: top; padding: 18px 20px; border-top: 1px solid #e8e8ed; }
+    tbody tr:first-child th, tbody tr:first-child td { border-top: 0; }
+    tbody th { width: 28%; font-weight: 600; }
+    tbody td:nth-child(3), tbody td:nth-child(4) { width: 15%; color: #424245; }
+    @media (min-width: 701px) {
+      thead th:nth-child(3), thead th:nth-child(4), tbody td:nth-child(3), tbody td:nth-child(4) { text-align: center; }
+    }
+    .sub { display: block; margin-top: 2px; font-size: 13px; line-height: 1.38; letter-spacing: -0.08px; color: #a1a1a6; }
+    .note { margin: 16px 0 0; max-width: 960px; font-size: 15px; line-height: 1.47; letter-spacing: -0.24px; color: #6e6e73; }
+    .note + .note { margin-top: 6px; }
+    @media (max-width: 700px) {
+      thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      table, tbody, tr, th, td { display: block; width: auto !important; }
+      tbody tr { padding: 18px 18px 16px; border-top: 1px solid #e8e8ed; }
+      tbody tr:first-child { border-top: 0; }
+      tbody th, tbody td { padding: 0; border: 0; }
+      tbody td { margin-top: 8px; }
+      tbody td::before { content: attr(data-label); display: block; font-size: 13px; font-weight: 600; color: #6e6e73; letter-spacing: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="index.html" onclick="if (window.opener) { window.close(); return false; } if (history.length > 1) { history.back(); return false; }">‹ Back to options</a>
+    <header>
+      <h1>Benefits of Qualifying for the DTC</h1>
+      <hr class="rule" />
+    </header>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Benefit or credit</th><th scope="col">Amount</th><th scope="col">Frequency</th><th scope="col">Income requirement</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Tax refund for past years</th><td data-label="Amount">The CRA can adjust tax returns up to 10 years back. The refund may be as high as $40,000.</td><td data-label="Frequency">Upon qualification<span class="sub">(if applicable)</span></td><td data-label="Income requirement">Yes</td></tr>
+          <tr><th scope="row">Tax refund every year going forward</th><td data-label="Amount">The disability amount lowers income tax every year, which can mean a yearly refund.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+          <tr><th scope="row">Disability amount (tax credit)</th><td data-label="Amount">$10,341 for 2026, plus a supplement of up to $6,032 for a person under 18.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+          <tr><th scope="row">Child Disability Benefit</th><td data-label="Amount">A tax-free benefit of up to $290 a month ($3,480 a year), from July 2026 to June 2027.</td><td data-label="Frequency">Monthly</td><td data-label="Income requirement">No</td></tr>
+          <tr><th scope="row">Canada Disability Benefit</th><td data-label="Amount">Up to $204.20 a month ($2,450.40 a year), from July 2026 to June 2027, for adults aged 18 to 64.</td><td data-label="Frequency">Monthly</td><td data-label="Income requirement">No</td></tr>
+          <tr><th scope="row">Canada Disability Savings Bond (part of the RDSP)</th><td data-label="Amount">Up to $1,000 a year and $20,000 in a lifetime, with no deposit needed. Age 49 and under.*</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">No</td></tr>
+          <tr><th scope="row">Canada Disability Savings Grant (part of the RDSP)</th><td data-label="Amount">The government matches up to 300% of deposits, up to $3,500 a year and $70,000 in a lifetime. Age 49 and under.*</td><td data-label="Frequency">Annual<span class="sub">(deposits are required)</span></td><td data-label="Income requirement">No</td></tr>
+          <tr><th scope="row">Canada caregiver amount</th><td data-label="Amount">Up to $8,773 for an adult dependant, or $2,740 for a child (2026), claimed by a supporting family member.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+          <tr><th scope="row">Medical expenses</th><td data-label="Amount">Additional expenses can be claimed, such as attendant care.</td><td data-label="Frequency">Annual</td><td data-label="Income requirement">Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+      <p class="note">* Until December 31 of the year the person turns 49.</p>
+      <p class="note">All amounts are federal, for 2026, and depend on income and other rules. Each of these requires an approved disability tax credit.</p>
+  </main>
+</body>
+</html>
